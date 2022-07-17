@@ -7,6 +7,7 @@ import { TransactionsComponent } from './me/transactions/transactions.component'
 import { Error404Component } from './errors/error404/error404.component';
 import { AboutComponent } from './other/about/about.component';
 import { DocumentationComponent } from './other/documentation/documentation.component';
+import { SettingsComponent } from './other/settings/settings.component';
 
 export const routes: Routes = [
         {
@@ -47,6 +48,11 @@ export const routes: Routes = [
                 path: 'documentation',
                 pathMatch: 'full',
                 component: DocumentationComponent
+        },
+        {
+                path: 'settings',
+                pathMatch: 'full',
+                component: SettingsComponent
         },
         {
                 path: '**',

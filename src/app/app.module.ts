@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 
 // components
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +26,7 @@ import { TransactionsComponent } from './me/transactions/transactions.component'
 import { Error404Component } from './errors/error404/error404.component';
 import { AboutComponent } from './other/about/about.component';
 import { DocumentationComponent } from './other/documentation/documentation.component';
+import { SettingsComponent } from './other/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { DocumentationComponent } from './other/documentation/documentation.comp
     TransactionsComponent,
     Error404Component,
     AboutComponent,
-    DocumentationComponent
+    DocumentationComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import { DocumentationComponent } from './other/documentation/documentation.comp
     MatIconModule,
     MatButtonModule,
     MatListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

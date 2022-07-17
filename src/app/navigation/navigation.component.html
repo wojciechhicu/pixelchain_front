@@ -5,7 +5,7 @@
     </button>
     <h1 class="example-app-name">Pixelchain app</h1>
     <span class="divider"></span>
-    <button mat-icon-button routerLink="stats">
+    <button mat-icon-button routerLink="wallets" matBadge="2" matBadgeColor="warn" matTooltip="Connected wallets: 2">
       <mat-icon>stream</mat-icon>
     </button>
   </mat-toolbar>
@@ -15,35 +15,39 @@
       fixedTopGap="56" opened>
       <mat-nav-list>
         <div mat-subheader>Pixelscan</div>
-        <mat-list-item routerLink="stats">
+        <mat-list-item routerLink="stats" routerLinkActive="is-active">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">info</mat-icon>
-          <div mat-line>Overalll stats</div>
+          <div mat-line>Pixelchain stats</div>
         </mat-list-item>
-        <mat-list-item routerLink="blockchain">
+        <mat-list-item routerLink="blockchain" routerLinkActive="is-active">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">grid_view</mat-icon>
           <div mat-line>Blocks</div>
         </mat-list-item>
-        <mat-list-item routerLink="validators">
+        <mat-list-item routerLink="validators" routerLinkActive="is-active">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">lens_blur</mat-icon>
           <div mat-line>Validators</div>
         </mat-list-item>
         <div mat-subheader>Me</div>
-        <mat-list-item routerLink="wallets">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">account_balance_wallet</mat-icon>
+        <mat-list-item routerLink="wallets" routerLinkActive="is-active">
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary" matBadge="2" matBadgeSize="small">account_balance_wallet</mat-icon>
           <div mat-line>Wallets</div>
         </mat-list-item>
-        <mat-list-item routerLink="transactions">
+        <mat-list-item routerLink="transactions" routerLinkActive="is-active">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">receipt_long</mat-icon>
           <div mat-line>Transactions</div>
         </mat-list-item>
         <div mat-subheader>Other</div>
-        <mat-list-item routerLink="about">
+        <mat-list-item routerLink="about" routerLinkActive="is-active">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">question_mark</mat-icon>
           <div mat-line>About</div>
         </mat-list-item>
-        <mat-list-item routerLink="documentation">
+        <mat-list-item routerLink="documentation" routerLinkActive="is-active">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">description</mat-icon>
           <div mat-line>Documentation</div>
+        </mat-list-item>
+        <mat-list-item routerLink="settings" routerLinkActive="is-active">
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">settings</mat-icon>
+          <div mat-line>Settings</div>
         </mat-list-item>
 
       </mat-nav-list>
