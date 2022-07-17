@@ -12,7 +12,8 @@ import { SettingsComponent } from './other/settings/settings.component';
 export const routes: Routes = [
         {
                 path: '',
-                component: StatsComponent
+                redirectTo: 'about',
+                pathMatch: 'full'
         },
         {
                 path: 'stats',
@@ -55,7 +56,13 @@ export const routes: Routes = [
                 component: SettingsComponent
         },
         {
-                path: '**',
+                path: '404',
+                pathMatch: 'full',
                 component: Error404Component
+        },
+        {
+                path: '**',
+                redirectTo: '404',
+                pathMatch: 'full'
         }
 ]
