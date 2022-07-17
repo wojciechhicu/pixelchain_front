@@ -1,1 +1,47 @@
-<router-outlet></router-outlet>j
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name">Pixelchain app</h1>
+    <span class="divider"></span>
+    <button mat-icon-button>
+      <mat-icon>stream</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56" opened>
+      <mat-nav-list>
+        <div mat-subheader>Pixelscan</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">info</mat-icon>
+          <div mat-line>Overalll stats</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">grid_view</mat-icon>
+          <div mat-line>Blocks</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">lens_blur</mat-icon>
+          <div mat-line>Validators</div>
+        </mat-list-item>
+        <div mat-subheader>Me</div>
+        <mat-list-item>
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">account_balance_wallet</mat-icon>
+          <div mat-line>Wallets</div>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">receipt_long</mat-icon>
+          <div mat-line>Transactions</div>
+        </mat-list-item>
+
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
