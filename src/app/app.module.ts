@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 // components
@@ -53,7 +54,8 @@ import { SettingsComponent } from './other/settings/settings.component';
     MatButtonModule,
     MatListModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

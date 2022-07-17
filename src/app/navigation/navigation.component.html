@@ -1,16 +1,22 @@
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
+<div class="container" [class.is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar">
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1 class="example-app-name">Pixelchain app</h1>
+    <h1 class="app-name">Pixelchain app</h1>
     <span class="divider"></span>
-    <button mat-icon-button routerLink="wallets" matBadge="2" matBadgeColor="warn" matTooltip="Connected wallets: 2">
+    <button mat-icon-button routerLink="wallets" matBadge="2" matBadgeColor="warn" matBadgeSize="small" [mat-menu-trigger-for]="menu">
       <mat-icon>stream</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon matBadge="2" matBadgeSize="small">delete</mat-icon>
+        <span>Delete all wallets</span>
+      </button>
+    </mat-menu>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56" opened>
       <mat-nav-list>
