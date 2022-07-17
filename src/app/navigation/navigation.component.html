@@ -5,7 +5,7 @@
     </button>
     <h1 class="example-app-name">Pixelchain app</h1>
     <span class="divider"></span>
-    <button mat-icon-button>
+    <button mat-icon-button routerLink="stats">
       <mat-icon>stream</mat-icon>
     </button>
   </mat-toolbar>
@@ -15,26 +15,35 @@
       fixedTopGap="56" opened>
       <mat-nav-list>
         <div mat-subheader>Pixelscan</div>
-        <mat-list-item>
+        <mat-list-item routerLink="stats">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">info</mat-icon>
           <div mat-line>Overalll stats</div>
         </mat-list-item>
-        <mat-list-item>
+        <mat-list-item routerLink="blockchain">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">grid_view</mat-icon>
           <div mat-line>Blocks</div>
         </mat-list-item>
-        <mat-list-item>
+        <mat-list-item routerLink="validators">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">lens_blur</mat-icon>
           <div mat-line>Validators</div>
         </mat-list-item>
         <div mat-subheader>Me</div>
-        <mat-list-item>
+        <mat-list-item routerLink="wallets">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">account_balance_wallet</mat-icon>
           <div mat-line>Wallets</div>
         </mat-list-item>
-        <mat-list-item>
+        <mat-list-item routerLink="transactions">
           <mat-icon mat-list-icon class="material-icons-outlined" color="primary">receipt_long</mat-icon>
           <div mat-line>Transactions</div>
+        </mat-list-item>
+        <div mat-subheader>Other</div>
+        <mat-list-item routerLink="about">
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">question_mark</mat-icon>
+          <div mat-line>About</div>
+        </mat-list-item>
+        <mat-list-item routerLink="documentation">
+          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">description</mat-icon>
+          <div mat-line>Documentation</div>
         </mat-list-item>
 
       </mat-nav-list>
