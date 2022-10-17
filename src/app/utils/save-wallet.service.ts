@@ -82,4 +82,15 @@ export class SaveWalletService {
 		localStorage.removeItem('walletsList');
 		window.location.reload()
 	}
+
+	public loadConnectedWallets(): Data[]{
+		let wallets = localStorage.getItem('walletsList');
+		if(wallets != null){
+			let parsedWallets: Data[] = JSON.parse(wallets);
+			return parsedWallets
+		} else {
+			let noWallets: Data[] = [];
+			return noWallets
+		}
+	}
 }
