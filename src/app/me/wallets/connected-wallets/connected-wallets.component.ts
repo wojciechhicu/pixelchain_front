@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Data } from 'src/app/_helpers/wallet-list.interface';
+import { SaveWalletService } from 'src/app/utils/save-wallet.service';
 
 @Component({
   selector: 'app-connected-wallets',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectedWalletsComponent implements OnInit {
 
-  constructor() { }
+  loadData: Data[] = this.service.loadConnectedWallets()
+  displayedColumns: string[] = ['privKey', 'pubKey'];
+  dataSource = this.loadData;
+
+  constructor(public service: SaveWalletService) { }
 
   ngOnInit(): void {
   }
