@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SaveWalletService } from 'src/app/utils/save-wallet.service';
 
 @Component({
   selector: 'app-load-wallet',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadWalletComponent implements OnInit {
 
-  constructor() { }
+  fileToUpload: File | null = null;
+
+  constructor(public wallet: SaveWalletService) { }
 
   ngOnInit(): void {
   }
 
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+}
 }

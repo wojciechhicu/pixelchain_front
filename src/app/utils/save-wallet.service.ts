@@ -71,7 +71,7 @@ export class SaveWalletService {
 		exportFromJSON({data, fileName, exportType })
 	}
 
-	public loadWallet(): void {
+	public uploadWallet(): void {
 
 	}
 
@@ -83,6 +83,10 @@ export class SaveWalletService {
 		window.location.reload()
 	}
 
+	/**
+	 * Load all connected wallets from localstorage and show them in table
+	 * @returns 
+	 */
 	public loadConnectedWallets(): Data[]{
 		let wallets = localStorage.getItem('walletsList');
 		if(wallets != null){
