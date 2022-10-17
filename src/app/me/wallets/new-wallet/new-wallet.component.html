@@ -1,0 +1,17 @@
+<mat-card>
+        <mat-card-title>
+                Create new wallet address
+        </mat-card-title>
+        <mat-card-content *ngIf="length > 0">
+                <div>
+                        Private key: {{ pairs.private}} <br>
+                        Public Key: {{ pairs.public }}
+                </div>
+        </mat-card-content>
+        <mat-card-actions>
+                <button mat-button (click)="createWallet()">Create wallet</button>
+                <button mat-button (click)="downloadWallet()" [disabled]="length <= 0">Download wallet Data</button>
+                <button mat-button (click)="saveWallet()" [disabled]="length <= 0">Save wallet</button>
+        </mat-card-actions>
+</mat-card>
+<mat-divider></mat-divider>
