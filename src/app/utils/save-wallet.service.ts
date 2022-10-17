@@ -28,6 +28,11 @@ export class SaveWalletService {
 		return 0
 	}
 
+	/**
+	 * Add wallet to localstorage memory
+	 * @param privateKey private key of wallet
+	 * @param publicKey  public key of wallet
+	 */
 	public saveWallet(privateKey: string | undefined, publicKey: string | undefined): void {
 		let historicalRawData = localStorage.getItem("walletsList");
 		if (historicalRawData != null) {
@@ -54,6 +59,11 @@ export class SaveWalletService {
 		}
 	}
 
+	/**
+	 * Download one created wallet as JSON
+	 * @param privateKey private key of wallet
+	 * @param publicKey public key of wallet
+	 */
 	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined): void {
 		const data: Data = {privKey: privateKey, pubKey: publicKey};
 		const fileName: string = 'pixelChainWallet';
@@ -65,6 +75,9 @@ export class SaveWalletService {
 
 	}
 
+	/**
+	 * Delete all wallets from memory
+	 */
 	public deleteAllWallets(): void {
 		localStorage.removeItem('walletsList');
 		window.location.reload()
