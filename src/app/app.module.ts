@@ -11,6 +11,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 // components
@@ -28,6 +30,10 @@ import { Error404Component } from './errors/error404/error404.component';
 import { AboutComponent } from './other/about/about.component';
 import { DocumentationComponent } from './other/documentation/documentation.component';
 import { SettingsComponent } from './other/settings/settings.component';
+import { NewWalletComponent } from './me/wallets/new-wallet/new-wallet.component';
+import { LoadWalletComponent } from './me/wallets/load-wallet/load-wallet.component';
+import { ConnectedWalletsComponent } from './me/wallets/connected-wallets/connected-wallets.component';
+import { RemoveWalletsDialogComponent } from './dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +48,11 @@ import { SettingsComponent } from './other/settings/settings.component';
     Error404Component,
     AboutComponent,
     DocumentationComponent,
-    SettingsComponent
+    SettingsComponent,
+    NewWalletComponent,
+    LoadWalletComponent,
+    ConnectedWalletsComponent,
+    RemoveWalletsDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +65,9 @@ import { SettingsComponent } from './other/settings/settings.component';
     MatListModule,
     MatBadgeModule,
     MatTooltipModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

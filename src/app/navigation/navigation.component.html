@@ -1,66 +1,71 @@
 <div class="container" [class.is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <h1 class="app-name">Pixelchain app</h1>
-    <span class="divider"></span>
-    <button mat-icon-button routerLink="wallets" matBadge="2" matBadgeColor="warn" matBadgeSize="small" [mat-menu-trigger-for]="menu">
-      <mat-icon>stream</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon matBadge="2" matBadgeSize="small">delete</mat-icon>
-        <span>Delete all wallets</span>
-      </button>
-    </mat-menu>
-  </mat-toolbar>
+	<mat-toolbar color="primary" class="toolbar">
+		<button mat-icon-button (click)="snav.toggle()">
+			<mat-icon>menu</mat-icon>
+		</button>
+		<h1 class="app-name">Pixelchain app</h1>
+		<span class="divider"></span>
+		<button mat-icon-button [mat-menu-trigger-for]="menu">
+			<mat-icon>stream</mat-icon>
+		</button>
+		<mat-menu #menu="matMenu">
+			<button mat-menu-item (click)="removeWalletsDialog()">
+				<mat-icon matBadge="{{numberOfWallets}}" [matBadgeHidden]="numberOfWallets == 0" matBadgeSize="small">delete</mat-icon>
+				<span>Delete all wallets</span>
+			</button>
+			<button mat-menu-item routerLink="wallets">
+				<mat-icon matBadge="{{numberOfWallets}}" [matBadgeHidden]="numberOfWallets == 0" matBadgeSize="small" routerLink="wallets">wallet</mat-icon>
+				<span>See all wallets</span>
+			</button>
+		</mat-menu>
+	</mat-toolbar>
 
-  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56" opened>
-      <mat-nav-list>
-        <div mat-subheader>Pixelscan</div>
-        <mat-list-item routerLink="stats" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">info</mat-icon>
-          <div mat-line>Pixelchain stats</div>
-        </mat-list-item>
-        <mat-list-item routerLink="blockchain" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">grid_view</mat-icon>
-          <div mat-line>Blocks</div>
-        </mat-list-item>
-        <mat-list-item routerLink="validators" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">lens_blur</mat-icon>
-          <div mat-line>Validators</div>
-        </mat-list-item>
-        <div mat-subheader>Me</div>
-        <mat-list-item routerLink="wallets" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary" matBadge="2" matBadgeSize="small">account_balance_wallet</mat-icon>
-          <div mat-line>Wallets</div>
-        </mat-list-item>
-        <mat-list-item routerLink="transactions" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">receipt_long</mat-icon>
-          <div mat-line>Transactions</div>
-        </mat-list-item>
-        <div mat-subheader>Other</div>
-        <mat-list-item routerLink="about" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">question_mark</mat-icon>
-          <div mat-line>About</div>
-        </mat-list-item>
-        <mat-list-item routerLink="documentation" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">description</mat-icon>
-          <div mat-line>Documentation</div>
-        </mat-list-item>
-        <mat-list-item routerLink="settings" routerLinkActive="is-active">
-          <mat-icon mat-list-icon class="material-icons-outlined" color="primary">settings</mat-icon>
-          <div mat-line>Settings</div>
-        </mat-list-item>
+	<mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+		<mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+			fixedTopGap="56" opened>
+			<mat-nav-list>
+				<div mat-subheader>Pixelscan</div>
+				<mat-list-item routerLink="stats" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">info</mat-icon>
+					<div mat-line>Pixelchain stats</div>
+				</mat-list-item>
+				<mat-list-item routerLink="blockchain" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">grid_view</mat-icon>
+					<div mat-line>Blocks</div>
+				</mat-list-item>
+				<mat-list-item routerLink="validators" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">lens_blur</mat-icon>
+					<div mat-line>Validators</div>
+				</mat-list-item>
+				<div mat-subheader>Me</div>
+				<mat-list-item routerLink="wallets" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary" matBadge="{{numberOfWallets}}" [matBadgeHidden]="numberOfWallets == 0"
+						matBadgeSize="small">account_balance_wallet</mat-icon>
+					<div mat-line>Wallets</div>
+				</mat-list-item>
+				<mat-list-item routerLink="transactions" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">receipt_long</mat-icon>
+					<div mat-line>Transactions</div>
+				</mat-list-item>
+				<div mat-subheader>Other</div>
+				<mat-list-item routerLink="about" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">question_mark</mat-icon>
+					<div mat-line>About</div>
+				</mat-list-item>
+				<mat-list-item routerLink="documentation" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">description</mat-icon>
+					<div mat-line>Documentation</div>
+				</mat-list-item>
+				<mat-list-item routerLink="settings" routerLinkActive="is-active">
+					<mat-icon mat-list-icon class="material-icons-outlined" color="primary">settings</mat-icon>
+					<div mat-line>Settings</div>
+				</mat-list-item>
 
-      </mat-nav-list>
-    </mat-sidenav>
+			</mat-nav-list>
+		</mat-sidenav>
 
-    <mat-sidenav-content>
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+		<mat-sidenav-content>
+			<router-outlet></router-outlet>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
 </div>
