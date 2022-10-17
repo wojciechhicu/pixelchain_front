@@ -1,10 +1,27 @@
-table {
-        width: 100%;
-}
-mat-card-content{
+
+
+mat-card-content {
         padding-top: 20px;
 }
-tr:hover{
-        background-color: rgba(0,0,0,.04);
-        cursor: pointer;
+
+
+
+.container {
+        width: 100%;
+        overflow-x: auto;
+        table {
+                width: 100%;
+                overflow: auto;
+                max-height: 500px;
+                td{
+                        max-width: 500px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                }
+                tr:hover {
+                        background-color: rgba(0, 0, 0, .04);
+                        cursor: pointer;
+                }
+        }
 }
