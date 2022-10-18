@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { SaveWalletService } from '../utils/save-wallet.service';
+import { SaveWalletService } from '../utils/wallet.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveWalletsDialogComponent } from '../dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 

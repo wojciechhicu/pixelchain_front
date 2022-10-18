@@ -97,4 +97,9 @@ export class SaveWalletService {
 			return noWallets
 		}
 	}
+
+	public checkCorrectStoringKeys(): Data[] | null {
+
+		return null
+	}
 }

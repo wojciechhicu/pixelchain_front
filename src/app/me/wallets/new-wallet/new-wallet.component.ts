@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as elliptic from 'elliptic';
-import { SaveWalletService } from 'src/app/utils/save-wallet.service';
+import { SaveWalletService } from 'src/app/utils/wallet.service';
 const ec = new elliptic.ec('secp256k1');
 
 
@@ -12,8 +12,8 @@ const ec = new elliptic.ec('secp256k1');
 export class NewWalletComponent implements OnInit {
 
 	pair: elliptic.ec.KeyPair = ec.genKeyPair();
-	private: string = this.pair.getPrivate().toString('hex')
-	public: string = this.pair.getPublic('hex')
+	private: string = this.pair.getPrivate().toString('hex');
+	public: string = this.pair.getPublic('hex');
 	pairs: Pairs = {};
 	length: number = 0;
 
@@ -32,7 +32,7 @@ export class NewWalletComponent implements OnInit {
 		this.pairs = {
 			pair: this.pair,
 			private: this.private,
-			public: this.public
+			public: this.public,
 		}
 	}
 
