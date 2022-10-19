@@ -35,6 +35,7 @@ import { NewWalletComponent } from './me/wallets/new-wallet/new-wallet.component
 import { LoadWalletComponent } from './me/wallets/load-wallet/load-wallet.component';
 import { ConnectedWalletsComponent } from './me/wallets/connected-wallets/connected-wallets.component';
 import { RemoveWalletsDialogComponent } from './dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
+import { UploadWalletsDialogErrorComponent } from './dialogs/upload-wallets-dialog-error/upload-wallets-dialog-error.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { RemoveWalletsDialogComponent } from './dialogs/navigationDialogs/remove
     NewWalletComponent,
     LoadWalletComponent,
     ConnectedWalletsComponent,
-    RemoveWalletsDialogComponent
+    RemoveWalletsDialogComponent,
+    UploadWalletsDialogErrorComponent
   ],
   imports: [
     BrowserModule,

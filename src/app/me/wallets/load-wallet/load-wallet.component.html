@@ -1,10 +1,7 @@
 <mat-card>
 	<mat-card-title>Upload existing wallets</mat-card-title>
 	<mat-card-content class="padding">
-		<input type="file" class="file-input">
+		<input type="file" class="file-input" (change)="handleFileInputErrors($event)">		
 	</mat-card-content>
-	<mat-card-actions>
-		<button mat-button>Upload wallet</button>
-	</mat-card-actions>
 </mat-card>
 <mat-divider></mat-divider>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SaveWalletService } from 'src/app/utils/save-wallet.service';
+import { SaveWalletService } from 'src/app/utils/wallet.service';
 
 @Component({
   selector: 'app-remove-wallets-dialog',
