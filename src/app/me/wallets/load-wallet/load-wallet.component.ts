@@ -38,30 +38,54 @@ export class LoadWalletComponent implements OnInit {
 				throw "File size is too big. Max 2MB"
 			}
 
-			this.file = event.target.files[0];
-			let fileReader = new FileReader();
-			fileReader.onload = (e) =>{
-				if(fileReader.result != null && typeof fileReader.result === 'string'){
-					let test = JSON.parse(fileReader.result)
-					console.log(test)
-
+			/**
+			 * 
+			 */
+			try {
+				this.file = event.target.files[0];
+				let fileReader = new FileReader();
+				fileReader.onload = (e) =>{
+					try{
+						if(fileReader.result != null && typeof fileReader.result === 'string'){
+							let parsedJSON = JSON.parse(fileReader.result)
+							if(this.wallet.checkCorrectStoringKeys(parsedJSON) != null){
+								let checkedData: Data[] = parsedJSON;
+								let tentanglement: Data[] | null = this.wallet.checkCorrecTentanglement(checkedData);
+								if(tentanglement != null){
+									console.log(tentanglement)
+								} else {
+									throw "All data is not correct"
+								}
+							} else {
+								throw "Data is corrupted or stored not correctly"
+							}
+						} else {
+							throw "Cannot read file."
+						}
+					} catch (err) {
+						this.dialogOpen(err)
+					}
 				}
-
-
+				fileReader.readAsText(this.file)
+				this.noErrors = false;
+			} catch (err){
+				this.dialogOpen(err)
 			}
-			fileReader.readAsText(this.file)
-			this.noErrors = false;
 
 		} catch( err) {
-			this.dialog.open(UploadWalletsDialogErrorComponent,{
-				data: {
-					criticalError: err
-				}
-			})
+			this.dialogOpen(err)
 		}
 	}
 
-	public uploadFile():void {
-
+	/**
+	 * Open dialog and send error message
+	 * @param error 
+	 */
+	private dialogOpen(error: unknown){
+		this.dialog.open(UploadWalletsDialogErrorComponent,{
+			data: {
+				criticalError: error
+			}
+		})
 	}
 }

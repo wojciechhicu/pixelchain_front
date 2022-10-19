@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Data } from '../_helpers/wallet-list.interface';
+import * as elliptic from 'elliptic';
+const ec = new elliptic.ec('secp256k1');
 import exportFromJSON from 'export-from-json'
 
 @Injectable({
@@ -71,10 +73,6 @@ export class SaveWalletService {
 		exportFromJSON({data, fileName, exportType })
 	}
 
-	public uploadWallet(): void {
-
-	}
-
 	/**
 	 * Delete all wallets from memory
 	 */
@@ -98,8 +96,43 @@ export class SaveWalletService {
 		}
 	}
 
-	public checkCorrectStoringKeys(): Data[] | null {
+	/**
+	 * Check if there are correct keys in JSON object
+	 * @param data full data readed
+	 * @returns null if there is any error or full object if keys are correct
+	 */
+	public checkCorrectStoringKeys(data: any): Data[] | null {
+		let check: Data[] = data;
+		let balanceTMP: number = 0;
+		if(check.length > 0){
+			check.forEach((val)=>{
+				if(!(val.privKey && val.pubKey)){
+					throw "Not correct data"
+				}
+			})
+			if(balanceTMP > 0){
+				return null
+			} else {
+				return check
+			}
+		} else {
+			return null
+		}
+	}
 
-		return null
+	public checkCorrecTentanglement(data: Data[]): Data[] | null{
+		let correctWallets: Data[] = [];
+		data.forEach((val, index)=>{
+			if(val.privKey != undefined){
+				if(ec. != val.pubKey){
+					correctWallets.push(data[index])
+				}
+			}
+		})
+		if(correctWallets.length == 0){
+			return null
+		} else {
+			return correctWallets;
+		}
 	}
 }
