@@ -124,9 +124,7 @@ export class SaveWalletService {
 		let correctWallets: Data[] = [];
 		data.forEach((val, index)=>{
 			if(val.privKey != undefined){
-				if(ec. != val.pubKey){
-					correctWallets.push(data[index])
-				}
+				
 			}
 		})
 		if(correctWallets.length == 0){
