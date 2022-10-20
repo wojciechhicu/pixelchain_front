@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PrivateKey } from 'src/app/_helpers/wallet-connect.interface';
-import { SaveWalletService } from 'src/app/utils/wallet.service';
+import { WalletService } from 'src/app/utils/wallet.service';
 
 @Component({
 	selector: 'app-edit-wallet-name-dialog',
@@ -11,7 +11,7 @@ import { SaveWalletService } from 'src/app/utils/wallet.service';
 export class EditWalletNameDialogComponent implements OnInit {
 
 	newName: string = '';
-	constructor(@Inject(MAT_DIALOG_DATA) public data: PrivateKey, public wallet: SaveWalletService) { }
+	constructor(@Inject(MAT_DIALOG_DATA) public data: PrivateKey, public wallet: WalletService) { }
 
 	ngOnInit(): void {
 	}

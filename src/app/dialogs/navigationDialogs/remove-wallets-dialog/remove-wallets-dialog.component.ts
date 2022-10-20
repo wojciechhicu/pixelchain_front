@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SaveWalletService } from 'src/app/utils/wallet.service';
+import { WalletService } from 'src/app/utils/wallet.service';
 
 @Component({
   selector: 'app-remove-wallets-dialog',
@@ -8,7 +8,7 @@ import { SaveWalletService } from 'src/app/utils/wallet.service';
 })
 export class RemoveWalletsDialogComponent implements OnInit {
 
-  constructor(public wallet: SaveWalletService) { }
+  constructor(public wallet: WalletService) { }
 
   ngOnInit(): void {
   }

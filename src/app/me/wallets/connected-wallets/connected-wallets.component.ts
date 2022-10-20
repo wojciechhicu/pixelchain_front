@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Data } from 'src/app/_helpers/wallet-list.interface';
-import { SaveWalletService } from 'src/app/utils/wallet.service';
+import { WalletService } from 'src/app/utils/wallet.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,7 +19,7 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	displayedColumns: string[] = ['privKey', 'pubKey', 'name', 'delete', 'transaction', 'editName'];
 	dataSource = new MatTableDataSource<Data>(this.loadData);
 
-	constructor(public service: SaveWalletService, public dialog: MatDialog, public router: Router) { }
+	constructor(public service: WalletService, public dialog: MatDialog, public router: Router) { }
 
 	ngOnInit(): void {
 	}

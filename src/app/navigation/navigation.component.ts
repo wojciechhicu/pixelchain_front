@@ -1,6 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { SaveWalletService } from '../utils/wallet.service';
+import { WalletService } from '../utils/wallet.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RemoveWalletsDialogComponent } from '../dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 
@@ -14,7 +14,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 	numberOfWallets: number = 0;
 
 	private _mobileQueryListener: () => void;
-	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public wallets: SaveWalletService, public dialog: MatDialog) {
+	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public wallets: WalletService, public dialog: MatDialog) {
 		this.mobileQuery = media.matchMedia('(max-width: 600px)');
 		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
 		this.mobileQuery.addListener(this._mobileQueryListener);
