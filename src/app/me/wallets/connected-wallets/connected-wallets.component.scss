@@ -25,7 +25,13 @@ mat-card-content {
                 }
         }
 }
-.mat-form-field {
-        font-size: 14px;
-        width: 100%;
-      }
+.wrapper{
+        .mat-form-field {
+
+                font-size: 14px;
+                width: 95%;
+              }
+        button{
+                width: 5%;
+        }
+}

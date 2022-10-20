@@ -80,10 +80,6 @@ export class SaveWalletService {
 		window.location.reload()
 	}
 
-	public deleteSingleKey(privKey: string, pubKey: string): void {
-		
-	}
-
 	/**
 	 * Load all connected wallets from localstorage and show them in table
 	 * @returns 
@@ -121,5 +117,25 @@ export class SaveWalletService {
 		} else {
 			return null
 		}
+	}
+
+	/**
+	 * Download full list of wallets as JSON file
+	 */
+	public downloadAllWallets(): void {
+		const data: Data[] = this.loadConnectedWallets();
+		const fileName: string = 'my-wallets-list';
+		const exportType = exportFromJSON.types.json;
+		exportFromJSON({data, fileName, exportType })
+	}
+	
+	public deleteSingleKey(privKey: string): void {
+		let connectedWallets: Data[] = this.loadConnectedWallets();
+		let index: number = 0;
+		connectedWallets.forEach((val,ind)=>{
+			if(val.privKey === privKey){
+				index = ind;
+			}
+		})
 	}
 }

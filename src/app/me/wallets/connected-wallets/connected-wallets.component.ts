@@ -3,6 +3,8 @@ import { Data } from 'src/app/_helpers/wallet-list.interface';
 import { SaveWalletService } from 'src/app/utils/wallet.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogConnectedWalletsComponent } from 'src/app/dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
 
 @Component({
 	selector: 'app-connected-wallets',
@@ -15,7 +17,7 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	displayedColumns: string[] = ['privKey', 'pubKey', 'delete'];
 	dataSource = new MatTableDataSource<Data>(this.loadData);
 
-	constructor(public service: SaveWalletService) { }
+	constructor(public service: SaveWalletService, public dialog: MatDialog) { }
 
 	ngOnInit(): void {
 	}
@@ -35,7 +37,15 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	deleteSingleKey(privKey: string, pubKey: string){
-		this.service.deleteSingleKey(privKey, pubKey);
+	deleteSingleKey(privKey: string){
+		this.dialog.open(ConfirmDialogConnectedWalletsComponent, {
+			data: {
+				privKey: privKey
+			}
+		})
+	}
+
+	downloadAllWallets(): void {
+		this.service.downloadAllWallets();
 	}
 }

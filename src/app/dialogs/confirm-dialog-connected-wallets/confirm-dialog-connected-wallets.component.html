@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Delete key</h2>
+<mat-dialog-content class="mat-typography">
+	<div>
+                Are You sure to delete key: {{ data.privKey}}
+        </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cancel</button>
+        <button mat-button (click)="confirmDelete(data.privKey)">Yes</button>
+</mat-dialog-actions>

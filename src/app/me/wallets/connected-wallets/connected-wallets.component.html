@@ -2,10 +2,13 @@
 	<mat-card-title>My connected wallets</mat-card-title>
 	<mat-card-content>
 		<div class="container">
-			<mat-form-field appearance="standard">
-				<mat-label>Filter</mat-label>
-				<input matInput class="" (keyup)="applyFilter($event)" placeholder="Place private or public key here" #input>
-			</mat-form-field>
+			<div class="wrapper">
+				<mat-form-field appearance="standard">
+					<mat-label>Filter</mat-label>
+					<input matInput class="" (keyup)="applyFilter($event)" placeholder="Place private or public key here" #input>
+				</mat-form-field>
+				<button mat-raised-button matTooltip="Download all wallets"  matTooltipPosition="left" (click)="downloadAllWallets()"><mat-icon  class="material-icons-outlined">file_download</mat-icon></button>
+			</div>
 			<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 				<!-- Private key Column -->
@@ -23,7 +26,7 @@
 				<!-- Delete this key -->
 				<ng-container matColumnDef="delete">
 					<th mat-header-cell *matHeaderCellDef> Delete key </th>
-					<td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="deleteSingleKey(element.privKey, element.pubKey)"><mat-icon class="material-icons-outlined">delete</mat-icon></button></td>
+					<td mat-cell *matCellDef="let element"> <button mat-flat-button (click)="deleteSingleKey(element.privKey)" matTooltip="Delete this keys" matTooltipPosition="left"><mat-icon class="material-icons-outlined">delete</mat-icon></button></td>
 				</ng-container>				
 
 				<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
