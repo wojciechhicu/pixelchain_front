@@ -37,7 +37,6 @@ export const routes: Routes = [
         },
         {
                 path: 'transactions',
-                pathMatch: 'full',
                 component: TransactionsComponent,
         },
         {

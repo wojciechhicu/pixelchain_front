@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 // components
@@ -79,7 +80,8 @@ import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog
     MatTableModule,
     MatPaginatorModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

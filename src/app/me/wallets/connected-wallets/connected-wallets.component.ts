@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogConnectedWalletsComponent } from 'src/app/dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-connected-wallets',
@@ -14,10 +15,10 @@ import { ConfirmDialogConnectedWalletsComponent } from 'src/app/dialogs/confirm-
 export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	loadData: Data[] = this.service.loadConnectedWallets()
-	displayedColumns: string[] = ['privKey', 'pubKey', 'delete'];
+	displayedColumns: string[] = ['privKey', 'pubKey', 'delete', 'transaction'];
 	dataSource = new MatTableDataSource<Data>(this.loadData);
 
-	constructor(public service: SaveWalletService, public dialog: MatDialog) { }
+	constructor(public service: SaveWalletService, public dialog: MatDialog, public router: Router) { }
 
 	ngOnInit(): void {
 	}
@@ -47,5 +48,11 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	downloadAllWallets(): void {
 		this.service.downloadAllWallets();
+	}
+
+	goToTransactions(pubKey: string): void {
+		this.router.navigate(['transactions'], {
+			queryParams: {publicKey: pubKey}
+		})
 	}
 }
