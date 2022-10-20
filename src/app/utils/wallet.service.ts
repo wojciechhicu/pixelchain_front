@@ -7,7 +7,7 @@ import exportFromJSON from 'export-from-json'
 @Injectable({
 	providedIn: 'root'
 })
-export class SaveWalletService {
+export class WalletService {
 
 	constructor() { }
 
@@ -142,6 +142,22 @@ export class SaveWalletService {
 			}
 		})
 		connectedWallets.splice(index ,1);
+		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
+		window.location.reload()
+	}
+
+	/**
+	 * Edit label for wallet
+	 * @param privKey private key as ID
+	 * @param newName new name for wallet
+	 */
+	public editWalletName(privKey: string, newName: string): void {
+		let connectedWallets: Data[] = this.loadConnectedWallets();
+		connectedWallets.forEach((val)=>{
+			if(val.privKey === privKey){
+				val.name = newName;
+			}
+		})
 		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
 		window.location.reload()
 	}

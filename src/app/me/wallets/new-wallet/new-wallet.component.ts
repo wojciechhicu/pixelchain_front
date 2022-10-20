@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as elliptic from 'elliptic';
-import { SaveWalletService } from 'src/app/utils/wallet.service';
+import { WalletService } from 'src/app/utils/wallet.service';
 const ec = new elliptic.ec('secp256k1');
 
 
@@ -18,7 +18,7 @@ export class NewWalletComponent implements OnInit {
 	length: number = 0;
 
 
-	constructor(public walletService: SaveWalletService) { }
+	constructor(public walletService: WalletService) { }
 
 	ngOnInit(): void {
 

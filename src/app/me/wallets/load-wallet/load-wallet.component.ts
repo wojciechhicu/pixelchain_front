@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SaveWalletService } from 'src/app/utils/wallet.service';
+import { WalletService } from 'src/app/utils/wallet.service';
 import { Data } from 'src/app/_helpers/wallet-list.interface';
 import { UploadWalletsDialogErrorComponent } from 'src/app/dialogs/upload-wallets-dialog-error/upload-wallets-dialog-error.component';
 
@@ -18,7 +18,7 @@ export class LoadWalletComponent implements OnInit {
 	fileData!: Data[]
 
 
-	constructor(public wallet: SaveWalletService, public dialog: MatDialog) { }
+	constructor(public wallet: WalletService, public dialog: MatDialog) { }
 
 	ngOnInit(): void {
 	}
