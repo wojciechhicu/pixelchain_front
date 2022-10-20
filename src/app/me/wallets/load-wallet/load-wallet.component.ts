@@ -50,12 +50,15 @@ export class LoadWalletComponent implements OnInit {
 							let parsedJSON = JSON.parse(fileReader.result)
 							if(this.wallet.checkCorrectStoringKeys(parsedJSON) != null){
 								let checkedData: Data[] = parsedJSON;
-								let tentanglement: Data[] | null = this.wallet.checkCorrecTentanglement(checkedData);
-								if(tentanglement != null){
-									console.log(tentanglement)
-								} else {
-									throw "All data is not correct"
-								}
+								let walletsInMemory: Data[] = this.wallet.loadConnectedWallets();
+								checkedData.forEach((val)=>{
+									let tmp = walletsInMemory.find(element => element.privKey == val.privKey)
+									if(tmp == undefined){
+										walletsInMemory.push({privKey: val.privKey, pubKey: val.pubKey})
+									}
+								})
+								localStorage.setItem("walletsList", JSON.stringify(walletsInMemory));
+								window.location.reload()
 							} else {
 								throw "Data is corrupted or stored not correctly"
 							}

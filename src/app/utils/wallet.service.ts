@@ -44,7 +44,6 @@ export class SaveWalletService {
 			historical.forEach((val)=>{
 				if(val.privKey != newData.privKey){
 					numberOfPrivKeysInside = numberOfPrivKeysInside + 1
-					console.log(val.privKey)
 				}
 				
 			})
@@ -67,7 +66,7 @@ export class SaveWalletService {
 	 * @param publicKey public key of wallet
 	 */
 	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined): void {
-		const data: Data = {privKey: privateKey, pubKey: publicKey};
+		const data: Data[] = [{privKey: privateKey, pubKey: publicKey}];
 		const fileName: string = 'pixelChainWallet';
 		const exportType = exportFromJSON.types.json;
 		exportFromJSON({data, fileName, exportType })
@@ -79,6 +78,10 @@ export class SaveWalletService {
 	public deleteAllWallets(): void {
 		localStorage.removeItem('walletsList');
 		window.location.reload()
+	}
+
+	public deleteSingleKey(privKey: string, pubKey: string): void {
+		
 	}
 
 	/**
@@ -117,20 +120,6 @@ export class SaveWalletService {
 			}
 		} else {
 			return null
-		}
-	}
-
-	public checkCorrecTentanglement(data: Data[]): Data[] | null{
-		let correctWallets: Data[] = [];
-		data.forEach((val, index)=>{
-			if(val.privKey != undefined){
-				
-			}
-		})
-		if(correctWallets.length == 0){
-			return null
-		} else {
-			return correctWallets;
 		}
 	}
 }
