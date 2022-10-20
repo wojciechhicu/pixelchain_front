@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 // components
@@ -41,6 +42,7 @@ import { ConnectedWalletsComponent } from './me/wallets/connected-wallets/connec
 import { RemoveWalletsDialogComponent } from './dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 import { UploadWalletsDialogErrorComponent } from './dialogs/upload-wallets-dialog-error/upload-wallets-dialog-error.component';
 import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
+import { EditWalletNameDialogComponent } from './dialogs/edit-wallet-name-dialog/edit-wallet-name-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog
     ConnectedWalletsComponent,
     RemoveWalletsDialogComponent,
     UploadWalletsDialogErrorComponent,
-    ConfirmDialogConnectedWalletsComponent
+    ConfirmDialogConnectedWalletsComponent,
+    EditWalletNameDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,9 @@ import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDividerModule
+    MatDividerModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

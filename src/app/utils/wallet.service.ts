@@ -145,4 +145,15 @@ export class SaveWalletService {
 		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
 		window.location.reload()
 	}
+
+	public editWalletName(privKey: string, newName: string): void {
+		let connectedWallets: Data[] = this.loadConnectedWallets();
+		connectedWallets.forEach((val)=>{
+			if(val.privKey === privKey){
+				val.name = newName;
+			}
+		})
+		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
+		window.location.reload()
+	}
 }
