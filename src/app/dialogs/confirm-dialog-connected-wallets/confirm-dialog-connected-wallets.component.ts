@@ -16,6 +16,6 @@ export class ConfirmDialogConnectedWalletsComponent implements OnInit {
   }
 
   public confirmDelete(privKey: string): void {
-    
+    this.wallet.deleteSingleKey(privKey)
   }
 }

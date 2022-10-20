@@ -129,6 +129,10 @@ export class SaveWalletService {
 		exportFromJSON({data, fileName, exportType })
 	}
 	
+	/**
+	 * Delete single key from localstorage
+	 * @param privKey private key as string
+	 */
 	public deleteSingleKey(privKey: string): void {
 		let connectedWallets: Data[] = this.loadConnectedWallets();
 		let index: number = 0;
@@ -137,5 +141,8 @@ export class SaveWalletService {
 				index = ind;
 			}
 		})
+		connectedWallets.splice(index ,1);
+		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
+		window.location.reload()
 	}
 }
