@@ -44,7 +44,6 @@ export class SaveWalletService {
 			historical.forEach((val)=>{
 				if(val.privKey != newData.privKey){
 					numberOfPrivKeysInside = numberOfPrivKeysInside + 1
-					console.log(val.privKey)
 				}
 				
 			})
@@ -67,7 +66,7 @@ export class SaveWalletService {
 	 * @param publicKey public key of wallet
 	 */
 	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined): void {
-		const data: Data = {privKey: privateKey, pubKey: publicKey};
+		const data: Data[] = [{privKey: privateKey, pubKey: publicKey}];
 		const fileName: string = 'pixelChainWallet';
 		const exportType = exportFromJSON.types.json;
 		exportFromJSON({data, fileName, exportType })
@@ -120,19 +119,30 @@ export class SaveWalletService {
 		}
 	}
 
-	public checkCorrecTentanglement(data: Data[]): Data[] | null{
-		let correctWallets: Data[] = [];
-		data.forEach((val, index)=>{
-			if(val.privKey != undefined){
-				if(ec. != val.pubKey){
-					correctWallets.push(data[index])
-				}
+	/**
+	 * Download full list of wallets as JSON file
+	 */
+	public downloadAllWallets(): void {
+		const data: Data[] = this.loadConnectedWallets();
+		const fileName: string = 'my-wallets-list';
+		const exportType = exportFromJSON.types.json;
+		exportFromJSON({data, fileName, exportType })
+	}
+	
+	/**
+	 * Delete single key from localstorage
+	 * @param privKey private key as string
+	 */
+	public deleteSingleKey(privKey: string): void {
+		let connectedWallets: Data[] = this.loadConnectedWallets();
+		let index: number = 0;
+		connectedWallets.forEach((val,ind)=>{
+			if(val.privKey === privKey){
+				index = ind;
 			}
 		})
-		if(correctWallets.length == 0){
-			return null
-		} else {
-			return correctWallets;
-		}
+		connectedWallets.splice(index ,1);
+		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
+		window.location.reload()
 	}
 }

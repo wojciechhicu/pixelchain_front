@@ -14,6 +14,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule  } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 // components
@@ -36,6 +39,7 @@ import { LoadWalletComponent } from './me/wallets/load-wallet/load-wallet.compon
 import { ConnectedWalletsComponent } from './me/wallets/connected-wallets/connected-wallets.component';
 import { RemoveWalletsDialogComponent } from './dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 import { UploadWalletsDialogErrorComponent } from './dialogs/upload-wallets-dialog-error/upload-wallets-dialog-error.component';
+import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,8 @@ import { UploadWalletsDialogErrorComponent } from './dialogs/upload-wallets-dial
     LoadWalletComponent,
     ConnectedWalletsComponent,
     RemoveWalletsDialogComponent,
-    UploadWalletsDialogErrorComponent
+    UploadWalletsDialogErrorComponent,
+    ConfirmDialogConnectedWalletsComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +76,10 @@ import { UploadWalletsDialogErrorComponent } from './dialogs/upload-wallets-dial
     MatMenuModule,
     MatCardModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
