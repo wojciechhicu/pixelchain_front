@@ -16,6 +16,7 @@ export class NewWalletComponent implements OnInit {
 	public: string = this.pair.getPublic('hex');
 	pairs: Pairs = {};
 	length: number = 0;
+	name: string = ''
 
 
 	constructor(public walletService: WalletService) { }
