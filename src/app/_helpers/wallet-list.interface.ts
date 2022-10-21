@@ -1,5 +1,5 @@
 export interface Data {
-        pubKey: string | undefined;
-        privKey: string | undefined;
-        name?: string;
+	pubKey: string | undefined;
+	privKey: string | undefined;
+	name?: string;
 }

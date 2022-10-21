@@ -1,3 +1,3 @@
 export interface PrivateKey {
-        privKey: string;
+	privKey: string;
 }

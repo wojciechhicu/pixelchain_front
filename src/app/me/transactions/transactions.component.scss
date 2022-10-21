@@ -7,6 +7,25 @@ mat-card{
                         display: inline-block;
                         height: 100%;
                         width: 50%;
+                        overflow-y: auto;
+                        .searching-bar{
+                                width: 100%;
+                        }
                 }
         }
+}
+.status{
+        display: inline-block;
+}
+.icon-lower{
+        transform: translateY(6px);
+}
+.success{
+        color: green
+}
+.pending {
+        color: lightblue;
+}
+.error{
+        color: red;
 }

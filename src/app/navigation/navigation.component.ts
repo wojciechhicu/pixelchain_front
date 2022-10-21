@@ -14,15 +14,20 @@ export class NavigationComponent implements OnInit, OnDestroy {
 	numberOfWallets: number = 0;
 
 	private _mobileQueryListener: () => void;
-	constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, public wallets: WalletService, public dialog: MatDialog) {
+	constructor(
+		changeDetectorRef: ChangeDetectorRef,
+		media: MediaMatcher,
+		public wallets: WalletService,
+		public dialog: MatDialog
+	) {
 		this.mobileQuery = media.matchMedia('(max-width: 600px)');
-		this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+		this._mobileQueryListener = () =>
+			changeDetectorRef.detectChanges();
 		this.mobileQuery.addListener(this._mobileQueryListener);
 		this.numberOfWallets = wallets.numberOfWallets();
-		
 	}
 
-	ngOnInit(): void { }
+	ngOnInit(): void {}
 
 	public removeWalletsDialog(): void {
 		this.dialog.open(RemoveWalletsDialogComponent);
@@ -31,6 +36,4 @@ export class NavigationComponent implements OnInit, OnDestroy {
 	ngOnDestroy(): void {
 		this.mobileQuery.removeListener(this._mobileQueryListener);
 	}
-
-
 }

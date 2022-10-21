@@ -1,86 +1,185 @@
 <mat-card>
-        <mat-card-content>
-                <div class="half">
-                        <div>
-                                <mat-form-field appearance="fill">
-                                        <mat-label>Search for transaction</mat-label>
-                                        <input matInput placeholder="Tx ID">
-                                </mat-form-field>
-                        </div>
-                        <div>
-                                <mat-form-field appearance="fill">
-                                        <mat-label>My wallets</mat-label>
-                                        <mat-select>
-                                                <mat-option *ngFor="let wallet of wallets" value="wallet.name">
-                                                        {{ wallet.name }}
-                                                </mat-option>
-                                        </mat-select>
-                                </mat-form-field>
-                        </div>
-                </div>
-                <div class="half">
-                        <mat-list dense>
-                                <div mat-subheader>Transaction overall</div>
-                                <mat-list-item>
-                                        <mat-icon mat-list-icon class="material-icons-outlined">data_object</mat-icon>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="A TxHash or transaction hash is a unique identifier that is generated whenever a transaction is executed."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Transaction
-                                                Hash: 123h234jk23h4k1h23i423874dxy243
-                                        </div>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="The status of the transaction."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Status:
-                                                <mat-icon>pending</mat-icon>pending
-                                        </div>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="Number of the block in which the transaction is recorded."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Block:
-                                                12324354234
-                                        </div>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="The date and time at which a transaction is mined."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Timestamp:
-                                                234234234
-                                        </div>
-                                </mat-list-item>
-                                <mat-divider [inset]="true"></mat-divider>
-                                <div mat-subheader>Transaction</div>
-                                <mat-list-item>
-                                        <mat-icon mat-list-icon>swap_horiz</mat-icon>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="The sending party of the transaction."
-                                                        matTooltipPosition="left">help_outline</mat-icon>From:
-                                                xd123234234234
-                                        </div>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="The receiving party of the transaction."
-                                                        matTooltipPosition="left">help_outline</mat-icon>To: 23c23c4234
-                                        </div>
-                                </mat-list-item>
-                                <mat-divider [inset]="true"></mat-divider>
-                                <div mat-subheader>Transaction values</div>
-                                <mat-list-item>
-                                        <mat-icon mat-list-icon class="material-icons-outlined">attach_money</mat-icon>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="The value being transacted in Pixel."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Value: 0.1
-                                        </div>
-                                        <div mat-line>
-                                                <mat-icon class="material-icons-outlined"
-                                                        matTooltip="Cost per unit of gas specified for the transaction, in Pixel. The higher the gas price the higher chance of getting included in a block."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Transaction
-                                                Fee: 0.000001
-                                        </div>
-                                </mat-list-item>
-                        </mat-list>
-                </div>
-        </mat-card-content>
+	<mat-card-content>
+		<div class="half">
+			<div class="searching-bar">
+				<mat-form-field appearance="legacy">
+					<mat-label
+						>Search for
+						transaction</mat-label
+					>
+					<input matInput placeholder="Tx ID" />
+				</mat-form-field>
+				<button mat-flat-button class="search-button">
+					<mat-icon>search</mat-icon>
+				</button>
+			</div>
+			<div>
+				<mat-form-field appearance="fill">
+					<mat-label>My wallets</mat-label>
+					<mat-select>
+						<mat-option
+							*ngFor="
+								let wallet of wallets
+							"
+							value="wallet.name">
+							{{ wallet.name }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+		</div>
+		<div class="half">
+			<mat-list dense>
+				<div mat-subheader>Transaction overall</div>
+				<mat-list-item>
+					<mat-icon
+						mat-list-icon
+						class="material-icons-outlined"
+						>data_object</mat-icon
+					>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="A TxHash or transaction hash is a unique identifier that is generated whenever a transaction is executed."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Transaction Hash:
+						{{ txObj.txHash }}
+					</div>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="The status of the transaction."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Status:
+						<div
+							class="status error"
+							*ngIf="
+								txObj.status ==
+								0
+							"
+							matTooltip="Error while sending transaction."
+							matTooltipPosition="right">
+							<mat-icon
+								class="material-icons-outlined icon-lower"
+								>error_outline</mat-icon
+							>
+							Error
+						</div>
+						<div
+							class="status pending"
+							*ngIf="
+								txObj.status ==
+								1
+							"
+							matTooltip="Pending transaction. Waiting to adding transaction to blockchain."
+							matTooltipPosition="right">
+							<mat-icon
+								class="material-icons-outlined icon-lower"
+								>pending</mat-icon
+							>
+							Pending
+						</div>
+						<div
+							class="status success"
+							*ngIf="
+								txObj.status ==
+								2
+							">
+							<mat-icon
+								class="material-icons-outlined icon-lower"
+								matTooltip="Transaction accepted."
+								matTooltipPosition="right"
+								>thumb_up_alt</mat-icon
+							>
+							Success
+						</div>
+					</div>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="Number of the block in which the transaction is recorded."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Block:
+						{{ txObj.block }}
+					</div>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="Transaction type. Root or base transaction."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Transaction type:
+						{{ txObj.txType }}
+					</div>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="The date and time at which a transaction is mined."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Timestamp:
+						{{
+							txObj.timestamp * 1000
+								| date
+									: "d/M/Y, h:mm a"
+									: "GMT+2"
+						}}
+					</div>
+				</mat-list-item>
+				<mat-divider [inset]="true"></mat-divider>
+				<div mat-subheader>Transaction</div>
+				<mat-list-item>
+					<mat-icon mat-list-icon
+						>swap_horiz</mat-icon
+					>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="The sending party of the transaction."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>From:
+						{{ txObj.from }}
+					</div>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="The receiving party of the transaction."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>To: {{ txObj.to }}
+					</div>
+				</mat-list-item>
+				<mat-divider [inset]="true"></mat-divider>
+				<div mat-subheader>Transaction values</div>
+				<mat-list-item>
+					<mat-icon
+						mat-list-icon
+						class="material-icons-outlined"
+						>attach_money</mat-icon
+					>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="The value being transacted in Pixel."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Value: {{ txObj.value }}
+					</div>
+					<div mat-line>
+						<mat-icon
+							class="material-icons-outlined icon-lower"
+							matTooltip="Cost per unit of gas specified for the transaction, in Pixel. The higher the gas price the higher chance of getting included in a block."
+							matTooltipPosition="left"
+							>help_outline</mat-icon
+						>Transaction Fee:
+						{{ txObj.txFee }}
+					</div>
+				</mat-list-item>
+			</mat-list>
+		</div>
+	</mat-card-content>
 </mat-card>
