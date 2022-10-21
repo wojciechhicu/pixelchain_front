@@ -54,7 +54,7 @@ export class LoadWalletComponent implements OnInit {
 								checkedData.forEach((val)=>{
 									let tmp = walletsInMemory.find(element => element.privKey == val.privKey)
 									if(tmp == undefined){
-										walletsInMemory.push({privKey: val.privKey, pubKey: val.pubKey})
+										walletsInMemory.push({privKey: val.privKey, pubKey: val.pubKey, name: val.name})
 									}
 								})
 								localStorage.setItem("walletsList", JSON.stringify(walletsInMemory));

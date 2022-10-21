@@ -83,7 +83,7 @@ export class WalletService {
 
 	/**
 	 * Load all connected wallets from localstorage and show them in table
-	 * @returns 
+	 * @returns wallets list
 	 */
 	public loadConnectedWallets(): Data[]{
 		let wallets = localStorage.getItem('walletsList');
