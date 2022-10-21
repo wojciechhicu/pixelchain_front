@@ -19,6 +19,8 @@ import { MatFormFieldModule  } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 // components
@@ -43,6 +45,7 @@ import { RemoveWalletsDialogComponent } from './dialogs/navigationDialogs/remove
 import { UploadWalletsDialogErrorComponent } from './dialogs/upload-wallets-dialog-error/upload-wallets-dialog-error.component';
 import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
 import { EditWalletNameDialogComponent } from './dialogs/edit-wallet-name-dialog/edit-wallet-name-dialog.component';
+import { ConfirmDeleteSelectedWalletsComponent } from './dialogs/confirm-delete-selected-wallets/confirm-delete-selected-wallets.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,8 @@ import { EditWalletNameDialogComponent } from './dialogs/edit-wallet-name-dialog
     RemoveWalletsDialogComponent,
     UploadWalletsDialogErrorComponent,
     ConfirmDialogConnectedWalletsComponent,
-    EditWalletNameDialogComponent
+    EditWalletNameDialogComponent,
+    ConfirmDeleteSelectedWalletsComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,9 @@ import { EditWalletNameDialogComponent } from './dialogs/edit-wallet-name-dialog
     MatInputModule,
     MatDividerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -35,11 +35,11 @@ export class WalletService {
 	 * @param privateKey private key of wallet
 	 * @param publicKey  public key of wallet
 	 */
-	public saveWallet(privateKey: string | undefined, publicKey: string | undefined): void {
+	public saveWallet(privateKey: string | undefined, publicKey: string | undefined, name: string): void {
 		let historicalRawData = localStorage.getItem("walletsList");
 		if (historicalRawData != null) {
 			let historical: Data[] = JSON.parse(historicalRawData);
-			let newData: Data = { privKey: privateKey, pubKey: publicKey };
+			let newData: Data = { privKey: privateKey, pubKey: publicKey, name: name };
 			let numberOfPrivKeysInside: number = 0;
 			historical.forEach((val)=>{
 				if(val.privKey != newData.privKey){
@@ -54,7 +54,7 @@ export class WalletService {
 			}
 
 		} else {
-			let newData: Data[] = [{ privKey: privateKey, pubKey: publicKey }];
+			let newData: Data[] = [{ privKey: privateKey, pubKey: publicKey, name: name }];
 			localStorage.setItem('walletsList', JSON.stringify(newData))
 			window.location.reload()
 		}
@@ -64,9 +64,10 @@ export class WalletService {
 	 * Download one created wallet as JSON
 	 * @param privateKey private key of wallet
 	 * @param publicKey public key of wallet
+	 * @param name name of wallet string or empty
 	 */
-	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined): void {
-		const data: Data[] = [{privKey: privateKey, pubKey: publicKey}];
+	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined, name: string): void {
+		const data: Data[] = [{privKey: privateKey, pubKey: publicKey, name: name}];
 		const fileName: string = 'pixelChainWallet';
 		const exportType = exportFromJSON.types.json;
 		exportFromJSON({data, fileName, exportType })
@@ -82,7 +83,7 @@ export class WalletService {
 
 	/**
 	 * Load all connected wallets from localstorage and show them in table
-	 * @returns 
+	 * @returns wallets list
 	 */
 	public loadConnectedWallets(): Data[]{
 		let wallets = localStorage.getItem('walletsList');

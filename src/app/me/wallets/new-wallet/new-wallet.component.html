@@ -1,6 +1,10 @@
 <div *ngIf="length">
         <div>Private key: {{ pairs.private}}</div>
         <div>Public Key: {{ pairs.public }}</div>
+        <mat-form-field appearance="fill">
+                <mat-label>Wallet name</mat-label>
+                <input matInput [(ngModel)]="name">
+        </mat-form-field>
 </div>
 <button mat-button (click)="createWallet()">Create wallet</button>
 <button mat-button (click)="downloadWallet()" [disabled]="length <= 0">Download wallet Data</button>

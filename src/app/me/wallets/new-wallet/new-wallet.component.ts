@@ -16,6 +16,7 @@ export class NewWalletComponent implements OnInit {
 	public: string = this.pair.getPublic('hex');
 	pairs: Pairs = {};
 	length: number = 0;
+	name: string = ''
 
 
 	constructor(public walletService: WalletService) { }
@@ -37,11 +38,11 @@ export class NewWalletComponent implements OnInit {
 	}
 
 	public downloadWallet(): void {
-		this.walletService.downloadWallet(this.pairs.private, this.pairs.public)
+		this.walletService.downloadWallet(this.pairs.private, this.pairs.public, this.name)
 	}
 
 	public saveWallet(): void {
-		this.walletService.saveWallet(this.pairs.private, this.pairs.public)
+		this.walletService.saveWallet(this.pairs.private, this.pairs.public, this.name)
 	}
 }
 export interface Pairs {
