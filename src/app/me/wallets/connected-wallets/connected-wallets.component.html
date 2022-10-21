@@ -9,6 +9,10 @@
 			(click)="downloadAllWallets()">
 			<mat-icon class="material-icons-outlined">file_download</mat-icon>
 		</button>
+		<button mat-raised-button matTooltip="Delete all wallets" matTooltipPosition="above"
+		(click)="deleteAllWallets()">
+		<mat-icon class="material-icons-outlined">delete</mat-icon>
+	</button>
 	</div>
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

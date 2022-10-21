@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogConnectedWalletsComponent } from 'src/app/dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
 import { EditWalletNameDialogComponent } from 'src/app/dialogs/edit-wallet-name-dialog/edit-wallet-name-dialog.component';
+import { RemoveWalletsDialogComponent } from '../../../dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -63,5 +64,9 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 				privKey: privKey
 			}
 		})
+	}
+
+	deleteAllWallets(): void {
+		this.dialog.open(RemoveWalletsDialogComponent)
 	}
 }
