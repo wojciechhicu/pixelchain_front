@@ -35,11 +35,11 @@ export class WalletService {
 	 * @param privateKey private key of wallet
 	 * @param publicKey  public key of wallet
 	 */
-	public saveWallet(privateKey: string | undefined, publicKey: string | undefined): void {
+	public saveWallet(privateKey: string | undefined, publicKey: string | undefined, name: string): void {
 		let historicalRawData = localStorage.getItem("walletsList");
 		if (historicalRawData != null) {
 			let historical: Data[] = JSON.parse(historicalRawData);
-			let newData: Data = { privKey: privateKey, pubKey: publicKey };
+			let newData: Data = { privKey: privateKey, pubKey: publicKey, name: name };
 			let numberOfPrivKeysInside: number = 0;
 			historical.forEach((val)=>{
 				if(val.privKey != newData.privKey){
@@ -54,7 +54,7 @@ export class WalletService {
 			}
 
 		} else {
-			let newData: Data[] = [{ privKey: privateKey, pubKey: publicKey }];
+			let newData: Data[] = [{ privKey: privateKey, pubKey: publicKey, name: name }];
 			localStorage.setItem('walletsList', JSON.stringify(newData))
 			window.location.reload()
 		}

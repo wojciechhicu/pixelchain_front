@@ -42,7 +42,7 @@ export class NewWalletComponent implements OnInit {
 	}
 
 	public saveWallet(): void {
-		this.walletService.saveWallet(this.pairs.private, this.pairs.public)
+		this.walletService.saveWallet(this.pairs.private, this.pairs.public, this.name)
 	}
 }
 export interface Pairs {
