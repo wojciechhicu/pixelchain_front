@@ -64,9 +64,10 @@ export class WalletService {
 	 * Download one created wallet as JSON
 	 * @param privateKey private key of wallet
 	 * @param publicKey public key of wallet
+	 * @param name name of wallet string or empty
 	 */
-	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined): void {
-		const data: Data[] = [{privKey: privateKey, pubKey: publicKey}];
+	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined, name: string): void {
+		const data: Data[] = [{privKey: privateKey, pubKey: publicKey, name: name}];
 		const fileName: string = 'pixelChainWallet';
 		const exportType = exportFromJSON.types.json;
 		exportFromJSON({data, fileName, exportType })

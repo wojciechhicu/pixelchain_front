@@ -38,7 +38,7 @@ export class NewWalletComponent implements OnInit {
 	}
 
 	public downloadWallet(): void {
-		this.walletService.downloadWallet(this.pairs.private, this.pairs.public)
+		this.walletService.downloadWallet(this.pairs.private, this.pairs.public, this.name)
 	}
 
 	public saveWallet(): void {
