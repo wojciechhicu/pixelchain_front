@@ -4,9 +4,11 @@ import { WalletService } from 'src/app/utils/wallet.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { SelectionModel } from '@angular/cdk/collections';
 import { ConfirmDialogConnectedWalletsComponent } from 'src/app/dialogs/confirm-dialog-connected-wallets/confirm-dialog-connected-wallets.component';
 import { EditWalletNameDialogComponent } from 'src/app/dialogs/edit-wallet-name-dialog/edit-wallet-name-dialog.component';
 import { RemoveWalletsDialogComponent } from '../../../dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
+import { ConfirmDeleteSelectedWalletsComponent } from 'src/app/dialogs/confirm-delete-selected-wallets/confirm-delete-selected-wallets.component';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,8 +19,9 @@ import { Router } from '@angular/router';
 export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	loadData: Data[] = this.service.loadConnectedWallets()
-	displayedColumns: string[] = ['privKey', 'pubKey', 'name', 'delete', 'transaction', 'editName'];
+	displayedColumns: string[] = ['select', 'privKey', 'pubKey', 'name', 'delete', 'transaction', 'editName'];
 	dataSource = new MatTableDataSource<Data>(this.loadData);
+	selection = new SelectionModel<Data>(true, [])
 
 	constructor(public service: WalletService, public dialog: MatDialog, public router: Router) { }
 
@@ -40,7 +43,7 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	deleteSingleKey(privKey: string){
+	deleteSingleKey(privKey: string) {
 		this.dialog.open(ConfirmDialogConnectedWalletsComponent, {
 			data: {
 				privKey: privKey
@@ -54,12 +57,12 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	goToTransactions(pubKey: string): void {
 		this.router.navigate(['transactions'], {
-			queryParams: {publicKey: pubKey}
+			queryParams: { publicKey: pubKey }
 		})
 	}
 
 	updateWalletNameDialog(privKey: string): void {
-		this.dialog.open(EditWalletNameDialogComponent,{
+		this.dialog.open(EditWalletNameDialogComponent, {
 			data: {
 				privKey: privKey
 			}
@@ -68,5 +71,39 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	deleteAllWallets(): void {
 		this.dialog.open(RemoveWalletsDialogComponent)
+	}
+
+
+
+	/** Whether the number of selected elements matches the total number of rows. */
+	isAllSelected() {
+		const numSelected = this.selection.selected.length;
+		const numRows = this.dataSource.data.length;
+		return numSelected === numRows;
+	}
+	/** Selects all rows if they are not all selected; otherwise clear selection. */
+	toggleAllRows() {
+		if (this.isAllSelected()) {
+			this.selection.clear();
+			return;
+		}
+
+		this.selection.select(...this.dataSource.data);
+	}
+
+	/** The label for the checkbox on the passed row */
+	checkboxLabel(row?: any): string {
+		if (!row) {
+			return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+		}
+		return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+	}
+
+	deleteSelectedKeys(): void {
+		this.dialog.open(ConfirmDeleteSelectedWalletsComponent, {
+			data: {
+				keys: this.selection.selected
+			}
+		})
 	}
 }
