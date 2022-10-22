@@ -5,6 +5,8 @@ import { WalletService as Wallet } from 'src/app/utils/wallet.service';
 import { HttpService } from 'src/app/utils/http.service';
 import { Data } from 'src/app/_helpers/wallet-list.interface';
 import { Tx } from 'src/app/_helpers/trasaction.interface';
+import { ConnectedPeers as Peers } from 'src/app/_helpers/http-response/connected-peers.interface';
+import { TransactionsService } from 'src/app/utils/transactions.service';
 
 @Component({
 	selector: 'app-transactions',
@@ -30,7 +32,8 @@ export class TransactionsComponent implements OnInit {
 		public router: Router,
 		public tx: Transaction,
 		public wallet: Wallet,
-		public http: HttpService
+		public http: HttpService,
+		public transaction: TransactionsService
 	) {
 		this.aRoute.queryParams.subscribe((params: any) => {
 			this.pubKey = params.publicKey;
@@ -46,6 +49,13 @@ export class TransactionsComponent implements OnInit {
 	}
 
 	searchForTx(search: string): void {
-		this.http.getConnectedNodes()
+		let nodes: Peers[] = [];
+		this.http.getConnectedNodes().subscribe((data: Peers[])=> {
+			let ldata = this.transaction.getOnlyValidators(data)
+			ldata.forEach((val)=>{
+				nodes.push(val)
+			})
+		})
+		console.log(nodes)
 	}
 }
