@@ -3,17 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ConnectedPeers as Peers } from '../_helpers/http-response/connected-peers.interface';
+import { SendTx } from '../_helpers/send-transaction.interface';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) {
-    
-   }
+	constructor(private http: HttpClient) {
 
-   getConnectedNodes() {
-    this.http.get(environment.server.peerDiscover.connectPeer).subscribe((obs)=>{ console.log(obs)})
-   }
+	}
+
+	getConnectedNodes() {
+		return this.http.get<Peers[]>(environment.server.peerDiscover.connectedPeers)
+	}
+
+	sendTransaction(tx: SendTx, url: string){
+		return this.http.post<SendTx>(url,tx);
+	}
 }

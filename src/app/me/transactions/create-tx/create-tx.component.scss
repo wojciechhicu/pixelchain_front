@@ -1,0 +1,29 @@
+mat-card {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100% - 32px);
+}
+
+.example-container .mat-form-field + .mat-form-field {
+	margin-left: 8px;
+}
+
+.example-right-align {
+	text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+	display: none;
+}
+
+input.example-right-align {
+	-moz-appearance: textfield;
+}
+.wide{
+        width: 100%;
+}
+.lower{
+        margin-top: 10px;
+}
