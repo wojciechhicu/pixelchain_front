@@ -3,15 +3,24 @@ mat-card{
         mat-card-content{
                 height: 100%;
                 width: 100%;
-                .half{
-                        display: inline-block;
-                        height: 100%;
-                        width: 50%;
-                        overflow-y: auto;
-                        .searching-bar{
-                                width: 100%;
-                        }
+                .createTx{
+                        display: none;
                 }
+                .transaction-data{
+                        display: flex;
+                        justify-content: center;
+                        align-items:center;
+                        height: calc(100% - 41px);
+                }
+        }
+}
+.searching-bar{
+        width: 100%;
+        mat-form-field{
+                width: 95%;
+        }
+        .search-button{
+                width: 5%;
         }
 }
 .status{
@@ -28,4 +37,7 @@ mat-card{
 }
 .error{
         color: red;
+}
+.tx{
+        display: inline-block;
 }

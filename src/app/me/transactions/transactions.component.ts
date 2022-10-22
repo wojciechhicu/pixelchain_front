@@ -14,12 +14,12 @@ export class TransactionsComponent implements OnInit {
 	pubKey: any;
 	wallets: Data[] = [];
 	txObj: Tx = {
-		txHash: '389ufj3e4kur3984ur',
+		txHash: '8341dc0fdba11120dd0291dba17445a9eaa761ff8ff9338a6f43ab26f57e9977',
 		status: 2,
-		block: '1232343ewrwefc534f5345',
-		timestamp: 1666391420,
-		from: 'df3r34f5345f',
-		to: '234f345f34f5',
+		block: '000000000000000000004c6285c9d0cfdc620f9b4f9e6e3791f379eb02170943',
+		timestamp: Date.now(),
+		from: 'bc1q4czhgvmnm3damnvj69zsujxqut0th7cmynhktajxk2c8rrp4nd0qpl70up',
+		to: 'bc1q4czhgvmnm3damnvj69zsujxqut0th7cmynhktajxk2c8rrp4nd0qpl70up',
 		value: 32,
 		txFee: 0.00002,
 		txType: 0,
@@ -41,5 +41,9 @@ export class TransactionsComponent implements OnInit {
 
 	public getAllWallets(): Data[] {
 		return this.wallet.loadConnectedWallets();
+	}
+
+	searchForTx(search: string): void {
+		console.log(search)
 	}
 }
