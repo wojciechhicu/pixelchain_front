@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Tx } from '../_helpers/trasaction.interface';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class TransactionsService {
 
-  constructor() { }
+
+	constructor() { }
 }

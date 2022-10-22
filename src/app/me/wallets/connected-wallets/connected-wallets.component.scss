@@ -1,40 +1,35 @@
-
-
 mat-card-content {
-        padding-top: 20px;
+	padding-top: 20px;
 }
-
-
 
 .container {
-        width: 100%;
-        overflow-x: auto;
-        table {
-                width: 100%;
-                overflow: auto;
-                max-height: 500px;
-                td{
-                        max-width: 500px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                }
-                .mat-row:hover {
-                        background-color: rgba(0, 0, 0, .04);
-                        cursor: pointer;
-                }
-        }
+	width: 100%;
+	overflow-x: auto;
+	table {
+		width: 100%;
+		overflow: auto;
+		max-height: 500px;
+		td {
+			max-width: 500px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		.mat-row:hover {
+			background-color: rgba(0, 0, 0, 0.04);
+			cursor: pointer;
+		}
+	}
 }
-.wrapper{
-        .mat-form-field {
-
-                font-size: 14px;
-                width: 90%;
-              }
-        button{
-                width: 5%;
-        }
+.wrapper {
+	.mat-form-field {
+		font-size: 14px;
+		width: 90%;
+	}
+	button {
+		width: 5%;
+	}
 }
-.transaction{
-        margin-left: 10px;
+.transaction {
+	margin-left: 10px;
 }

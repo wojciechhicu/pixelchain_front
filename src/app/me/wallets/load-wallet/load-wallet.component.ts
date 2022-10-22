@@ -7,88 +7,123 @@ import { UploadWalletsDialogErrorComponent } from 'src/app/dialogs/upload-wallet
 @Component({
 	selector: 'app-load-wallet',
 	templateUrl: './load-wallet.component.html',
-	styleUrls: ['./load-wallet.component.scss']
+	styleUrls: ['./load-wallet.component.scss'],
 })
 export class LoadWalletComponent implements OnInit {
-
 	//selectedFile: File;
 	file!: File;
 	helperCount: number = 0;
 	noErrors: boolean = true;
-	fileData!: Data[]
+	fileData!: Data[];
 
+	constructor(public wallet: WalletService, public dialog: MatDialog) {}
 
-	constructor(public wallet: WalletService, public dialog: MatDialog) { }
-
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	handleFileInputErrors(event: any) {
 		try {
 			/**
 			 * check type
 			 */
-			if(event.target.files[0].type != "application/json"){
-				throw "File type is not a JSON";
+			if (event.target.files[0].type != 'application/json') {
+				throw 'File type is not a JSON';
 			}
 			/**
 			 * check size of file ~max 2mb
 			 */
-			if(event.target.files[0].size > 1307633){
-				throw "File size is too big. Max 2MB"
+			if (event.target.files[0].size > 1307633) {
+				throw 'File size is too big. Max 2MB';
 			}
 
 			/**
-			 * 
+			 *
 			 */
 			try {
 				this.file = event.target.files[0];
 				let fileReader = new FileReader();
-				fileReader.onload = (e) =>{
-					try{
-						if(fileReader.result != null && typeof fileReader.result === 'string'){
-							let parsedJSON = JSON.parse(fileReader.result)
-							if(this.wallet.checkCorrectStoringKeys(parsedJSON) != null){
-								let checkedData: Data[] = parsedJSON;
-								let walletsInMemory: Data[] = this.wallet.loadConnectedWallets();
-								checkedData.forEach((val)=>{
-									let tmp = walletsInMemory.find(element => element.privKey == val.privKey)
-									if(tmp == undefined){
-										walletsInMemory.push({privKey: val.privKey, pubKey: val.pubKey, name: val.name})
+				fileReader.onload = (e) => {
+					try {
+						if (
+							fileReader.result !=
+								null &&
+							typeof fileReader.result ===
+								'string'
+						) {
+							let parsedJSON =
+								JSON.parse(
+									fileReader.result
+								);
+							if (
+								this.wallet.checkCorrectStoringKeys(
+									parsedJSON
+								) != null
+							) {
+								let checkedData: Data[] =
+									parsedJSON;
+								let walletsInMemory: Data[] =
+									this.wallet.loadConnectedWallets();
+								checkedData.forEach(
+									(
+										val
+									) => {
+										let tmp =
+											walletsInMemory.find(
+												(
+													element
+												) =>
+													element.privKey ==
+													val.privKey
+											);
+										if (
+											tmp ==
+											undefined
+										) {
+											walletsInMemory.push(
+												{
+													privKey: val.privKey,
+													pubKey: val.pubKey,
+													name: val.name,
+												}
+											);
+										}
 									}
-								})
-								localStorage.setItem("walletsList", JSON.stringify(walletsInMemory));
-								window.location.reload()
+								);
+								localStorage.setItem(
+									'walletsList',
+									JSON.stringify(
+										walletsInMemory
+									)
+								);
+								window.location.reload();
 							} else {
-								throw "Data is corrupted or stored not correctly"
+								throw 'Data is corrupted or stored not correctly';
 							}
 						} else {
-							throw "Cannot read file."
+							throw 'Cannot read file.';
 						}
 					} catch (err) {
-						this.dialogOpen(err)
+						this.dialogOpen(err);
 					}
-				}
-				fileReader.readAsText(this.file)
+				};
+				fileReader.readAsText(this.file);
 				this.noErrors = false;
-			} catch (err){
-				this.dialogOpen(err)
+			} catch (err) {
+				this.dialogOpen(err);
 			}
-
-		} catch( err) {
-			this.dialogOpen(err)
+		} catch (err) {
+			this.dialogOpen(err);
 		}
 	}
 
 	/**
 	 * Open dialog and send error message
-	 * @param error 
+	 * @param error
 	 */
-	private dialogOpen(error: unknown){
-		this.dialog.open(UploadWalletsDialogErrorComponent,{
+	private dialogOpen(error: unknown) {
+		this.dialog.open(UploadWalletsDialogErrorComponent, {
 			data: {
-				criticalError: error
-			}
-		})
+				criticalError: error,
+			},
+		});
 	}
 }

@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-wallets',
-  templateUrl: './wallets.component.html',
-  styleUrls: ['./wallets.component.scss']
+	selector: 'app-wallets',
+	templateUrl: './wallets.component.html',
+	styleUrls: ['./wallets.component.scss'],
 })
 export class WalletsComponent implements OnInit {
+	constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {}
 }

@@ -1,3 +1,3 @@
 export interface DialogData {
-        criticalError?: string;
+	criticalError?: string;
 }

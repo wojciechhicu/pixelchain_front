@@ -14,19 +14,29 @@ import { Router } from '@angular/router';
 @Component({
 	selector: 'app-connected-wallets',
 	templateUrl: './connected-wallets.component.html',
-	styleUrls: ['./connected-wallets.component.scss']
+	styleUrls: ['./connected-wallets.component.scss'],
 })
 export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
-
-	loadData: Data[] = this.service.loadConnectedWallets()
-	displayedColumns: string[] = ['select', 'privKey', 'pubKey', 'name', 'delete', 'transaction', 'editName'];
+	loadData: Data[] = this.service.loadConnectedWallets();
+	displayedColumns: string[] = [
+		'select',
+		'privKey',
+		'pubKey',
+		'name',
+		'delete',
+		'transaction',
+		'editName',
+	];
 	dataSource = new MatTableDataSource<Data>(this.loadData);
-	selection = new SelectionModel<Data>(true, [])
+	selection = new SelectionModel<Data>(true, []);
 
-	constructor(public service: WalletService, public dialog: MatDialog, public router: Router) { }
+	constructor(
+		public service: WalletService,
+		public dialog: MatDialog,
+		public router: Router
+	) {}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -46,9 +56,9 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	deleteSingleKey(privKey: string) {
 		this.dialog.open(ConfirmDialogConnectedWalletsComponent, {
 			data: {
-				privKey: privKey
-			}
-		})
+				privKey: privKey,
+			},
+		});
 	}
 
 	downloadAllWallets(): void {
@@ -57,23 +67,21 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	goToTransactions(pubKey: string): void {
 		this.router.navigate(['transactions'], {
-			queryParams: { publicKey: pubKey }
-		})
+			queryParams: { publicKey: pubKey },
+		});
 	}
 
 	updateWalletNameDialog(privKey: string): void {
 		this.dialog.open(EditWalletNameDialogComponent, {
 			data: {
-				privKey: privKey
-			}
-		})
+				privKey: privKey,
+			},
+		});
 	}
 
 	deleteAllWallets(): void {
-		this.dialog.open(RemoveWalletsDialogComponent)
+		this.dialog.open(RemoveWalletsDialogComponent);
 	}
-
-
 
 	/** Whether the number of selected elements matches the total number of rows. */
 	isAllSelected() {
@@ -94,16 +102,20 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	/** The label for the checkbox on the passed row */
 	checkboxLabel(row?: any): string {
 		if (!row) {
-			return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+			return `${
+				this.isAllSelected() ? 'deselect' : 'select'
+			} all`;
 		}
-		return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+		return `${
+			this.selection.isSelected(row) ? 'deselect' : 'select'
+		} row ${row.position + 1}`;
 	}
 
 	deleteSelectedKeys(): void {
 		this.dialog.open(ConfirmDeleteSelectedWalletsComponent, {
 			data: {
-				keys: this.selection.selected
-			}
-		})
+				keys: this.selection.selected,
+			},
+		});
 	}
 }

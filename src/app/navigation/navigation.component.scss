@@ -6,8 +6,6 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-
-
 }
 .is-mobile .toolbar {
 	position: fixed;
@@ -31,10 +29,9 @@ h1.app-name {
 	flex: 1 0 auto;
 }
 
-	.divider {
-		flex: 1 1 auto;
-	}
-
+.divider {
+	flex: 1 1 auto;
+}
 
 .is-active {
 	background-color: #f1f1f1;

@@ -2,32 +2,31 @@ import { Injectable } from '@angular/core';
 import { Data } from '../_helpers/wallet-list.interface';
 import * as elliptic from 'elliptic';
 const ec = new elliptic.ec('secp256k1');
-import exportFromJSON from 'export-from-json'
+import exportFromJSON from 'export-from-json';
 
 @Injectable({
-	providedIn: 'root'
+	providedIn: 'root',
 })
 export class WalletService {
-
-	constructor() { }
+	constructor() {}
 
 	/**
 	 * Find if there is any saved wallet and if yes then count them
 	 * @returns numbers of saved wallets
 	 */
 	public numberOfWallets(): number {
-		let listOfWallets = localStorage.getItem("walletsList");
+		let listOfWallets = localStorage.getItem('walletsList');
 
-		if(listOfWallets != null){
+		if (listOfWallets != null) {
 			let parsedWallets: Data[] = JSON.parse(listOfWallets);
-			if(parsedWallets.length > 0){
-				return parsedWallets.length
+			if (parsedWallets.length > 0) {
+				return parsedWallets.length;
 			}
 		}
-		if(listOfWallets == null){
-			return 0
+		if (listOfWallets == null) {
+			return 0;
 		}
-		return 0
+		return 0;
 	}
 
 	/**
@@ -35,28 +34,47 @@ export class WalletService {
 	 * @param privateKey private key of wallet
 	 * @param publicKey  public key of wallet
 	 */
-	public saveWallet(privateKey: string | undefined, publicKey: string | undefined, name: string): void {
-		let historicalRawData = localStorage.getItem("walletsList");
+	public saveWallet(
+		privateKey: string | undefined,
+		publicKey: string | undefined,
+		name: string
+	): void {
+		let historicalRawData = localStorage.getItem('walletsList');
 		if (historicalRawData != null) {
 			let historical: Data[] = JSON.parse(historicalRawData);
-			let newData: Data = { privKey: privateKey, pubKey: publicKey, name: name };
+			let newData: Data = {
+				privKey: privateKey,
+				pubKey: publicKey,
+				name: name,
+			};
 			let numberOfPrivKeysInside: number = 0;
-			historical.forEach((val)=>{
-				if(val.privKey != newData.privKey){
-					numberOfPrivKeysInside = numberOfPrivKeysInside + 1
+			historical.forEach((val) => {
+				if (val.privKey != newData.privKey) {
+					numberOfPrivKeysInside =
+						numberOfPrivKeysInside + 1;
 				}
-				
-			})
-			if(numberOfPrivKeysInside != 0){
+			});
+			if (numberOfPrivKeysInside != 0) {
 				historical.push(newData);
-				localStorage.setItem("walletsList", JSON.stringify(historical));
-				window.location.reload()
+				localStorage.setItem(
+					'walletsList',
+					JSON.stringify(historical)
+				);
+				window.location.reload();
 			}
-
 		} else {
-			let newData: Data[] = [{ privKey: privateKey, pubKey: publicKey, name: name }];
-			localStorage.setItem('walletsList', JSON.stringify(newData))
-			window.location.reload()
+			let newData: Data[] = [
+				{
+					privKey: privateKey,
+					pubKey: publicKey,
+					name: name,
+				},
+			];
+			localStorage.setItem(
+				'walletsList',
+				JSON.stringify(newData)
+			);
+			window.location.reload();
 		}
 	}
 
@@ -66,11 +84,17 @@ export class WalletService {
 	 * @param publicKey public key of wallet
 	 * @param name name of wallet string or empty
 	 */
-	public downloadWallet(privateKey: string | undefined, publicKey: string | undefined, name: string): void {
-		const data: Data[] = [{privKey: privateKey, pubKey: publicKey, name: name}];
+	public downloadWallet(
+		privateKey: string | undefined,
+		publicKey: string | undefined,
+		name: string
+	): void {
+		const data: Data[] = [
+			{ privKey: privateKey, pubKey: publicKey, name: name },
+		];
 		const fileName: string = 'pixelChainWallet';
 		const exportType = exportFromJSON.types.json;
-		exportFromJSON({data, fileName, exportType })
+		exportFromJSON({ data, fileName, exportType });
 	}
 
 	/**
@@ -78,21 +102,21 @@ export class WalletService {
 	 */
 	public deleteAllWallets(): void {
 		localStorage.removeItem('walletsList');
-		window.location.reload()
+		window.location.reload();
 	}
 
 	/**
 	 * Load all connected wallets from localstorage and show them in table
 	 * @returns wallets list
 	 */
-	public loadConnectedWallets(): Data[]{
+	public loadConnectedWallets(): Data[] {
 		let wallets = localStorage.getItem('walletsList');
-		if(wallets != null){
+		if (wallets != null) {
 			let parsedWallets: Data[] = JSON.parse(wallets);
-			return parsedWallets
+			return parsedWallets;
 		} else {
 			let noWallets: Data[] = [];
-			return noWallets
+			return noWallets;
 		}
 	}
 
@@ -104,19 +128,19 @@ export class WalletService {
 	public checkCorrectStoringKeys(data: any): Data[] | null {
 		let check: Data[] = data;
 		let balanceTMP: number = 0;
-		if(check.length > 0){
-			check.forEach((val)=>{
-				if(!(val.privKey && val.pubKey)){
-					throw "Not correct data"
+		if (check.length > 0) {
+			check.forEach((val) => {
+				if (!(val.privKey && val.pubKey)) {
+					throw 'Not correct data';
 				}
-			})
-			if(balanceTMP > 0){
-				return null
+			});
+			if (balanceTMP > 0) {
+				return null;
 			} else {
-				return check
+				return check;
 			}
 		} else {
-			return null
+			return null;
 		}
 	}
 
@@ -127,9 +151,9 @@ export class WalletService {
 		const data: Data[] = this.loadConnectedWallets();
 		const fileName: string = 'my-wallets-list';
 		const exportType = exportFromJSON.types.json;
-		exportFromJSON({data, fileName, exportType })
+		exportFromJSON({ data, fileName, exportType });
 	}
-	
+
 	/**
 	 * Delete single key from localstorage
 	 * @param privKey private key as string
@@ -137,14 +161,17 @@ export class WalletService {
 	public deleteSingleKey(privKey: string): void {
 		let connectedWallets: Data[] = this.loadConnectedWallets();
 		let index: number = 0;
-		connectedWallets.forEach((val,ind)=>{
-			if(val.privKey === privKey){
+		connectedWallets.forEach((val, ind) => {
+			if (val.privKey === privKey) {
 				index = ind;
 			}
-		})
-		connectedWallets.splice(index ,1);
-		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
-		window.location.reload()
+		});
+		connectedWallets.splice(index, 1);
+		localStorage.setItem(
+			'walletsList',
+			JSON.stringify(connectedWallets)
+		);
+		window.location.reload();
 	}
 
 	/**
@@ -154,12 +181,15 @@ export class WalletService {
 	 */
 	public editWalletName(privKey: string, newName: string): void {
 		let connectedWallets: Data[] = this.loadConnectedWallets();
-		connectedWallets.forEach((val)=>{
-			if(val.privKey === privKey){
+		connectedWallets.forEach((val) => {
+			if (val.privKey === privKey) {
 				val.name = newName;
 			}
-		})
-		localStorage.setItem("walletsList", JSON.stringify(connectedWallets))
-		window.location.reload()
+		});
+		localStorage.setItem(
+			'walletsList',
+			JSON.stringify(connectedWallets)
+		);
+		window.location.reload();
 	}
 }

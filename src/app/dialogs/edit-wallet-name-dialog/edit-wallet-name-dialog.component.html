@@ -1,17 +1,21 @@
 <h2 mat-dialog-title>Edit wallet name</h2>
 <mat-dialog-content class="mat-typography">
-        <div>
-                Type new wallet name
-        </div>
-        <div>
-                <mat-form-field appearance="fill">
-                        <mat-label>Wallet name</mat-label>
-                        <input matInput [(ngModel)]="newName">
-                </mat-form-field>
-        </div>
+	<div>Type new wallet name</div>
+	<div>
+		<mat-form-field appearance="fill">
+			<mat-label>Wallet name</mat-label>
+			<input matInput [(ngModel)]="newName" />
+		</mat-form-field>
+	</div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Cancel</button>
-        <button mat-button [mat-dialog-close]="true" cdkFocusInitial
-                (click)="editWalletName(data.privKey, newName)" [disabled]="newName.length < 3">Update</button>
+	<button mat-button mat-dialog-close>Cancel</button>
+	<button
+		mat-button
+		[mat-dialog-close]="true"
+		cdkFocusInitial
+		(click)="editWalletName(data.privKey, newName)"
+		[disabled]="newName.length < 3">
+		Update
+	</button>
 </mat-dialog-actions>

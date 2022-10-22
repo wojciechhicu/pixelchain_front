@@ -6,18 +6,18 @@ import { WalletService } from 'src/app/utils/wallet.service';
 @Component({
 	selector: 'app-edit-wallet-name-dialog',
 	templateUrl: './edit-wallet-name-dialog.component.html',
-	styleUrls: ['./edit-wallet-name-dialog.component.scss']
+	styleUrls: ['./edit-wallet-name-dialog.component.scss'],
 })
 export class EditWalletNameDialogComponent implements OnInit {
-
 	newName: string = '';
-	constructor(@Inject(MAT_DIALOG_DATA) public data: PrivateKey, public wallet: WalletService) { }
+	constructor(
+		@Inject(MAT_DIALOG_DATA) public data: PrivateKey,
+		public wallet: WalletService
+	) {}
 
-	ngOnInit(): void {
-	}
+	ngOnInit(): void {}
 
 	editWalletName(privKey: string, newName: string): void {
 		this.wallet.editWalletName(privKey, newName);
 	}
-
 }

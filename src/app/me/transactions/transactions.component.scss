@@ -3,10 +3,41 @@ mat-card{
         mat-card-content{
                 height: 100%;
                 width: 100%;
-                .half{
-                        display: inline-block;
-                        height: 100%;
-                        width: 50%;
+                .createTx{
+                        display: none;
+                }
+                .transaction-data{
+                        display: flex;
+                        justify-content: center;
+                        align-items:center;
+                        height: calc(100% - 41px);
                 }
         }
+}
+.searching-bar{
+        width: 100%;
+        mat-form-field{
+                width: 95%;
+        }
+        .search-button{
+                width: 5%;
+        }
+}
+.status{
+        display: inline-block;
+}
+.icon-lower{
+        transform: translateY(6px);
+}
+.success{
+        color: green
+}
+.pending {
+        color: lightblue;
+}
+.error{
+        color: red;
+}
+.tx{
+        display: inline-block;
 }
