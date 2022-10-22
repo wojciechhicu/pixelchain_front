@@ -9,7 +9,8 @@ export const environment = {
 		peerDiscover: {
 			baseUrl: 'http://localhost',
 			port: 3000,
-			connectedPeers: 'http://localhost:3000/get-connected-nodes'
+			connectedPeers: 'http://localhost:3000/get-connected-nodes',
+			connectPeer: 'http://localhost:3000/connect-node'
 		}
 	}
 };

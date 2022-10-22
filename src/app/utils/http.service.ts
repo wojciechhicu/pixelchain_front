@@ -14,6 +14,6 @@ export class HttpService {
    }
 
    getConnectedNodes() {
-    this.http.get(environment.server.peerDiscover.connectedPeers).subscribe((obs)=>{ console.log(obs)})
+    this.http.get(environment.server.peerDiscover.connectPeer).subscribe((obs)=>{ console.log(obs)})
    }
 }
