@@ -28,10 +28,10 @@
 				>
 				<span>See all wallets</span>
 			</button>
-			<button mat-menu-item routerLink="transactions/create-tx">
-				<mat-icon
-					>add_circle_outline</mat-icon
-				>
+			<button
+				mat-menu-item
+				routerLink="transactions/create-tx">
+				<mat-icon>add_circle_outline</mat-icon>
 				<span>Create transaction</span>
 			</button>
 		</mat-menu>
@@ -110,6 +110,17 @@
 					<div mat-line>Transactions</div>
 				</mat-list-item>
 				<div mat-subheader>Other</div>
+				<mat-list-item
+					routerLink="visualisation"
+					routerLinkActive="is-active">
+					<mat-icon
+						mat-list-icon
+						class="material-icons-outlined"
+						color="primary"
+						>visibility</mat-icon
+					>
+					<div mat-line>About</div>
+				</mat-list-item>
 				<mat-list-item
 					routerLink="about"
 					routerLinkActive="is-active">
