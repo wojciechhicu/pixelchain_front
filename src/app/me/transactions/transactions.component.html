@@ -3,11 +3,14 @@
 			<div class="searching-bar">
 				<form>
 					<mat-form-field appearance="legacy">
-							<mat-label>Search for transaction</mat-label>
-							<input matInput placeholder="Tx ID" #search>
+							<mat-label>Search for transaction or wallet</mat-label>
+							<input matInput placeholder="Tx ID or wallet" #search>
+                                                        <mat-hint>Place here wallet address to see all transactions corresponded to this wallet or transaction ID to see only specyfic transaction</mat-hint>
 					</mat-form-field>
-					<button type="submit" mat-flat-button class="search-button" (click)="searchForTx(search.value)"><mat-icon>search</mat-icon></button>
+					<button type="submit" mat-flat-button class="search-button" (click)="searchForTx(search.value)" matTooltip="Search for transaction" matTooltipPosition="above"><mat-icon>search</mat-icon></button>
+                                        <button mat-flat-button class="search-button" routerLink="create-tx"  matTooltip="Create new transaction" matTooltipPosition="below"><mat-icon>add_circle_outline</mat-icon></button>
 			</form>
+                        
 		</div>
                 <div class="createTx">
 
@@ -22,8 +25,8 @@
                                 </mat-form-field>
                         </div>
                 </div>
-                <div class="transaction-data">
-                        <mat-list dense>
+                <div class="transaction-data" *ngIf="txObjs.length > 0">
+                        <mat-list dense *ngFor="let txObj of txObjs">
                                 <div mat-subheader>Transaction overall</div>
                                 <mat-list-item>
                                         <mat-icon mat-list-icon class="material-icons-outlined">data_object</mat-icon>
