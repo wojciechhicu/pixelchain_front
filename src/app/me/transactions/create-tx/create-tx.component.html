@@ -4,11 +4,8 @@
 			<mat-form-field appearance="fill" class="wide">
 				<mat-label>Select my wallet</mat-label>
 				<mat-select [(ngModel)]="from">
-					<mat-option value="one"
-						>First option</mat-option
-					>
-					<mat-option value="two"
-						>Second option</mat-option
+					<mat-option *ngFor="let wallet of wallets" [value]="wallet"
+						>{{ wallet.name }}</mat-option
 					>
 				</mat-select>
                                 <mat-icon class="material-icons-outlined" matPrefix>wallet</mat-icon>
@@ -50,7 +47,7 @@
 			</mat-form-field>
 		</div>
                 <div>
-                        <button mat-raised-button color="primary" class="wide" (click)="sendTransaction(from, to, txValue, fee)">Send Transaction</button>
+                        <button mat-raised-button color="primary" class="wide" (click)="sendTransaction(from, to, txValue, fee)" [disabled]="checkData(from, to, txValue, fee)">Send Transaction</button>
                 </div>
                 <div>
                         <button mat-raised-button routerLink=".." class="wide lower">Back to transactions</button>
