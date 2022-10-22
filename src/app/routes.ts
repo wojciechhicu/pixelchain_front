@@ -8,6 +8,7 @@ import { Error404Component } from './errors/error404/error404.component';
 import { AboutComponent } from './other/about/about.component';
 import { DocumentationComponent } from './other/documentation/documentation.component';
 import { SettingsComponent } from './other/settings/settings.component';
+import { CreateTxComponent } from './me/transactions/create-tx/create-tx.component';
 
 export const routes: Routes = [
         {
@@ -33,11 +34,19 @@ export const routes: Routes = [
         {
                 path: 'wallets',
                 pathMatch: 'full',
-                component: WalletsComponent
+                component: WalletsComponent,
+                
+                
         },
         {
                 path: 'transactions',
+                pathMatch: 'full',
                 component: TransactionsComponent,
+        },
+        {
+                path: 'transactions/create-tx',
+                pathMatch: 'full',
+                component: CreateTxComponent,
         },
         {
                 path: 'about',
