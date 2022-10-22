@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TransactionsService as Transaction } from 'src/app/utils/transactions.service';
 import { WalletService as Wallet } from 'src/app/utils/wallet.service';
+import { HttpService } from 'src/app/utils/http.service';
 import { Data } from 'src/app/_helpers/wallet-list.interface';
 import { Tx } from 'src/app/_helpers/trasaction.interface';
 
@@ -28,7 +29,8 @@ export class TransactionsComponent implements OnInit {
 		public aRoute: ActivatedRoute,
 		public router: Router,
 		public tx: Transaction,
-		public wallet: Wallet
+		public wallet: Wallet,
+		public http: HttpService
 	) {
 		this.aRoute.queryParams.subscribe((params: any) => {
 			this.pubKey = params.publicKey;
@@ -44,6 +46,6 @@ export class TransactionsComponent implements OnInit {
 	}
 
 	searchForTx(search: string): void {
-		console.log(search)
+		this.http.getConnectedNodes()
 	}
 }

@@ -9,6 +9,7 @@ import { AboutComponent } from './other/about/about.component';
 import { DocumentationComponent } from './other/documentation/documentation.component';
 import { SettingsComponent } from './other/settings/settings.component';
 import { CreateTxComponent } from './me/transactions/create-tx/create-tx.component';
+import { VisualisationComponent } from "./other/visualisation/visualisation.component";
 
 export const routes: Routes = [
         {
@@ -47,6 +48,11 @@ export const routes: Routes = [
                 path: 'transactions/create-tx',
                 pathMatch: 'full',
                 component: CreateTxComponent,
+        },
+        {
+                path: 'visualisation',
+                pathMatch: 'full',
+                component: VisualisationComponent
         },
         {
                 path: 'about',

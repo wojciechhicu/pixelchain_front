@@ -1,6 +1,7 @@
 //basic angular 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 //angular material
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -47,6 +48,7 @@ import { ConfirmDialogConnectedWalletsComponent } from './dialogs/confirm-dialog
 import { EditWalletNameDialogComponent } from './dialogs/edit-wallet-name-dialog/edit-wallet-name-dialog.component';
 import { ConfirmDeleteSelectedWalletsComponent } from './dialogs/confirm-delete-selected-wallets/confirm-delete-selected-wallets.component';
 import { CreateTxComponent } from './me/transactions/create-tx/create-tx.component';
+import { VisualisationComponent } from './other/visualisation/visualisation.component';
 
 @NgModule({
   declarations: [
@@ -70,11 +72,13 @@ import { CreateTxComponent } from './me/transactions/create-tx/create-tx.compone
     ConfirmDialogConnectedWalletsComponent,
     EditWalletNameDialogComponent,
     ConfirmDeleteSelectedWalletsComponent,
-    CreateTxComponent
+    CreateTxComponent,
+    VisualisationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatSidenavModule,
     MatToolbarModule,

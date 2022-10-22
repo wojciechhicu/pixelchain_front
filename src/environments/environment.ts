@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+	production: false,
+	server: {
+		baseUrl: 'http://localhost',
+		peerDiscover: {
+			baseUrl: 'http://localhost',
+			port: 3000,
+			connectedPeers: 'http://localhost:3000/get-connected-nodes'
+		}
+	}
 };
 
 /*
