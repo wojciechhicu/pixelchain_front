@@ -20,7 +20,7 @@ export class CreateTxComponent implements OnInit {
 	txValue!: number;
 	fee!: number;
 
-	constructor(public walletService: WalletService, public http: HttpService, public txService: TransactionsService) {}
+	constructor(public walletService: WalletService, public txService: TransactionsService) {}
 
 	ngOnInit(): void {
 		this.wallets = this.getWalletsFromMemory()
@@ -30,21 +30,37 @@ export class CreateTxComponent implements OnInit {
 		//bypass error of interfaces. By error there is Data[] interface not Data
 		let correctFrom: Data = from;
 		let data = {
+			privKey: correctFrom.privKey,
 			from: correctFrom.pubKey,
 			to: to,
 			txValue: txValue,
 			fee: fee
 		}
 
-		let nodes: Peers[] = [];
-		this.http.getConnectedNodes().subscribe((data: Peers[])=> {
-			let ldata = this.txService.getOnlyValidators(data)
-			ldata.forEach((val)=>{
-				nodes.push(val)
-			})
-		})
-		console.log(data)
+		if(data.privKey != undefined){
+			let signingKey: elliptic.ec.KeyPair = ec.keyFromPrivate(data.privKey);
+			let pub = signingKey.getPublic('hex');
+			if( data.from === pub){
+				const time = Date.now()
+				const hashTx = this.txService.calcHash(pub, data.to, data.txValue, time);
+				const signature = signingKey.sign(hashTx).toDER('hex');
+				if(data.from != undefined){
+					const isValid: boolean = this.txService.isValidTx(data.from, signature, data.from, data.to, data.txValue, time);
+					console.log(isValid)
+				}
+				
+			} else {
+				console.log("błąd")
+			}
+		}
 		
+		// let nodes: Peers[] = [];
+		// this.http.getConnectedNodes().subscribe((data: Peers[])=> {
+		// 	let ldata = this.txService.getOnlyValidators(data)
+		// 	ldata.forEach((val)=>{
+		// 		nodes.push(val)
+		// 	})
+		// })
 	}
 
 	/**

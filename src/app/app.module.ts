@@ -49,6 +49,8 @@ import { EditWalletNameDialogComponent } from './dialogs/edit-wallet-name-dialog
 import { ConfirmDeleteSelectedWalletsComponent } from './dialogs/confirm-delete-selected-wallets/confirm-delete-selected-wallets.component';
 import { CreateTxComponent } from './me/transactions/create-tx/create-tx.component';
 import { VisualisationComponent } from './other/visualisation/visualisation.component';
+import { ConfirmSendTransactionComponent } from './dialogs/confirm-send-transaction/confirm-send-transaction.component';
+import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transaction/error-sending-transaction.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,9 @@ import { VisualisationComponent } from './other/visualisation/visualisation.comp
     EditWalletNameDialogComponent,
     ConfirmDeleteSelectedWalletsComponent,
     CreateTxComponent,
-    VisualisationComponent
+    VisualisationComponent,
+    ConfirmSendTransactionComponent,
+    ErrorSendingTransactionComponent
   ],
   imports: [
     BrowserModule,
