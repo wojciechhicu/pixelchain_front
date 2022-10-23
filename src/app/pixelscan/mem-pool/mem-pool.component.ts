@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MemPoolService } from 'src/app/utils/mem-pool.service';
 
 @Component({
   selector: 'app-mem-pool',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemPoolComponent implements OnInit {
 
-  constructor() { }
+  constructor(public memory: MemPoolService) { }
 
   ngOnInit(): void {
   }

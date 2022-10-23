@@ -11,6 +11,7 @@ import { SettingsComponent } from './other/settings/settings.component';
 import { CreateTxComponent } from './me/transactions/create-tx/create-tx.component';
 import { VisualisationComponent } from "./other/visualisation/visualisation.component";
 import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
+import { FaucetComponent } from './me/faucet/faucet.component';
 
 export const routes: Routes = [
         {
@@ -41,9 +42,7 @@ export const routes: Routes = [
         {
                 path: 'wallets',
                 pathMatch: 'full',
-                component: WalletsComponent,
-                
-                
+                component: WalletsComponent,      
         },
         {
                 path: 'transactions',
@@ -54,6 +53,11 @@ export const routes: Routes = [
                 path: 'transactions/create-tx',
                 pathMatch: 'full',
                 component: CreateTxComponent,
+        },
+        {
+                path: 'faucet',
+                pathMatch: 'full',
+                component: FaucetComponent
         },
         {
                 path: 'visualisation',

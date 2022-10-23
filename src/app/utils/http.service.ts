@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
 import { ConnectedPeers as Peers } from '../_helpers/http-response/connected-peers.interface';
 import { SendTx } from '../_helpers/send-transaction.interface';
 
@@ -16,7 +13,7 @@ export class HttpService {
 	}
 
 	getConnectedNodes() {
-		return this.http.get<Peers[]>(environment.server.peerDiscover.connectedPeers)
+		return this.http.get<Peers[]>('http://localhost:3000/get-connected-nodes')
 	}
 
 	sendTransaction(tx: SendTx, url: string){

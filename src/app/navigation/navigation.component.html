@@ -9,14 +9,19 @@
 			<mat-icon>stream</mat-icon>
 		</button>
 		<mat-menu #menu="matMenu">
-			<button mat-menu-item (click)="removeWalletsDialog()">
-				<mat-icon
-					matBadge="{{ numberOfWallets }}"
-					[matBadgeHidden]="numberOfWallets == 0"
-					matBadgeSize="small"
-					>delete</mat-icon
-				>
-				<span>Delete all wallets</span>
+			<button
+				mat-menu-item
+				routerLink="transactions/create-tx"
+			>
+				<mat-icon>add_circle_outline</mat-icon>
+				<span>Create transaction</span>
+			</button>
+			<button
+				mat-menu-item
+				routerLink="faucet"
+			>
+				<mat-icon class="material-icons-outlined">free_breakfast</mat-icon>
+				<span>Faucet</span>
 			</button>
 			<button mat-menu-item routerLink="wallets">
 				<mat-icon
@@ -28,12 +33,15 @@
 				>
 				<span>See all wallets</span>
 			</button>
-			<button
-				mat-menu-item
-				routerLink="transactions/create-tx"
-			>
-				<mat-icon>add_circle_outline</mat-icon>
-				<span>Create transaction</span>
+
+			<button mat-menu-item (click)="removeWalletsDialog()">
+				<mat-icon
+					matBadge="{{ numberOfWallets }}"
+					[matBadgeHidden]="numberOfWallets == 0"
+					matBadgeSize="small"
+					>delete</mat-icon
+				>
+				<span>Delete all wallets</span>
 			</button>
 		</mat-menu>
 	</mat-toolbar>

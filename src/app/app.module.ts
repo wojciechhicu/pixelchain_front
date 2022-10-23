@@ -54,6 +54,7 @@ import { ConfirmSendTransactionComponent } from './dialogs/confirm-send-transact
 import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transaction/error-sending-transaction.component';
 import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/error-in-transaction.component';
 import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
+import { FaucetComponent } from './me/faucet/faucet.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
     ConfirmSendTransactionComponent,
     ErrorSendingTransactionComponent,
     ErrorInTransactionComponent,
-    MemPoolComponent
+    MemPoolComponent,
+    FaucetComponent
   ],
   imports: [
     BrowserModule,
