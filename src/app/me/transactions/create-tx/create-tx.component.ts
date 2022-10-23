@@ -6,7 +6,6 @@ import { TransactionsService } from 'src/app/utils/transactions.service';
 import { ConnectedPeers as Peers } from 'src/app/_helpers/http-response/connected-peers.interface';
 import * as elliptic from 'elliptic'
 const ec = new elliptic.ec('secp256k1');
-import { SHA256 } from 'crypto-js'
 
 @Component({
 	selector: 'app-create-tx',
@@ -43,10 +42,10 @@ export class CreateTxComponent implements OnInit {
 			let pub = signingKey.getPublic('hex');
 			if( data.from === pub){
 				const time = Date.now()
-				const hashTx = this.calcHash(pub, data.to, data.txValue, time);
+				const hashTx = this.txService.calcHash(pub, data.to, data.txValue, time);
 				const signature = signingKey.sign(hashTx).toDER('hex');
 				if(data.from != undefined){
-					const isValid: boolean = this.isValidTx(data.from, signature, data.from, data.to, data.txValue, time);
+					const isValid: boolean = this.txService.isValidTx(data.from, signature, data.from, data.to, data.txValue, time);
 					console.log(isValid)
 				}
 				
@@ -54,15 +53,6 @@ export class CreateTxComponent implements OnInit {
 				console.log("błąd")
 			}
 		}
-		
-		
-
-
-
-
-
-
-
 		
 		// let nodes: Peers[] = [];
 		// this.http.getConnectedNodes().subscribe((data: Peers[])=> {
@@ -99,21 +89,5 @@ export class CreateTxComponent implements OnInit {
 		if( fee == undefined ) { return true }
 		if( fee == null ) { return true }
 		return false
-	}
-
-	private calcHash(from: string, to: string, value: number, time: number): string{
-		return SHA256(from + to + value + time).toString()
-	}	
-
-	private isValidTx(from: string, signature: string, from2: string, to: string, txVal: number, time: number): boolean {
-		if(from === null){
-			return false;
-		}
-		if(!signature || signature.length === 0){
-			return false // w tym miejscu jeśli nie ma signature dla transakcji
-		}
-
-		const pubKey = ec.keyFromPublic(from, 'hex');
-		return pubKey.verify(this.calcHash(from2, to, txVal, time), signature)
 	}
 }
