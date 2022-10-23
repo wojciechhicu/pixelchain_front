@@ -49,13 +49,6 @@ export class TransactionsComponent implements OnInit {
 	}
 
 	searchForTx(search: string): void {
-		let nodes: Peers[] = [];
-		this.http.getConnectedNodes().subscribe((data: Peers[])=> {
-			let ldata = this.transaction.getOnlyValidators(data)
-			ldata.forEach((val)=>{
-				nodes.push(val)
-			})
-		})
-		console.log(nodes)
+
 	}
 }

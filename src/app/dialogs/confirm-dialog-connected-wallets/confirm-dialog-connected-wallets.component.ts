@@ -16,6 +16,10 @@ export class ConfirmDialogConnectedWalletsComponent implements OnInit {
 
 	ngOnInit(): void {}
 
+	/**
+	 * Delete single key pair from memory
+	 * @param privKey private key as ID
+	 */
 	public confirmDelete(privKey: string): void {
 		this.wallet.deleteSingleKey(privKey);
 	}

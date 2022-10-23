@@ -1,3 +1,6 @@
+/**
+ * Transaction interfcae 
+ */
 export interface Tx {
 	txHash: string;
 	status: number;
