@@ -51,6 +51,7 @@ import { CreateTxComponent } from './me/transactions/create-tx/create-tx.compone
 import { VisualisationComponent } from './other/visualisation/visualisation.component';
 import { ConfirmSendTransactionComponent } from './dialogs/confirm-send-transaction/confirm-send-transaction.component';
 import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transaction/error-sending-transaction.component';
+import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/error-in-transaction.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transa
     CreateTxComponent,
     VisualisationComponent,
     ConfirmSendTransactionComponent,
-    ErrorSendingTransactionComponent
+    ErrorSendingTransactionComponent,
+    ErrorInTransactionComponent
   ],
   imports: [
     BrowserModule,

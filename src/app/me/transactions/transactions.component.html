@@ -87,13 +87,13 @@
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The value being transacted in Pixel."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Value: {{ txObj.value}}
+                                                        matTooltipPosition="left">help_outline</mat-icon>Value: {{ txObj.value / 10000000}}
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="Cost per unit of gas specified for the transaction, in Pixel. The higher the gas price the higher chance of getting included in a block."
                                                         matTooltipPosition="left">help_outline</mat-icon>Transaction
-                                                Fee: {{ txObj.txFee}}
+                                                Fee: {{ txObj.txFee / 10000000 }}
                                         </div>
                                 </mat-list-item>
                         </mat-list>

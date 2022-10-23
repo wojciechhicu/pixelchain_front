@@ -4,19 +4,25 @@
 			<mat-form-field appearance="fill" class="wide">
 				<mat-label>Select my wallet</mat-label>
 				<mat-select [(ngModel)]="from">
-					<mat-option *ngFor="let wallet of wallets" [value]="wallet"
+					<mat-option
+						*ngFor="let wallet of wallets"
+						[value]="wallet"
 						>{{ wallet.name }}</mat-option
 					>
 				</mat-select>
-                                <mat-icon class="material-icons-outlined" matPrefix>wallet</mat-icon>
+				<mat-icon
+					class="material-icons-outlined"
+					matPrefix
+					>wallet</mat-icon
+				>
 			</mat-form-field>
 		</div>
 
 		<div>
 			<mat-form-field appearance="fill" class="wide">
 				<mat-label>Send to</mat-label>
-				<input matInput [(ngModel)]="to"/>
-                                <mat-icon matPrefix>swap_horiz</mat-icon>
+				<input matInput [(ngModel)]="to" />
+				<mat-icon matPrefix>swap_horiz</mat-icon>
 			</mat-form-field>
 		</div>
 		<div>
@@ -27,7 +33,7 @@
 					type="number"
 					class="example-right-align"
 					placeholder="0"
-                                        [(ngModel)]="txValue"
+					[(ngModel)]="txValue"
 				/>
 				<mat-icon matPrefix>fitbit</mat-icon>
 			</mat-form-field>
@@ -35,22 +41,45 @@
 
 		<div>
 			<mat-form-field appearance="fill" floatLabel="always">
-				<mat-label>How much fee for transaction</mat-label>
+				<mat-label
+					>How much fee for transaction</mat-label
+				>
 				<input
 					matInput
 					type="number"
 					class="example-right-align"
 					placeholder="0"
-                                        [(ngModel)]="fee"
+					[(ngModel)]="fee"
 				/>
 				<mat-icon matPrefix>fitbit</mat-icon>
 			</mat-form-field>
 		</div>
-                <div>
-                        <button mat-raised-button color="primary" class="wide" (click)="sendTransaction(from, to, txValue, fee)" [disabled]="checkData(from, to, txValue, fee)">Send Transaction</button>
-                </div>
-                <div>
-                        <button mat-raised-button routerLink=".." class="wide lower">Back to transactions</button>
-                </div>
+		<div>
+			<button
+				mat-raised-button
+				color="primary"
+				class="wide"
+				(click)="
+					sendTransactionToConfirmDialog(
+						from,
+						to,
+						txValue,
+						fee
+					)
+				"
+				[disabled]="checkData(from, to, txValue, fee)"
+			>
+				Send Transaction
+			</button>
+		</div>
+		<div>
+			<button
+				mat-raised-button
+				routerLink=".."
+				class="wide lower"
+			>
+				Back to transactions
+			</button>
+		</div>
 	</div>
 </mat-card>

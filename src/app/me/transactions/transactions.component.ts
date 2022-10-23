@@ -23,8 +23,8 @@ export class TransactionsComponent implements OnInit {
 		timestamp: Date.now(),
 		from: 'bc1q4czhgvmnm3damnvj69zsujxqut0th7cmynhktajxk2c8rrp4nd0qpl70up',
 		to: 'bc1q4czhgvmnm3damnvj69zsujxqut0th7cmynhktajxk2c8rrp4nd0qpl70up',
-		value: 32,
-		txFee: 0.00002,
+		value: 32000000,
+		txFee: 12,
 		txType: 0,
 	}];
 	constructor(
