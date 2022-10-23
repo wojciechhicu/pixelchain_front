@@ -63,7 +63,7 @@ export class TransactionsService {
 		return pubKey.verify(this.calcHash(from2, to, txVal, time), signature)
 	}
 
-			// let nodes: Peers[] = [];
+		// let nodes: Peers[] = [];
 		// this.http.getConnectedNodes().subscribe((data: Peers[])=> {
 		// 	let ldata = this.txService.getOnlyValidators(data)
 		// 	ldata.forEach((val)=>{
