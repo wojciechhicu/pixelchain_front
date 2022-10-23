@@ -10,6 +10,7 @@ import { DocumentationComponent } from './other/documentation/documentation.comp
 import { SettingsComponent } from './other/settings/settings.component';
 import { CreateTxComponent } from './me/transactions/create-tx/create-tx.component';
 import { VisualisationComponent } from "./other/visualisation/visualisation.component";
+import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
 
 export const routes: Routes = [
         {
@@ -31,6 +32,11 @@ export const routes: Routes = [
                 path: 'validators',
                 pathMatch: 'full',
                 component: ValidatorsComponent
+        },
+        {
+                path: 'mempool',
+                pathMatch: 'full',
+                component: MemPoolComponent
         },
         {
                 path: 'wallets',

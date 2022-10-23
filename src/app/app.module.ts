@@ -22,6 +22,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 // components
@@ -52,6 +53,7 @@ import { VisualisationComponent } from './other/visualisation/visualisation.comp
 import { ConfirmSendTransactionComponent } from './dialogs/confirm-send-transaction/confirm-send-transaction.component';
 import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transaction/error-sending-transaction.component';
 import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/error-in-transaction.component';
+import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/erro
     VisualisationComponent,
     ConfirmSendTransactionComponent,
     ErrorSendingTransactionComponent,
-    ErrorInTransactionComponent
+    ErrorInTransactionComponent,
+    MemPoolComponent
   ],
   imports: [
     BrowserModule,
@@ -104,7 +107,8 @@ import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/erro
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

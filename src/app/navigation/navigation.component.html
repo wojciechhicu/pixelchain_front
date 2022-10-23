@@ -30,7 +30,8 @@
 			</button>
 			<button
 				mat-menu-item
-				routerLink="transactions/create-tx">
+				routerLink="transactions/create-tx"
+			>
 				<mat-icon>add_circle_outline</mat-icon>
 				<span>Create transaction</span>
 			</button>
@@ -39,18 +40,21 @@
 
 	<mat-sidenav-container
 		class="sidenav-container"
-		[style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+		[style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+	>
 		<mat-sidenav
 			#snav
 			[mode]="mobileQuery.matches ? 'over' : 'side'"
 			[fixedInViewport]="mobileQuery.matches"
 			fixedTopGap="56"
-			opened>
+			opened
+		>
 			<mat-nav-list>
 				<div mat-subheader>Pixelscan</div>
 				<mat-list-item
 					routerLink="stats"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -61,7 +65,8 @@
 				</mat-list-item>
 				<mat-list-item
 					routerLink="blockchain"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -72,7 +77,8 @@
 				</mat-list-item>
 				<mat-list-item
 					routerLink="validators"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -81,10 +87,23 @@
 					>
 					<div mat-line>Validators</div>
 				</mat-list-item>
+				<mat-list-item
+					routerLink="mempool"
+					routerLinkActive="is-active"
+				>
+					<mat-icon
+						mat-list-icon
+						class="material-icons-outlined"
+						color="primary"
+						>memory</mat-icon
+					>
+					<div mat-line>Mempool</div>
+				</mat-list-item>
 				<div mat-subheader>Me</div>
 				<mat-list-item
 					routerLink="wallets"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -100,7 +119,8 @@
 				</mat-list-item>
 				<mat-list-item
 					routerLink="transactions"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -112,7 +132,8 @@
 				<div mat-subheader>Other</div>
 				<mat-list-item
 					routerLink="visualisation"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -123,7 +144,8 @@
 				</mat-list-item>
 				<mat-list-item
 					routerLink="about"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -134,7 +156,8 @@
 				</mat-list-item>
 				<mat-list-item
 					routerLink="documentation"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
@@ -145,7 +168,8 @@
 				</mat-list-item>
 				<mat-list-item
 					routerLink="settings"
-					routerLinkActive="is-active">
+					routerLinkActive="is-active"
+				>
 					<mat-icon
 						mat-list-icon
 						class="material-icons-outlined"
