@@ -19,9 +19,9 @@ export class CreateTxComponent implements OnInit {
 	
 	from!: Data[];
 	wallets!: Data[];
-	to: string = '';
-	txValue!: number;
-	fee!: number;
+	to: string = 'fdghjds44ertrefgdfgertert';
+	txValue: number = 32;
+	fee: number = 2;
 
 	constructor(public walletService: WalletService, public txService: TransactionsService, public dialog: MatDialog) {}
 
