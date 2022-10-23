@@ -8,6 +8,9 @@ import { DialogData } from 'src/app/_helpers/wallet-upload.interface';
 	styleUrls: ['./upload-wallets-dialog-error.component.scss'],
 })
 export class UploadWalletsDialogErrorComponent implements OnInit {
+	/**
+	 * Custom error displayed after this message
+	 */
 	customErr = `TypeError: Cannot read properties of undefined (reading 'type')`;
 	constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 

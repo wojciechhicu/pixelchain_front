@@ -11,6 +11,9 @@ export class RemoveWalletsDialogComponent implements OnInit {
 
 	ngOnInit(): void {}
 
+	/**
+	 * Remove all stored wallets in memory
+	 */
 	removeWallets(): void {
 		this.wallet.deleteAllWallets();
 	}

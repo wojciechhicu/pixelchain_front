@@ -16,6 +16,10 @@ export class ConfirmDeleteSelectedWalletsComponent implements OnInit {
 
 	ngOnInit(): void {}
 
+	/**
+	 * Dialog confirm to delete all selected keys from memory
+	 * @param data full list of wallets
+	 */
 	confirmDelete(data: Data[]): void {
 		data.forEach((val) => {
 			if (val.privKey != undefined) {
