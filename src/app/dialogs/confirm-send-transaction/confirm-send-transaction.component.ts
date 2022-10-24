@@ -26,7 +26,8 @@ export class ConfirmSendTransactionComponent implements OnInit {
 			})
 			.afterDismissed()
 			.subscribe((obs) => {
-				window.location.reload();
+				//window.location.reload();
 			});
+			console.log(tx)
 	}
 }
