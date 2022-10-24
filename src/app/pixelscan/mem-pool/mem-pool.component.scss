@@ -38,11 +38,23 @@ tr.element-row:not(.expanded-row):active {
 .element-detail {
 	overflow: hidden;
 	display: flex;
+	flex-direction: column;
 }
 
 .element-description {
 	padding: 16px;
 }
 .fill-space{
-	width: 100%;
+	width: 95%;
+}
+.refresh{
+	width: 5%;
+}
+.copy{
+	transform: translateY(-2px);
+	cursor: pointer;
+}
+.eq{
+	transform: translateY(5px);
+	cursor: pointer;
 }
