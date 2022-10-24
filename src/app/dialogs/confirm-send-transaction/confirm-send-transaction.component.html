@@ -1,1 +1,6 @@
-<p>confirm-send-transaction works!</p>
+<h1 mat-dialog-title>Send transaction</h1>
+<div mat-dialog-content>Are You sure of sending transaction with value {{ data.txValue / 10000000}} Pixels?</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>No</button>
+  <button mat-button mat-dialog-close color="primary" (click)="sendTransaction(data)">Yes</button>
+</div>

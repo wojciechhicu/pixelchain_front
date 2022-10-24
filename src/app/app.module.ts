@@ -22,6 +22,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 // components
@@ -51,6 +53,9 @@ import { CreateTxComponent } from './me/transactions/create-tx/create-tx.compone
 import { VisualisationComponent } from './other/visualisation/visualisation.component';
 import { ConfirmSendTransactionComponent } from './dialogs/confirm-send-transaction/confirm-send-transaction.component';
 import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transaction/error-sending-transaction.component';
+import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/error-in-transaction.component';
+import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
+import { FaucetComponent } from './me/faucet/faucet.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +82,10 @@ import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transa
     CreateTxComponent,
     VisualisationComponent,
     ConfirmSendTransactionComponent,
-    ErrorSendingTransactionComponent
+    ErrorSendingTransactionComponent,
+    ErrorInTransactionComponent,
+    MemPoolComponent,
+    FaucetComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +110,9 @@ import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transa
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
