@@ -5,6 +5,7 @@
                         <mat-label>Filter</mat-label>
                         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
                 </mat-form-field>
+                <button mat-stroked-button class="refresh" (click)="refresh()" matTooltip="Refresh mempool" matTooltipPosition="below"><mat-icon class="material-icons-outlined">sync</mat-icon></button>
                 <div class="mat-elevation-z8">
                         <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
@@ -31,9 +32,14 @@
                                                 [attr.colspan]="columnsToDisplayWithExpand.length">
                                                 <div class="element-detail"
                                                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                                                                <div>
-                                                                        {{element.to}}
-                                                                </div>
+                                                                <mat-list role="list" dense>
+                                                                        <mat-list-item role="listitem" (click)="copy(element.from)"><mat-icon matTooltip="From where pixels were sent." matTooltipPosition="left">help_outline</mat-icon>From: {{ element.from }} <mat-icon class="material-icons-outlined copy" matTooltip="Copy wallet address.">content_copy</mat-icon></mat-list-item>
+                                                                        <mat-list-item role="listitem" (click)="copy(element.to)"><mat-icon matTooltip="Destination wallet address." matTooltipPosition="left">help_outline</mat-icon>Destination: {{ element.to }} <mat-icon class="material-icons-outlined copy" matTooltip="Copy wallet address.">content_copy</mat-icon></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction script signature." matTooltipPosition="left">help_outline</mat-icon>Script signature: {{ element.signature }}</mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction value fro destination address." matTooltipPosition="left">help_outline</mat-icon>Tx value: {{ element.txValue / 10000000 }}</mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction fee for validator." matTooltipPosition="left">help_outline</mat-icon>Tx fee: {{ element.fee / 10000000 }}</mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="When transaction was created." matTooltipPosition="left">help_outline</mat-icon>Tx create time: {{ element.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}</mat-list-item>
+                                                                </mat-list>
                                                 </div>
                                         </td>
                                 </ng-container>
@@ -46,7 +52,7 @@
 
                                 <!-- Row shown when there is no matching data. -->
                                 <tr class="mat-row" *matNoDataRow>
-                                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"
+                                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}" or mempool is empty.
                                         </td>
                                 </tr>
                                 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>

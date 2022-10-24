@@ -4,6 +4,8 @@ import { SendTransaction } from 'src/app/_helpers/ready-to-send-transaction.inte
 import { HttpService } from 'src/app/utils/http.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Clipboard } from '@angular/cdk/clipboard';
 import {
 	animate,
 	state,
@@ -40,7 +42,7 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 	connectedNodes = this.http.getConnectedNodes();
 	txObjs: SendTransaction[] = [];
 
-	constructor(public http: HttpService) {
+	constructor(public http: HttpService, private snack: MatSnackBar, private clip: Clipboard) {
 		this.connectedNodes.subscribe((nodes) => {
 			let index: number = Math.floor(
 				Math.random() * nodes.length
@@ -70,5 +72,14 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 		if (this.dataSource.paginator) {
 			this.dataSource.paginator.firstPage();
 		}
+	}
+
+	refresh(): void  {
+		window.location.reload()
+	}
+
+	copy(text: string){
+		this.clip.copy(text);
+		this.snack.open('Coppied to clipboard.', 'Close',{duration: 3000})
 	}
 }
