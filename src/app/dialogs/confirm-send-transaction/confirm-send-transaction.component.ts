@@ -14,13 +14,15 @@ import { SendTransaction } from 'src/app/_helpers/ready-to-send-transaction.inte
 export class ConfirmSendTransactionComponent implements OnInit {
 	constructor(
 		@Inject(MAT_DIALOG_DATA) public data: SendTransaction,
-		private snack: MatSnackBar
+		private snack: MatSnackBar,
+		public http: HttpService
 	) {}
 
 	ngOnInit(): void {}
 
 	sendTransaction(tx: SendTransaction) {
-		this.snack
+		this.http.getConnectedNodes().subscribe((obs)=>{
+			this.snack
 			.open('Transaction sent', 'Close', {
 				duration: 3000,
 			})
@@ -28,6 +30,10 @@ export class ConfirmSendTransactionComponent implements OnInit {
 			.subscribe((obs) => {
 				//window.location.reload();
 			});
-			console.log(tx)
+			let index: number = Math.floor(Math.random() * obs.length)
+			this.http.sendTransaction(tx,`${obs[index].host}:${obs[index].port}/send-transaction`).subscribe((obs)=>{
+				console.log(obs.body)
+			})
+		})
 	}
 }
