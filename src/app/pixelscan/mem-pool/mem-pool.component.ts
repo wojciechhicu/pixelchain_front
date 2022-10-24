@@ -38,7 +38,6 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
 	connectedNodes = this.http.getConnectedNodes();
-	loading: boolean = false;
 	txObjs: SendTransaction[] = [];
 
 	constructor(public http: HttpService) {
@@ -50,7 +49,6 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 				`${nodes[index].host}:${nodes[index].port}/mempool`
 			);
 			mempool.subscribe((obs: any) => {
-				
 				this.dataSource.data = JSON.parse(obs);
 				this.dataSource.paginator = this.paginator;
 			});
