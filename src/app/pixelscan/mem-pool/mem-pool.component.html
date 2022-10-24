@@ -11,7 +11,7 @@
 
                                 <!-- From Column -->
                                 <ng-container matColumnDef="from">
-                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sender address </th>
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Sender address <mat-icon class="eq" matTooltip="Mempool volume: {{volume / 10000000}} pixels." matTooltipPosition="right">equalizer</mat-icon></th>
                                         <td mat-cell *matCellDef="let row"> {{row.from}} </td>
                                 </ng-container>
                                 <!-- expanded row-->

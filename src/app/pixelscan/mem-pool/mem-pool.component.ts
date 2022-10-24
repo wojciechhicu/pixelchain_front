@@ -34,6 +34,7 @@ import {
 })
 export class MemPoolComponent implements OnInit, AfterViewInit {
 	displayedColumns: string[] = ['from'];
+	volume: number = 0;
 	dataSource = new MatTableDataSource<SendTransaction>();
 	columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
 	expandedElement!: SendTransaction | null;
@@ -57,6 +58,9 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 			mempool.subscribe((obs: any) => {
 				this.dataSource.data = JSON.parse(obs);
 				this.dataSource.paginator = this.paginator;
+				this.dataSource.data.forEach((val)=>{
+					this.volume = this.volume + val.txValue;
+				})
 			});
 		});
 	}
