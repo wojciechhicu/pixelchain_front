@@ -43,6 +43,10 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 	txObjs: SendTransaction[] = [];
 
 	constructor(public http: HttpService, private snack: MatSnackBar, private clip: Clipboard) {
+
+	}
+
+	ngOnInit(): void {
 		this.connectedNodes.subscribe((nodes) => {
 			let index: number = Math.floor(
 				Math.random() * nodes.length
@@ -55,10 +59,6 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 				this.dataSource.paginator = this.paginator;
 			});
 		});
-	}
-
-	ngOnInit(): void {
-
 	}
 
 	ngAfterViewInit(): void {

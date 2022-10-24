@@ -3,7 +3,7 @@
 
                 <mat-form-field appearance="standard" class="fill-space">
                         <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Type any address or value" #input>
                 </mat-form-field>
                 <button mat-stroked-button class="refresh" (click)="refresh()" matTooltip="Refresh mempool" matTooltipPosition="below"><mat-icon class="material-icons-outlined">sync</mat-icon></button>
                 <div class="mat-elevation-z8">
@@ -14,6 +14,7 @@
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Sender address </th>
                                         <td mat-cell *matCellDef="let row"> {{row.from}} </td>
                                 </ng-container>
+                                <!-- expanded row-->
                                 <ng-container matColumnDef="expand">
                                         <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
                                         <td mat-cell *matCellDef="let element">
@@ -33,8 +34,8 @@
                                                 <div class="element-detail"
                                                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                                                                 <mat-list role="list" dense>
-                                                                        <mat-list-item role="listitem" (click)="copy(element.from)"><mat-icon matTooltip="From where pixels were sent." matTooltipPosition="left">help_outline</mat-icon>From: {{ element.from }} <mat-icon class="material-icons-outlined copy" matTooltip="Copy wallet address.">content_copy</mat-icon></mat-list-item>
-                                                                        <mat-list-item role="listitem" (click)="copy(element.to)"><mat-icon matTooltip="Destination wallet address." matTooltipPosition="left">help_outline</mat-icon>Destination: {{ element.to }} <mat-icon class="material-icons-outlined copy" matTooltip="Copy wallet address.">content_copy</mat-icon></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="From where pixels were sent." matTooltipPosition="left">help_outline</mat-icon>From: {{ element.from }} <mat-icon (click)="copy(element.from)" class="material-icons-outlined copy" matTooltip="Copy sender address.">content_copy</mat-icon></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Destination wallet address." matTooltipPosition="left">help_outline</mat-icon>Destination: {{ element.to }} <mat-icon (click)="copy(element.from)" class="material-icons-outlined copy" matTooltip="Copy destination address.">content_copy</mat-icon></mat-list-item>
                                                                         <mat-list-item role="listitem"><mat-icon matTooltip="Transaction script signature." matTooltipPosition="left">help_outline</mat-icon>Script signature: {{ element.signature }}</mat-list-item>
                                                                         <mat-list-item role="listitem"><mat-icon matTooltip="Transaction value fro destination address." matTooltipPosition="left">help_outline</mat-icon>Tx value: {{ element.txValue / 10000000 }}</mat-list-item>
                                                                         <mat-list-item role="listitem"><mat-icon matTooltip="Transaction fee for validator." matTooltipPosition="left">help_outline</mat-icon>Tx fee: {{ element.fee / 10000000 }}</mat-list-item>
