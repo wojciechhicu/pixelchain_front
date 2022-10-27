@@ -37,8 +37,8 @@ export class TransactionsService {
 	 * @param time current unix timestamp of creating transaction
 	 * @returns hash as string of inputs
 	 */
-	public calcHash(from: string, to: string, value: number, time: number): string{
-		return SHA256(from + to + value + time).toString()
+	public calcHash(from: string, to: string, value: number, time: number, fee: number): string{
+		return SHA256(from + to + value + time + fee).toString()
 	}	
 
 	/**
@@ -51,7 +51,7 @@ export class TransactionsService {
 	 * @param time timestamp of transaction when were made
 	 * @returns true = valid; false = invalid
 	 */
-	public isValidTx(from: string, signature: string, from2: string, to: string, txVal: number, time: number): boolean {
+	public isValidTx(from: string, signature: string, from2: string, to: string, txVal: number, time: number, fee: number): boolean {
 		if(from === null){
 			return false;
 		}
@@ -60,14 +60,6 @@ export class TransactionsService {
 		}
 
 		const pubKey = ec.keyFromPublic(from, 'hex');
-		return pubKey.verify(this.calcHash(from2, to, txVal, time), signature)
+		return pubKey.verify(this.calcHash(from2, to, txVal, time, fee), signature)
 	}
-
-		// let nodes: Peers[] = [];
-		// this.http.getConnectedNodes().subscribe((data: Peers[])=> {
-		// 	let ldata = this.txService.getOnlyValidators(data)
-		// 	ldata.forEach((val)=>{
-		// 		nodes.push(val)
-		// 	})
-		// })
 }

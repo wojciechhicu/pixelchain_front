@@ -24,6 +24,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 // components
@@ -56,6 +57,9 @@ import { ErrorSendingTransactionComponent } from './dialogs/error-sending-transa
 import { ErrorInTransactionComponent } from './dialogs/error-in-transaction/error-in-transaction.component';
 import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
 import { FaucetComponent } from './me/faucet/faucet.component';
+import { WwwComponent } from './other/documentation/www/www.component';
+import { RouterComponent } from './other/documentation/router/router.component';
+import { ValidatorComponent } from './other/documentation/validator/validator.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +89,10 @@ import { FaucetComponent } from './me/faucet/faucet.component';
     ErrorSendingTransactionComponent,
     ErrorInTransactionComponent,
     MemPoolComponent,
-    FaucetComponent
+    FaucetComponent,
+    WwwComponent,
+    RouterComponent,
+    ValidatorComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +119,8 @@ import { FaucetComponent } from './me/faucet/faucet.component';
     MatSelectModule,
     MatCheckboxModule,
     MatSnackBarModule,
-    ClipboardModule
+    ClipboardModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

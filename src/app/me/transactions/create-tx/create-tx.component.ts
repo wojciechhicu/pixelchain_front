@@ -52,10 +52,10 @@ export class CreateTxComponent implements OnInit {
 				let pub = signingKey.getPublic('hex');
 				if( data.from === pub){
 					const time = Date.now()
-					const hashTx = this.txService.calcHash(pub, data.to, data.txValue, time);
+					const hashTx = this.txService.calcHash(pub, data.to, data.txValue, time, data.fee);
 					const signature = signingKey.sign(hashTx).toDER('hex');
 					if(data.from != undefined){
-						const isValid: boolean = this.txService.isValidTx(data.from, signature, data.from, data.to, data.txValue, time);
+						const isValid: boolean = this.txService.isValidTx(data.from, signature, data.from, data.to, data.txValue, time, data.fee);
 						if( isValid === true){
 							const transaction: SendTransaction = {
 								from: data.from,
