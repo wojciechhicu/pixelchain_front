@@ -56,7 +56,7 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 				`${nodes[index].host}:${nodes[index].port}/mempool`
 			);
 			mempool.subscribe((obs: any) => {
-				this.dataSource.data = JSON.parse(obs);
+				this.dataSource.data = obs;
 				this.dataSource.paginator = this.paginator;
 				this.dataSource.data.forEach((val)=>{
 					this.volume = this.volume + val.txValue;
