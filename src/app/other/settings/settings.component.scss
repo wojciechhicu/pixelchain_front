@@ -1,0 +1,18 @@
+mat-card{
+        height: calc(100% - 32px);
+        overflow-y: auto;
+        mat-card-content{
+                .section{
+                        width: 100%;
+                        padding: 10px;
+                        box-sizing: border-box;
+                        .title{
+                                width: 100%;
+                                font-size: larger;
+                        }
+                        .content{
+                                padding: 10px;
+                        }
+                }
+        }
+}
