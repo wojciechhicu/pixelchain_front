@@ -13,14 +13,29 @@ export class HttpService {
 
 	}
 
+	/**
+	 * Get connected nodes to network
+	 * @returns nodes connected to network
+	 */
 	getConnectedNodes() {
 		return this.http.get<Peers[]>(environment.router)
 	}
 
+	/**
+	 * Send transaction to node
+	 * @param tx transaction object
+	 * @param url url to node
+	 * @returns if transaction was added
+	 */
 	sendTransaction(tx: SendTransaction, url: string){
 		return this.http.post<SendTransaction>(url,tx, {observe: 'response'});
 	}
 
+	/**
+	 * Get mempool full data
+	 * @param url url to server
+	 * @returns mempool transactions
+	 */
 	getMempool(url: string){
 		return this.http.get<SendTransaction[]>(url);
 	}
