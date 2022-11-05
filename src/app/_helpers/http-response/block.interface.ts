@@ -22,6 +22,7 @@ export interface TX {
         timestamp: number;
         uTxo: number;
         TxHash: string;
+        status?: number;
 }
 
 /**
