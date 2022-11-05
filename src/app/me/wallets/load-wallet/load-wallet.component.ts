@@ -16,9 +16,9 @@ export class LoadWalletComponent implements OnInit {
 	noErrors: boolean = true;
 	fileData!: Data[];
 
-	constructor(public wallet: WalletService, public dialog: MatDialog) {}
+	constructor(public wallet: WalletService, public dialog: MatDialog) { }
 
-	ngOnInit(): void {}
+	ngOnInit(): void { }
 
 	handleFileInputErrors(event: any) {
 		try {
@@ -45,9 +45,9 @@ export class LoadWalletComponent implements OnInit {
 					try {
 						if (
 							fileReader.result !=
-								null &&
+							null &&
 							typeof fileReader.result ===
-								'string'
+							'string'
 						) {
 							let parsedJSON =
 								JSON.parse(
@@ -83,6 +83,7 @@ export class LoadWalletComponent implements OnInit {
 													privKey: val.privKey,
 													pubKey: val.pubKey,
 													name: val.name,
+													funds: val.funds
 												}
 											);
 										}
