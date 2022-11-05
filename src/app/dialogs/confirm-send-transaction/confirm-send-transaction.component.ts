@@ -22,17 +22,13 @@ export class ConfirmSendTransactionComponent implements OnInit {
 
 	sendTransaction(tx: SendTransaction) {
 		this.http.getConnectedNodes().subscribe((obs)=>{
-			this.snack
-			.open('Transaction sent', 'Close', {
-				duration: 3000,
-			})
-			.afterDismissed()
-			.subscribe((obs) => {
-				//window.location.reload();
-			});
 			let index: number = Math.floor(Math.random() * obs.length)
 			this.http.sendTransaction(tx,`${obs[index].host}:${obs[index].port}/send-transaction`).subscribe((obs)=>{
-				console.log(obs.body)
+				if(obs.status === 200){
+					this.snack.open('Transaction sent.','Close', { duration: 3000})
+				} else {
+					this.snack.open('Error accured please try again later.', 'Close', {duration: 3000})
+				}
 			})
 		})
 	}

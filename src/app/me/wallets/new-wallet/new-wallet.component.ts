@@ -15,6 +15,7 @@ export class NewWalletComponent implements OnInit {
 	pairs: Pairs = {};
 	length: number = 0;
 	name: string = '';
+	funds: number = 0;
 
 	constructor(public walletService: WalletService) {}
 
@@ -36,7 +37,8 @@ export class NewWalletComponent implements OnInit {
 		this.walletService.downloadWallet(
 			this.pairs.private,
 			this.pairs.public,
-			this.name
+			this.name,
+			this.funds
 		);
 	}
 

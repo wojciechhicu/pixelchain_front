@@ -23,6 +23,7 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 		'privKey',
 		'pubKey',
 		'name',
+		'funds',
 		'delete',
 		'transaction',
 		'editName',

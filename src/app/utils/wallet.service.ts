@@ -46,6 +46,7 @@ export class WalletService {
 				privKey: privateKey,
 				pubKey: publicKey,
 				name: name,
+				funds: 0
 			};
 			let numberOfPrivKeysInside: number = 0;
 			historical.forEach((val) => {
@@ -87,10 +88,11 @@ export class WalletService {
 	public downloadWallet(
 		privateKey: string | undefined,
 		publicKey: string | undefined,
-		name: string
+		name: string,
+		funds: number
 	): void {
 		const data: Data[] = [
-			{ privKey: privateKey, pubKey: publicKey, name: name },
+			{ privKey: privateKey, pubKey: publicKey, name: name, funds: funds },
 		];
 		const fileName: string = 'pixelChainWallet';
 		const exportType = exportFromJSON.types.json;
