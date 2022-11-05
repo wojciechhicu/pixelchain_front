@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ConnectedPeers as Peers } from '../_helpers/http-response/connected-peers.interface';
 import { SendTransaction } from '../_helpers/ready-to-send-transaction.interface';
 import { environment } from 'src/environments/environment';
+import { TX } from '../_helpers/http-response/block.interface';
+import { TXHash } from '../_helpers/http-response/txhash.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -38,5 +40,18 @@ export class HttpService {
 	 */
 	getMempool(url: string){
 		return this.http.get<SendTransaction[]>(url);
+	}
+
+	/**
+	 * search for transaction in blockchain
+	 * @param transaction hash of transaction
+	 * @param url url to node
+	 * @returns transaction object
+	 */
+	searchForTransactionInfo(transaction: string, url: string){
+		const hash: TXHash = {
+			TxHash: transaction
+		}
+		return this.http.post<TX>(url, hash, {observe: 'response'})
 	}
 }

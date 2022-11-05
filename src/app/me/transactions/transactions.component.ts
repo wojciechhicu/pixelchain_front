@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TransactionsService as Transaction } from 'src/app/utils/transactions.service';
 import { WalletService as Wallet } from 'src/app/utils/wallet.service';
 import { HttpService } from 'src/app/utils/http.service';
@@ -15,29 +14,15 @@ import { TransactionsService } from 'src/app/utils/transactions.service';
 })
 export class TransactionsComponent implements OnInit {
 	pubKey: any;
+	visible: boolean = false;
 	wallets: Data[] = [];
-	txObjs: Tx[] = [{
-		txHash: '8341dc0fdba11120dd0291dba17445a9eaa761ff8ff9338a6f43ab26f57e9977',
-		status: 2,
-		block: '000000000000000000004c6285c9d0cfdc620f9b4f9e6e3791f379eb02170943',
-		timestamp: Date.now(),
-		from: 'bc1q4czhgvmnm3damnvj69zsujxqut0th7cmynhktajxk2c8rrp4nd0qpl70up',
-		to: 'bc1q4czhgvmnm3damnvj69zsujxqut0th7cmynhktajxk2c8rrp4nd0qpl70up',
-		value: 32000000,
-		txFee: 12,
-		txType: 0,
-	}];
+	txObjs!: Tx[];
 	constructor(
-		public aRoute: ActivatedRoute,
-		public router: Router,
 		public tx: Transaction,
 		public wallet: Wallet,
 		public http: HttpService,
 		public transaction: TransactionsService
 	) {
-		this.aRoute.queryParams.subscribe((params: any) => {
-			this.pubKey = params.publicKey;
-		});
 	}
 
 	ngOnInit(): void {
@@ -49,6 +34,14 @@ export class TransactionsComponent implements OnInit {
 	}
 
 	searchForTx(search: string): void {
-
+		let test = this.http.searchForTransactionInfo(search, 'http://localhost:12000/get-transaction-data');
+		test.subscribe((obs: any)=>{
+			if(obs.status == 200){
+				this.visible = true;
+				console.log(obs.body)
+			} else {
+				console.log("Cannot find tx")
+			}
+		})
 	}
 }
