@@ -33,3 +33,17 @@ mat-card-content {
 .transaction {
 	margin-left: 10px;
 }
+.wrapper-table{
+	position: relative;
+}
+.spinner-container{
+	width: 100%;
+	height: calc(100% - 30px);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 30px;
+	left: 0;
+	background-color: rgba(0,0,0,0.10);
+}
