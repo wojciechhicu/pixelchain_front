@@ -10,6 +10,7 @@ import { EditWalletNameDialogComponent } from 'src/app/dialogs/edit-wallet-name-
 import { RemoveWalletsDialogComponent } from '../../../dialogs/navigationDialogs/remove-wallets-dialog/remove-wallets-dialog.component';
 import { ConfirmDeleteSelectedWalletsComponent } from 'src/app/dialogs/confirm-delete-selected-wallets/confirm-delete-selected-wallets.component';
 import { Router } from '@angular/router';
+import { HttpService } from 'src/app/utils/http.service';
 
 @Component({
 	selector: 'app-connected-wallets',
@@ -30,11 +31,12 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	];
 	dataSource = new MatTableDataSource<Data>(this.loadData);
 	selection = new SelectionModel<Data>(true, []);
-
+	spinner: boolean = false;
 	constructor(
 		public service: WalletService,
 		public dialog: MatDialog,
-		public router: Router
+		public router: Router,
+		public http: HttpService
 	) {}
 
 	ngOnInit(): void {}
@@ -118,5 +120,23 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 				keys: this.selection.selected,
 			},
 		});
+	}
+
+	refreshFundsForConnectedWallets(): void {
+		this.spinner = true;
+		this.http.getWalletsBalances(this.getConnectedWallets(), 'http://localhost:12000/get-wallets-balance').subscribe(obs => {
+			console.log(obs.body)
+		});
+	}
+
+	private getConnectedWallets():string[]{
+		const wallets: Data[] = this.service.loadConnectedWallets();
+		let walletsPubKeys: string[] = [];
+		wallets.forEach((val)=>{
+			if(val.pubKey != undefined){
+				walletsPubKeys.push(val.pubKey);
+			}
+		})
+		return walletsPubKeys
 	}
 }

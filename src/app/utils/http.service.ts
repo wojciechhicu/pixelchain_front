@@ -54,4 +54,14 @@ export class HttpService {
 		}
 		return this.http.post<TX>(url, hash, {observe: 'response'})
 	}
+
+	/**
+	 * Get connected wallets balances
+	 * @param pubKeys public keys array of wallets which user want to get balance
+	 * @param url url to server
+	 * @returns resposne
+	 */
+	getWalletsBalances(pubKeys: string[], url: string){
+		return this.http.post<string[]>(url, pubKeys, {observe: 'response'})
+	}
 }
