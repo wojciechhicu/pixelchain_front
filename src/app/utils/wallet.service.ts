@@ -3,6 +3,7 @@ import { Data } from '../_helpers/wallet-list.interface';
 import * as elliptic from 'elliptic';
 const ec = new elliptic.ec('secp256k1');
 import exportFromJSON from 'export-from-json';
+import { WalletBalances as WB } from '../_helpers/received-wallet-balances.interface';
 
 @Injectable({
 	providedIn: 'root',
@@ -193,5 +194,17 @@ export class WalletService {
 			JSON.stringify(connectedWallets)
 		);
 		window.location.reload();
+	}
+
+	public editWalletBalances(wallets: WB[]): void {
+		let walletsInMemory: Data[] = this.loadConnectedWallets();
+		walletsInMemory.forEach((val, ind)=>{
+			wallets.forEach((value, index)=>{
+				if(val.pubKey == value.walletPubkey){
+					val.funds = value.balance
+				}
+			})
+		})
+		localStorage.setItem('walletsList', JSON.stringify(walletsInMemory))
 	}
 }

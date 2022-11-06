@@ -5,6 +5,8 @@ import { SendTransaction } from '../_helpers/ready-to-send-transaction.interface
 import { environment } from 'src/environments/environment';
 import { TX } from '../_helpers/http-response/block.interface';
 import { TXHash } from '../_helpers/http-response/txhash.interface';
+import { take } from 'rxjs';
+import { WalletBalances as WB} from '../_helpers/received-wallet-balances.interface';
 
 @Injectable({
 	providedIn: 'root'
@@ -19,7 +21,7 @@ export class HttpService {
 	 * Get connected nodes to network
 	 * @returns nodes connected to network
 	 */
-	getConnectedNodes() {
+	private getConnectedNodes() {
 		return this.http.get<Peers[]>(environment.router)
 	}
 
@@ -38,8 +40,13 @@ export class HttpService {
 	 * @param url url to server
 	 * @returns mempool transactions
 	 */
-	getMempool(url: string){
-		return this.http.get<SendTransaction[]>(url);
+	async getMempool(url: string): Promise<SendTransaction[]>{
+		// return this.http.get<SendTransaction[]>(url);
+		return new Promise(resolve => {
+			this.http.get<SendTransaction[]>(url).pipe(take(1)).subscribe((obs)=>{
+				resolve(obs)
+			})
+		})
 	}
 
 	/**
@@ -48,12 +55,12 @@ export class HttpService {
 	 * @param url url to node
 	 * @returns transaction object
 	 */
-	searchForTransactionInfo(transaction: string, url: string){
+	public searchForTransactionInfo(transaction: string, url: string){
 		const hash: TXHash = {
 			TxHash: transaction
 		}
 		return this.http.post<TX>(url, hash, {observe: 'response'})
-	}
+	} //FIXME repair here
 
 	/**
 	 * Get connected wallets balances
@@ -61,7 +68,27 @@ export class HttpService {
 	 * @param url url to server
 	 * @returns resposne
 	 */
-	getWalletsBalances(pubKeys: string[], url: string){
-		return this.http.post<string[]>(url, pubKeys, {observe: 'response'})
+	public async getWalletsBalances(pubKeys: string[], url: string): Promise<WB[]>{
+		return new Promise(resolve=>{
+			this.http.post(url, pubKeys, {observe: 'response'}).pipe(take(1)).subscribe((data: any)=>{
+				let res: WB[] = data.body;
+				resolve(res)
+			})
+		})
+	}
+
+	/**
+	 * Connect to random node/ peer to network
+	 * @returns promise with single peer data
+	 */
+	public async connectToRandomNode(): Promise<Peers>{
+		return new Promise(resolve=>{
+			this.getConnectedNodes().pipe(take(1)).subscribe((data:any)=>{
+				let nodes: Peers[] = data;
+				let index: number = Math.floor(Math.random() * nodes.length);
+
+				resolve(nodes[index])
+			})
+		})
 	}
 }

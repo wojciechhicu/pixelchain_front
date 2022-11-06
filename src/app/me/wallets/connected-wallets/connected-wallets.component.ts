@@ -11,6 +11,7 @@ import { RemoveWalletsDialogComponent } from '../../../dialogs/navigationDialogs
 import { ConfirmDeleteSelectedWalletsComponent } from 'src/app/dialogs/confirm-delete-selected-wallets/confirm-delete-selected-wallets.component';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/utils/http.service';
+import { ConnectedPeers as Peer } from 'src/app/_helpers/http-response/connected-peers.interface';
 
 @Component({
 	selector: 'app-connected-wallets',
@@ -124,9 +125,15 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 
 	refreshFundsForConnectedWallets(): void {
 		this.spinner = true;
-		this.http.getWalletsBalances(this.getConnectedWallets(), 'http://localhost:12000/get-wallets-balance').subscribe(obs => {
-			console.log(obs.body)
-		});
+		this.http.connectToRandomNode().then((val: any)=>{
+			const node: Peer = val;
+			this.http.getWalletsBalances(this.getConnectedWallets(), `${node.host}:${node.port}/get-wallets-balance`).then((value)=>{
+				this.service.editWalletBalances(value);
+			}).then(()=>{
+				this.spinner = false;
+				window.location.reload();
+			})
+		})
 	}
 
 	private getConnectedWallets():string[]{
