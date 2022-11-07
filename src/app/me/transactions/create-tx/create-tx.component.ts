@@ -102,10 +102,10 @@ export class CreateTxComponent implements OnInit {
 		if(to.length < 10) { return true }
 		if( txValue == undefined ) { return true }
 		if( txValue == null ) { return true }
-		if( txValue < 1) { return true }
-		if( fee < 1) { return true}
+		if( txValue < 0) { return true }
+		if( fee < 0) { return true}
 		if( fee == undefined ) { return true }
 		if( fee == null ) { return true }
 		return false
-	}
+	}//FIXME naprawić błąd wpisywania wartosci przecinkowych np 0.00001 i w memmpool jest 10mln mniejsza
 }

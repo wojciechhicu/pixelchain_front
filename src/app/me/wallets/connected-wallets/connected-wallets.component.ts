@@ -33,6 +33,7 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	dataSource = new MatTableDataSource<Data>(this.loadData);
 	selection = new SelectionModel<Data>(true, []);
 	spinner: boolean = false;
+	pInWallets: number = 0;
 	constructor(
 		public service: WalletService,
 		public dialog: MatDialog,
@@ -40,7 +41,9 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 		public http: HttpService
 	) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.getBalanceFromAllWallets();
+	}
 
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -145,5 +148,13 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 			}
 		})
 		return walletsPubKeys
+	}
+
+	getBalanceFromAllWallets(){
+		this.dataSource.data.forEach((val, ind)=>{
+			if(val.funds != undefined){
+				this.pInWallets += val.funds;
+			}
+		})
 	}
 }
