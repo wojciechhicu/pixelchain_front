@@ -21,9 +21,8 @@ export class ConfirmSendTransactionComponent implements OnInit {
 	ngOnInit(): void {}
 
 	sendTransaction(tx: SendTransaction) {
-		this.http.getConnectedNodes().subscribe((obs)=>{
-			let index: number = Math.floor(Math.random() * obs.length)
-			this.http.sendTransaction(tx,`${obs[index].host}:${obs[index].port}/send-transaction`).subscribe((obs)=>{
+		this.http.connectToRandomNode().then((val)=>{
+			this.http.sendTransaction(tx, `${val.host}:${val.port}/send-transaction`).subscribe((obs)=>{
 				if(obs.status === 200){
 					this.snack.open('Transaction sent.','Close', { duration: 3000})
 				} else {
@@ -31,5 +30,6 @@ export class ConfirmSendTransactionComponent implements OnInit {
 				}
 			})
 		})
+
 	}
 }

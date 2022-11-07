@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MemPoolService } from 'src/app/utils/mem-pool.service';
 import { SendTransaction } from 'src/app/_helpers/ready-to-send-transaction.interface';
 import { HttpService } from 'src/app/utils/http.service';
 import { MatPaginator } from '@angular/material/paginator';
@@ -40,7 +39,7 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 	expandedElement!: SendTransaction | null;
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
-	connectedNodes = this.http.getConnectedNodes();
+	connectedNodes = this.http.connectToRandomNode();
 	txObjs: SendTransaction[] = [];
 
 	constructor(public http: HttpService, private snack: MatSnackBar, private clip: Clipboard) {
@@ -48,21 +47,16 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit(): void {
-		this.connectedNodes.subscribe((nodes) => {
-			let index: number = Math.floor(
-				Math.random() * nodes.length
-			);
-			let mempool: any = this.http.getMempool(
-				`${nodes[index].host}:${nodes[index].port}/mempool`
-			);
-			mempool.subscribe((obs: any) => {
-				this.dataSource.data = obs;
+		this.connectedNodes.then((value)=>{
+			let mempool = this.http.getMempool(`${value.host}:${value.port}/mempool`);
+			mempool.then((val)=>{
+				this.dataSource.data = val;
 				this.dataSource.paginator = this.paginator;
-				this.dataSource.data.forEach((val)=>{
-					this.volume = this.volume + val.txValue;
+				this.dataSource.data.forEach((data)=>{
+					this.volume += data.txValue;
 				})
-			});
-		});
+			})
+		})
 	}
 
 	ngAfterViewInit(): void {

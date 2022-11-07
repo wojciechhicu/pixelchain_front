@@ -7,6 +7,7 @@
 					<mat-option
 						*ngFor="let wallet of wallets"
 						[value]="wallet"
+						(click)="setBalance(wallet.funds)"
 						>{{ wallet.name }}</mat-option
 					>
 				</mat-select>
@@ -15,6 +16,7 @@
 					matPrefix
 					>wallet</mat-icon
 				>
+				<mat-hint *ngIf="from">Wallet balance: {{ balance / 10000000}} pixels</mat-hint>
 			</mat-form-field>
 		</div>
 

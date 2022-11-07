@@ -22,6 +22,7 @@ export class CreateTxComponent implements OnInit {
 	to: string = 'fdghjds44ertrefgdfgertert';
 	txValue: number = 32;
 	fee: number = 2;
+	balance!: number;
 
 	constructor(public walletService: WalletService, public txService: TransactionsService, public dialog: MatDialog) {}
 
@@ -102,10 +103,16 @@ export class CreateTxComponent implements OnInit {
 		if(to.length < 10) { return true }
 		if( txValue == undefined ) { return true }
 		if( txValue == null ) { return true }
-		if( txValue < 1) { return true }
-		if( fee < 1) { return true}
+		if( txValue < 0) { return true }
+		if( fee < 0) { return true}
 		if( fee == undefined ) { return true }
 		if( fee == null ) { return true }
 		return false
+	}//FIXME naprawić błąd wpisywania wartosci przecinkowych np 0.00001 i w memmpool jest 10mln mniejsza
+
+	setBalance(balance: number | undefined): void {
+		if(balance != undefined){
+			this.balance = balance
+		}
 	}
 }
