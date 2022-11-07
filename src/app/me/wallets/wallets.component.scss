@@ -1,3 +1,12 @@
 mat-card{
-        height: calc(100% - 32px);
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        mat-card-content{
+                height: 100%;
+                overflow-y: auto;
+        }
+}
+.mat-divider{
+        position: relative !important;
 }
