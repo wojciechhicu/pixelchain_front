@@ -42,3 +42,17 @@ mat-card{
 .tx{
         display: inline-block;
 }
+.relative{
+        position: relative;
+}
+.spinner-wrapper{
+        position: absolute;
+        display: flex;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0,0,0,0.10);
+}

@@ -34,7 +34,7 @@
                         </div>
                 </div>
                 <div class="transaction-data" *ngIf="visible">
-                        <mat-list dense>
+                        <mat-list dense class="relative">
                                 <div mat-subheader>Transaction overall</div>
                                 <mat-list-item>
                                         <mat-icon mat-list-icon class="material-icons-outlined">data_object</mat-icon>
@@ -131,7 +131,11 @@
                                                 Fee: {{ txObj.fee / 10000000 }}
                                         </div>
                                 </mat-list-item>
+                                <div class="spinner-wrapper" *ngIf="spinner">
+                                        <mat-spinner></mat-spinner>
+                                </div>
                         </mat-list>
+
                 </div>
         </mat-card-content>
 </mat-card>

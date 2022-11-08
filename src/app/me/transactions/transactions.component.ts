@@ -18,6 +18,7 @@ export class TransactionsComponent implements OnInit {
 	visible: boolean = false;
 	wallets: Data[] = [];
 	txObj!: TX;
+	spinner: boolean = false;
 	constructor(
 		public tx: Transaction,
 		public wallet: Wallet,
@@ -35,7 +36,7 @@ export class TransactionsComponent implements OnInit {
 	}
 
 	searchForTx(search: string): void {
-
+		this.spinner= true
 		let test: string = search.slice(0 , 2);
 		if(test == '04'){
 			console.log("Wallet")
@@ -44,8 +45,10 @@ export class TransactionsComponent implements OnInit {
 				let transaction = this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`);
 				transaction.then((value)=>{
 					this.visible = true;
-					this.txObj = value
-				})
+					this.txObj = value;
+				}).then(()=>{
+				this.spinner = false
+			})
 			})
 		}
 	}
