@@ -1,17 +1,25 @@
 <mat-card>
         <mat-card-content>
-			<div class="searching-bar">
-				<form>
-					<mat-form-field appearance="legacy">
-							<mat-label>Search for transaction or wallet</mat-label>
-							<input matInput placeholder="Tx ID or wallet" #search>
-                                                        <mat-hint>Place here wallet address to see all transactions corresponded to this wallet or transaction ID to see only specyfic transaction</mat-hint>
-					</mat-form-field>
-					<button type="submit" mat-flat-button class="search-button" (click)="searchForTx(search.value)" matTooltip="Search for transaction" matTooltipPosition="above"><mat-icon>search</mat-icon></button>
-                                        <button mat-flat-button class="search-button" routerLink="create-tx"  matTooltip="Create new transaction" matTooltipPosition="below"><mat-icon>add_circle_outline</mat-icon></button>
-			</form>
-                        
-		</div>
+                <div class="searching-bar">
+                        <form>
+                                <mat-form-field appearance="legacy">
+                                        <mat-label>Search for transaction or wallet</mat-label>
+                                        <input matInput placeholder="Tx ID or wallet" #search>
+                                        <mat-hint>Place here wallet address to see all transactions corresponded to this
+                                                wallet or transaction ID to see only specyfic transaction</mat-hint>
+                                </mat-form-field>
+                                <button type="submit" mat-flat-button class="search-button"
+                                        (click)="searchForTx(search.value)" matTooltip="Search for transaction"
+                                        matTooltipPosition="above">
+                                        <mat-icon>search</mat-icon>
+                                </button>
+                                <button mat-flat-button class="search-button" routerLink="create-tx"
+                                        matTooltip="Create new transaction" matTooltipPosition="below">
+                                        <mat-icon>add_circle_outline</mat-icon>
+                                </button>
+                        </form>
+
+                </div>
                 <div class="createTx">
 
                         <div>
@@ -39,30 +47,44 @@
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The status of the transaction."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Status: 
-                                                        <div class="status error" *ngIf="txObj.status == 0" matTooltip="Error while sending transaction." matTooltipPosition="right"><mat-icon class="material-icons-outlined icon-lower">error_outline</mat-icon>Error</div>
-                                                        <div class="status pending" *ngIf="txObj.status == 1" matTooltip="Pending transaction. Waiting to adding transaction to blockchain." matTooltipPosition="right"><mat-icon class="material-icons-outlined icon-lower">pending</mat-icon>Pending</div>
-                                                        <div class="status success" *ngIf="txObj.status == 2" matTooltip="Transaction accepted." matTooltipPosition="right"><mat-icon class="material-icons-outlined icon-lower" >thumb_up_alt</mat-icon>Success</div>
+                                                        matTooltipPosition="left">help_outline</mat-icon>Status:
+                                                <div class="status error" *ngIf="txObj.status == 0"
+                                                        matTooltip="Error while sending transaction."
+                                                        matTooltipPosition="right">
+                                                        <mat-icon class="material-icons-outlined icon-lower">
+                                                                error_outline</mat-icon>Error
+                                                </div>
+                                                <div class="status pending" *ngIf="txObj.status == 1"
+                                                        matTooltip="Pending transaction. Waiting to adding transaction to blockchain."
+                                                        matTooltipPosition="right">
+                                                        <mat-icon class="material-icons-outlined icon-lower">pending
+                                                        </mat-icon>Pending
+                                                </div>
+                                                <div class="status success" *ngIf="txObj.status == 2"
+                                                        matTooltip="Transaction accepted." matTooltipPosition="right">
+                                                        <mat-icon class="material-icons-outlined icon-lower">
+                                                                thumb_up_alt</mat-icon>Success
+                                                </div>
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="Number of the block in which the transaction is recorded."
                                                         matTooltipPosition="left">help_outline</mat-icon>Block:
-                                                        {{ txObj.blockHeight}}
+                                                {{ txObj.blockHeight}}
                                         </div>
-										<!-- <div mat-line>
-											<mat-icon class="material-icons-outlined icon-lower"
-													matTooltip="Transaction type. Root or base transaction."
-													matTooltipPosition="left">help_outline</mat-icon>Transaction type:
-													<div class="tx" *ngIf="txObj.txType == 0">Root</div>
-													<div class="tx"*ngIf="txObj.txType == 1">Normal</div>
-									</div> --> 
-                                                                        <!-- TODO dodać używanie statusu transakcji i bloku-->
+                                        <!-- <div mat-line>
+                                                <mat-icon class="material-icons-outlined icon-lower"
+                                                        matTooltip="Transaction type. Root or base transaction."
+                                                        matTooltipPosition="left">help_outline</mat-icon>Transaction
+                                                type:
+                                                <div class="tx" *ngIf="txObj.txType == 0">Root</div>
+                                                <div class="tx" *ngIf="txObj.txType == 1">Normal</div>
+                                        </div> -->
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The date and time at which a transaction is mined."
                                                         matTooltipPosition="left">help_outline</mat-icon>Timestamp:
-                                                        {{ txObj.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}
+                                                {{ txObj.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}
                                         </div>
                                 </mat-list-item>
                                 <mat-divider [inset]="true"></mat-divider>
@@ -73,12 +95,13 @@
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The sending party of the transaction."
                                                         matTooltipPosition="left">help_outline</mat-icon>From:
-                                                        {{ txObj.from}}
+                                                {{ txObj.from}}
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The receiving party of the transaction."
-                                                        matTooltipPosition="left">help_outline</mat-icon>To: {{ txObj.to}}
+                                                        matTooltipPosition="left">help_outline</mat-icon>To: {{
+                                                txObj.to}}
                                         </div>
                                 </mat-list-item>
                                 <mat-divider [inset]="true"></mat-divider>
@@ -88,7 +111,8 @@
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The value being transacted in Pixel."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Value: {{ txObj.txValue / 10000000}}
+                                                        matTooltipPosition="left">help_outline</mat-icon>Value: {{
+                                                txObj.txValue / 10000000}}
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
