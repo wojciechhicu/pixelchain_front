@@ -55,12 +55,19 @@ export class HttpService {
 	 * @param url url to node
 	 * @returns transaction object
 	 */
-	public searchForTransactionInfo(transaction: string, url: string){
-		const hash: TXHash = {
-			TxHash: transaction
-		}
-		return this.http.post<TX>(url, hash, {observe: 'response'})
-	} //FIXME repair here
+	public searchForTransactionInfo(transaction: string, url: string): Promise<TX>{
+
+		// return this.http.post<TX>(url, hash, {observe: 'response'})
+		return new Promise(resolve=>{
+			const hash: TXHash = {
+				TxHash: transaction
+			}
+			this.http.post(url, hash, {observe: 'response'}).pipe(take(1)).subscribe((obs: any)=>{
+				const tx: TX = obs.body;
+				resolve(tx)
+			})
+		})
+	}
 
 	/**
 	 * Get connected wallets balances

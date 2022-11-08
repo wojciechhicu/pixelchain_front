@@ -34,7 +34,7 @@
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="A TxHash or transaction hash is a unique identifier that is generated whenever a transaction is executed."
                                                         matTooltipPosition="left">help_outline</mat-icon>Transaction
-                                                Hash: {{ txObj.txHash}}
+                                                Hash: {{ txObj.TxHash}}
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
@@ -48,15 +48,16 @@
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="Number of the block in which the transaction is recorded."
                                                         matTooltipPosition="left">help_outline</mat-icon>Block:
-                                                        {{ txObj.block}}
+                                                        {{ txObj.blockHeight}}
                                         </div>
-										<div mat-line>
+										<!-- <div mat-line>
 											<mat-icon class="material-icons-outlined icon-lower"
 													matTooltip="Transaction type. Root or base transaction."
 													matTooltipPosition="left">help_outline</mat-icon>Transaction type:
 													<div class="tx" *ngIf="txObj.txType == 0">Root</div>
 													<div class="tx"*ngIf="txObj.txType == 1">Normal</div>
-									</div>
+									</div> --> 
+                                                                        <!-- TODO dodać używanie statusu transakcji i bloku-->
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The date and time at which a transaction is mined."
@@ -87,13 +88,13 @@
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The value being transacted in Pixel."
-                                                        matTooltipPosition="left">help_outline</mat-icon>Value: {{ txObj.value / 10000000}}
+                                                        matTooltipPosition="left">help_outline</mat-icon>Value: {{ txObj.txValue / 10000000}}
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="Cost per unit of gas specified for the transaction, in Pixel. The higher the gas price the higher chance of getting included in a block."
                                                         matTooltipPosition="left">help_outline</mat-icon>Transaction
-                                                Fee: {{ txObj.txFee / 10000000 }}
+                                                Fee: {{ txObj.fee / 10000000 }}
                                         </div>
                                 </mat-list-item>
                         </mat-list>

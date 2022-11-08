@@ -17,7 +17,7 @@
                                 <!-- expanded row-->
                                 <ng-container matColumnDef="expand">
                                         <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-                                        <td mat-cell *matCellDef="let element">
+                                        <td class="bigger" mat-cell *matCellDef="let element">
                                                 <button mat-icon-button aria-label="expand row"
                                                         (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
                                                         <mat-icon *ngIf="expandedElement !== element">
@@ -34,12 +34,12 @@
                                                 <div class="element-detail"
                                                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                                                                 <mat-list role="list" dense>
-                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="From where pixels were sent." matTooltipPosition="left">help_outline</mat-icon>From: {{ element.from }} <mat-icon (click)="copy(element.from)" class="material-icons-outlined copy" matTooltip="Copy sender address.">content_copy</mat-icon></mat-list-item>
-                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Destination wallet address." matTooltipPosition="left">help_outline</mat-icon>Destination: {{ element.to }} <mat-icon (click)="copy(element.from)" class="material-icons-outlined copy" matTooltip="Copy destination address.">content_copy</mat-icon></mat-list-item>
-                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction script signature." matTooltipPosition="left">help_outline</mat-icon>Script signature: {{ element.signature }}</mat-list-item>
-                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction value fro destination address." matTooltipPosition="left">help_outline</mat-icon>Tx value: {{ element.txValue / 10000000 | number: '.1-10'}}</mat-list-item>
-                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction fee for validator." matTooltipPosition="left">help_outline</mat-icon>Tx fee: {{ element.fee / 10000000 | number: '.1-10'}}</mat-list-item>
-                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="When transaction was created." matTooltipPosition="left">help_outline</mat-icon>Tx create time: {{ element.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}</mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="From where pixels were sent." matTooltipPosition="left">help_outline</mat-icon>From: <div class="smaller">{{ element.from }} </div><mat-icon (click)="copy(element.from)" class="material-icons-outlined copy" matTooltip="Copy sender address.">content_copy</mat-icon></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Destination wallet address." matTooltipPosition="left">help_outline</mat-icon>Destination: <div class="smaller">{{ element.to }} </div><mat-icon (click)="copy(element.from)" class="material-icons-outlined copy" matTooltip="Copy destination address.">content_copy</mat-icon></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction script signature." matTooltipPosition="left">help_outline</mat-icon>Script signature: <div class="smaller">{{ element.signature }}</div></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction value fro destination address." matTooltipPosition="left">help_outline</mat-icon>Tx value: <div class="smaller">{{ element.txValue / 10000000 | number: '.1-10'}}</div></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="Transaction fee for validator." matTooltipPosition="left">help_outline</mat-icon>Tx fee: <div class="smaller">{{ element.fee / 10000000 | number: '.1-10'}}</div></mat-list-item>
+                                                                        <mat-list-item role="listitem"><mat-icon matTooltip="When transaction was created." matTooltipPosition="left">help_outline</mat-icon>Tx create time: <div class="smaller">{{ element.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}</div></mat-list-item>
                                                                 </mat-list>
                                                 </div>
                                         </td>
@@ -58,7 +58,9 @@
                                 </tr>
                                 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
                         </table>
-
+                        <div class="spinner-container" *ngIf="spinner">
+                                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                        </div>
                         <mat-paginator [pageSizeOptions]="[10, 25, 100, 250]" showFirstLastButtons="true"
                                 aria-label="Select page of users"></mat-paginator>
                 </div>

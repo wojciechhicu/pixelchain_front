@@ -20,9 +20,10 @@ export interface TX {
         txValue: number;
         fee: number;
         timestamp: number;
-        uTxo: number;
-        TxHash: string;
+        uTxo?: number;
+        TxHash?: string;
         status?: number;
+        blockHeight?: string;
 }
 
 /**

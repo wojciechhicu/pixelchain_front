@@ -196,6 +196,10 @@ export class WalletService {
 		window.location.reload();
 	}
 
+	/**
+	 * Ddit wallet balance from server response
+	 * @param wallets wallets to update with balance number
+	 */
 	public editWalletBalances(wallets: WB[]): void {
 		let walletsInMemory: Data[] = this.loadConnectedWallets();
 		walletsInMemory.forEach((val, ind)=>{
@@ -206,5 +210,25 @@ export class WalletService {
 			})
 		})
 		localStorage.setItem('walletsList', JSON.stringify(walletsInMemory))
+	}
+
+	public isUserHaveEnoughFunds(wallet: string, txValue: number, fee: number): boolean {
+		const wallets = this.loadConnectedWallets();
+		let singleWallet!: Data
+		wallets.forEach((val, ind)=>{
+			if(wallet == val.pubKey){
+				singleWallet = wallets[ind]
+			}
+		})
+		const txCombined = txValue + fee;
+		if(singleWallet.funds != undefined){
+			if(singleWallet.funds - txCombined >= 0){
+				return true
+			} else {
+				return false
+			}
+		} else {
+			return false
+		}
 	}
 }
