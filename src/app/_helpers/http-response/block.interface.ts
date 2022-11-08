@@ -23,7 +23,7 @@ export interface TX {
         uTxo?: number;
         TxHash?: string;
         status?: number;
-        blockHeight?: string;
+        blockHeight?: number;
 }
 
 /**
