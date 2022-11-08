@@ -24,18 +24,18 @@ mat-card-content {
 .wrapper {
 	.mat-form-field {
 		font-size: 14px;
-		width: 85%;
+		display: inline-block;
+		width: calc(100% - 192px);
 	}
-	button {
-		width: 5%;
+	.btn-container{
+		display: inline-block;
+		width: auto;
 	}
-}
-.transaction {
-	margin-left: 10px;
 }
 .wrapper-table{
 	position: relative;
 }
+
 .spinner-container{
 	width: 100%;
 	height: calc(100% - 30px);
@@ -46,4 +46,28 @@ mat-card-content {
 	top: 30px;
 	left: 0;
 	background-color: rgba(0,0,0,0.10);
+}
+.biggerTD{
+	max-width: 100px !important;
+	white-space: nowrap;
+	transition: 0.2s;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.smallerTD{
+	max-width: 50px !important;
+	transition: 0.2s;
+}
+
+@media screen and(min-width: 600px){
+
+	.smallerTD{
+		max-width: 45px !important;
+	}
+}
+@media screen and(min-width: 900px){
+
+	.smallerTD{
+		max-width: 30px !important;
+	}
 }

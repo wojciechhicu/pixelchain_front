@@ -53,10 +53,10 @@ export class CreateTxComponent implements OnInit {
 				let pub = signingKey.getPublic('hex');
 				if( data.from === pub){
 					const time = Date.now()
-					const hashTx = this.txService.calcHash(pub, data.to, data.txValue, time, data.fee);
+					const hashTx = this.txService.calcHash(pub, data.to, data.txValue * 10000000, time, data.fee * 10000000);
 					const signature = signingKey.sign(hashTx).toDER('hex');
 					if(data.from != undefined){
-						const isValid: boolean = this.txService.isValidTx(data.from, signature, data.from, data.to, data.txValue, time, data.fee);
+						const isValid: boolean = this.txService.isValidTx(data.from, signature, data.from, data.to, data.txValue * 10000000, time, data.fee * 10000000);
 						if( isValid === true){
 							const transaction: SendTransaction = {
 								from: data.from,
@@ -72,6 +72,8 @@ export class CreateTxComponent implements OnInit {
 						} else {
 							this.dialog.open(ErrorInTransactionComponent);
 						}
+					} else {
+						this.dialog.open(ErrorInTransactionComponent);
 					}
 				} else {
 					this.dialog.open(ErrorInTransactionComponent);
@@ -108,8 +110,12 @@ export class CreateTxComponent implements OnInit {
 		if( fee == undefined ) { return true }
 		if( fee == null ) { return true }
 		return false
-	}//FIXME naprawić błąd wpisywania wartosci przecinkowych np 0.00001 i w memmpool jest 10mln mniejsza
+	}
 
+	/**
+	 * Set balance in hint for a wallet
+	 * @param balance balance of clicked wallet
+	 */
 	setBalance(balance: number | undefined): void {
 		if(balance != undefined){
 			this.balance = balance

@@ -41,22 +41,14 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 
 	connectedNodes = this.http.connectToRandomNode();
 	txObjs: SendTransaction[] = [];
+	spinner: boolean = false;
 
 	constructor(public http: HttpService, private snack: MatSnackBar, private clip: Clipboard) {
 
 	}
 
 	ngOnInit(): void {
-		this.connectedNodes.then((value)=>{
-			let mempool = this.http.getMempool(`${value.host}:${value.port}/mempool`);
-			mempool.then((val)=>{
-				this.dataSource.data = val;
-				this.dataSource.paginator = this.paginator;
-				this.dataSource.data.forEach((data)=>{
-					this.volume += data.txValue;
-				})
-			})
-		})
+		this.refresh();
 	}
 
 	ngAfterViewInit(): void {
@@ -73,11 +65,27 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 	}
 
 	refresh(): void  {
-		window.location.reload()
+		this.getMempool()
 	}
 
 	copy(text: string){
 		this.clip.copy(text);
 		this.snack.open('Coppied to clipboard.', 'Close',{duration: 3000})
+	}
+
+	getMempool(): void{
+		this.spinner = true;
+		this.connectedNodes.then((value)=>{
+			let mempool = this.http.getMempool(`${value.host}:${value.port}/mempool`);
+			mempool.then((val)=>{
+				this.dataSource.data = val;
+				this.dataSource.paginator = this.paginator;
+				this.dataSource.data.forEach((data)=>{
+					this.volume += data.txValue;
+				})
+			}).then(()=>{
+				this.spinner = false;
+			})
+		})
 	}
 }
