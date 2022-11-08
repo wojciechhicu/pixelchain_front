@@ -4,7 +4,7 @@
                         <form>
                                 <mat-form-field appearance="legacy">
                                         <mat-label>Search for transaction or wallet</mat-label>
-                                        <input matInput placeholder="Tx ID or wallet" #search>
+                                        <input matInput placeholder="Tx ID or wallet" #search value="bffda9fdb9115d08aae26571ca56d546c4a063751a3837252011150dcc41b59b">
                                         <mat-hint>Place here wallet address to see all transactions corresponded to this
                                                 wallet or transaction ID to see only specyfic transaction</mat-hint>
                                 </mat-form-field>
@@ -34,7 +34,7 @@
                         </div>
                 </div>
                 <div class="transaction-data" *ngIf="visible">
-                        <mat-list dense *ngFor="let txObj of txObjs">
+                        <mat-list dense>
                                 <div mat-subheader>Transaction overall</div>
                                 <mat-list-item>
                                         <mat-icon mat-list-icon class="material-icons-outlined">data_object</mat-icon>
@@ -66,25 +66,35 @@
                                                                 thumb_up_alt</mat-icon>Success
                                                 </div>
                                         </div>
-                                        <div mat-line>
+                                        <div mat-line *ngIf="txObj.blockHeight != -1; else otherH">
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="Number of the block in which the transaction is recorded."
                                                         matTooltipPosition="left">help_outline</mat-icon>Block:
                                                 {{ txObj.blockHeight}}
                                         </div>
-                                        <!-- <div mat-line>
+                                        <ng-template #otherH>
+                                                <div mat-line>
+                                                        <mat-icon class="material-icons-outlined icon-lower"
+                                                                matTooltip="Number of the block in which the transaction is recorded."
+                                                                matTooltipPosition="left">help_outline</mat-icon>Block:
+                                                        Transaction in mempool
+                                                </div>
+                                        </ng-template>
+                                        <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
-                                                        matTooltip="Transaction type. Root or base transaction."
+                                                        matTooltip="Transaction type. Coinbase or transfer transaction."
                                                         matTooltipPosition="left">help_outline</mat-icon>Transaction
                                                 type:
-                                                <div class="tx" *ngIf="txObj.txType == 0">Root</div>
-                                                <div class="tx" *ngIf="txObj.txType == 1">Normal</div>
-                                        </div> -->
+                                                <div class="tx" *ngIf="txObj.from == 'null'; else normal">Root</div>
+                                                <ng-template #normal>
+                                                        <div class="tx">Normal</div>
+                                                </ng-template>
+                                        </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The date and time at which a transaction is mined."
                                                         matTooltipPosition="left">help_outline</mat-icon>Timestamp:
-                                                {{ txObj.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}
+                                                {{ txObj.timestamp * 1000 | date: 'd/M/Y, h:mm a': 'GMT+2'}}
                                         </div>
                                 </mat-list-item>
                                 <mat-divider [inset]="true"></mat-divider>

@@ -17,7 +17,7 @@ export class TransactionsComponent implements OnInit {
 	pubKey: any;
 	visible: boolean = false;
 	wallets: Data[] = [];
-	txObjs: TX[] = [];
+	txObj!: TX;
 	constructor(
 		public tx: Transaction,
 		public wallet: Wallet,
@@ -44,7 +44,7 @@ export class TransactionsComponent implements OnInit {
 				let transaction = this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`);
 				transaction.then((value)=>{
 					this.visible = true;
-					this.txObjs.push(value)
+					this.txObj = value
 				})
 			})
 		}

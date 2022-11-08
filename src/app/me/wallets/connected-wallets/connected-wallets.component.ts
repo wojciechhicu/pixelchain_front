@@ -12,6 +12,7 @@ import { ConfirmDeleteSelectedWalletsComponent } from 'src/app/dialogs/confirm-d
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/utils/http.service';
 import { ConnectedPeers as Peer } from 'src/app/_helpers/http-response/connected-peers.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-connected-wallets',
@@ -38,7 +39,8 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 		public service: WalletService,
 		public dialog: MatDialog,
 		public router: Router,
-		public http: HttpService
+		public http: HttpService,
+		private snack: MatSnackBar
 	) {}
 
 	ngOnInit(): void {
@@ -132,7 +134,7 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 			const node: Peer = val;
 			this.http.getWalletsBalances(this.getConnectedWallets(), `${node.host}:${node.port}/get-wallets-balance`).then((value)=>{
 				this.service.editWalletBalances(value);
-			}).then(()=>{
+			}).then((obs)=>{
 				this.spinner = false;
 				window.location.reload();
 			})
