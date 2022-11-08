@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService as Transaction } from 'src/app/utils/transactions.service';
-import { WalletService as Wallet } from 'src/app/utils/wallet.service';
 import { HttpService } from 'src/app/utils/http.service';
 import { Data } from 'src/app/_helpers/wallet-list.interface';
-import { Tx } from 'src/app/_helpers/trasaction.interface';
 import { TX } from 'src/app/_helpers/http-response/block.interface';
-import { ConnectedPeers as Peers } from 'src/app/_helpers/http-response/connected-peers.interface';
 import { TransactionsService } from 'src/app/utils/transactions.service';
 
 @Component({
@@ -15,25 +12,22 @@ import { TransactionsService } from 'src/app/utils/transactions.service';
 })
 export class TransactionsComponent implements OnInit {
 	pubKey: any;
-	visible: boolean = false;
+	visibleTX: boolean = false;
 	wallets: Data[] = [];
 	txObj!: TX;
 	spinner: boolean = false;
 	constructor(
 		public tx: Transaction,
-		public wallet: Wallet,
 		public http: HttpService,
 		public transaction: TransactionsService
 	) {
 	}
 
 	ngOnInit(): void {
-		this.wallets = this.getAllWallets();
+		//just for testing
+		this.searchForTx("bffda9fdb9115d08aae26571ca56d546c4a063751a3837252011150dcc41b59b");
 	}
 
-	public getAllWallets(): Data[] {
-		return this.wallet.loadConnectedWallets();
-	}
 
 	searchForTx(search: string): void {
 		this.spinner= true
@@ -44,7 +38,7 @@ export class TransactionsComponent implements OnInit {
 			this.http.connectToRandomNode().then((val)=>{
 				let transaction = this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`);
 				transaction.then((value)=>{
-					this.visible = true;
+					this.visibleTX = true;
 					this.txObj = value;
 				}).then(()=>{
 				this.spinner = false

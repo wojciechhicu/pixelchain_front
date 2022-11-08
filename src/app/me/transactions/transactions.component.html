@@ -1,39 +1,23 @@
 <mat-card>
         <mat-card-content>
-                <div class="searching-bar">
-                        <form>
-                                <mat-form-field appearance="legacy">
-                                        <mat-label>Search for transaction or wallet</mat-label>
-                                        <input matInput placeholder="Tx ID or wallet" #search value="bffda9fdb9115d08aae26571ca56d546c4a063751a3837252011150dcc41b59b">
-                                        <mat-hint>Place here wallet address to see all transactions corresponded to this
-                                                wallet or transaction ID to see only specyfic transaction</mat-hint>
-                                </mat-form-field>
-                                <button type="submit" mat-flat-button class="search-button"
-                                        (click)="searchForTx(search.value)" matTooltip="Search for transaction"
-                                        matTooltipPosition="above">
-                                        <mat-icon>search</mat-icon>
-                                </button>
-                                <button mat-flat-button class="search-button" routerLink="create-tx"
-                                        matTooltip="Create new transaction" matTooltipPosition="below">
-                                        <mat-icon>add_circle_outline</mat-icon>
-                                </button>
-                        </form>
-
+                <mat-form-field appearance="legacy" class="searchfield">
+                        <mat-label>Search for transaction or wallet</mat-label>
+                        <input matInput placeholder="Tx ID or wallet" #search class="input"
+                                value="bffda9fdb9115d08aae26571ca56d546c4a063751a3837252011150dcc41b59b">
+                        <mat-hint>Place here wallet address to see all transactions corresponded to this
+                                wallet or transaction ID to see only specyfic transaction</mat-hint>
+                </mat-form-field>
+                <div class="btn-container">
+                        <button type="submit" mat-flat-button class="search-button" (click)="searchForTx(search.value)"
+                                matTooltip="Search for transaction" matTooltipPosition="above">
+                                <mat-icon>search</mat-icon>
+                        </button>
+                        <button mat-flat-button class="search-button" routerLink="create-tx"
+                                matTooltip="Create new transaction" matTooltipPosition="below">
+                                <mat-icon>add_circle_outline</mat-icon>
+                        </button>
                 </div>
-                <div class="createTx">
-
-                        <div>
-                                <mat-form-field appearance="fill">
-                                        <mat-label>My wallets</mat-label>
-                                        <mat-select>
-                                                <mat-option *ngFor="let wallet of wallets" value="wallet.name">
-                                                        {{ wallet.name }}
-                                                </mat-option>
-                                        </mat-select>
-                                </mat-form-field>
-                        </div>
-                </div>
-                <div class="transaction-data" *ngIf="visible">
+                <div class="transaction-data" *ngIf="visibleTX">
                         <mat-list dense class="relative">
                                 <div mat-subheader>Transaction overall</div>
                                 <mat-list-item>
