@@ -23,8 +23,9 @@
 		<div>
 			<mat-form-field appearance="fill" class="wide" >
 				<mat-label>Send to</mat-label>
-				<input matInput [(ngModel)]="to" />
+				<input matInput [formControl]="to" required/>
 				<mat-icon matPrefix>swap_horiz</mat-icon>
+				<mat-error *ngIf="to.invalid">{{getErrorMessageTo()}}</mat-error>
 			</mat-form-field>
 		</div>
 		<div>
@@ -35,9 +36,11 @@
 					type="number"
 					class="example-right-align"
 					placeholder="0"
-					[(ngModel)]="txValue"
+					[formControl]="txValue"
+					required
 				/>
 				<mat-icon matPrefix>fitbit</mat-icon>
+				<mat-error *ngIf="txValue.invalid">{{getErrorMessagetxValue()}}</mat-error>
 			</mat-form-field>
 		</div>
 
@@ -51,9 +54,11 @@
 					type="number"
 					class="example-right-align"
 					placeholder="0"
-					[(ngModel)]="fee"
+					[formControl]="fee"
+					required
 				/>
 				<mat-icon matPrefix>fitbit</mat-icon>
+				<mat-error *ngIf="fee.invalid">{{getErrorMessageFee()}}</mat-error>
 			</mat-form-field>
 		</div>
 		<div>
@@ -61,15 +66,8 @@
 				mat-raised-button
 				color="primary"
 				class="wide"
-				(click)="
-					sendTransactionToConfirmDialog(
-						from,
-						to,
-						txValue,
-						fee
-					)
-				"
-				[disabled]="checkData(from, to, txValue, fee)"
+				(click)="sendTxToDialog()"
+				[disabled]=" checkData(from)"
 			>
 				Send Transaction
 			</button>

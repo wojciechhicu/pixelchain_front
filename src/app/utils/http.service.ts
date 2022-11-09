@@ -98,4 +98,12 @@ export class HttpService {
 			})
 		})
 	}
+
+	public async getWalletTransactions(wallet: string, url: string): Promise<TX[]>{
+		return new Promise(resolve=>{
+			this.http.post(url, wallet, {observe: 'response'}).pipe(take(1)).subscribe((data: any)=>{
+				resolve(data)
+			})
+		})
+	}
 }
