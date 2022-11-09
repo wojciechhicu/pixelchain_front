@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmSendTransactionComponent } from '../../../dialogs/confirm-send-transaction/confirm-send-transaction.component';
 import { ErrorInTransactionComponent } from '../../../dialogs/error-in-transaction/error-in-transaction.component';
 import * as elliptic from 'elliptic';
+import { FormControl, Validators } from '@angular/forms';
+import { minValue, check04 } from 'src/app/utils/custom-validators';
 
 const ec = new elliptic.ec('secp256k1');
 
@@ -19,9 +21,9 @@ export class CreateTxComponent implements OnInit {
 	
 	from!: Data[];
 	wallets!: Data[];
-	to: string = 'fdghjds44ertrefgdfgertert';
-	txValue: number = 32;
-	fee: number = 2;
+	to = new FormControl('', [Validators.required, check04()]);
+	txValue = new FormControl(null, [Validators.required, minValue(0.0000001)]);
+	fee = new FormControl(null, [Validators.required, minValue(0.0000001)]);
 	balance!: number;
 
 	constructor(public walletService: WalletService, public txService: TransactionsService, public dialog: MatDialog) {}
@@ -37,7 +39,7 @@ export class CreateTxComponent implements OnInit {
 	 * @param txValue value in pixels how much to send
 	 * @param fee value of fee for transaction
 	 */
-	sendTransactionToConfirmDialog(from: any, to: string, txValue: number, fee: number){
+	sendTransaction(from: any, to: string, txValue: number, fee: number){
 		try {
 			//bypass error of interfaces. By error there is Data[] interface not Data
 			let correctFrom: Data = from;
@@ -100,15 +102,15 @@ export class CreateTxComponent implements OnInit {
 	 * @param fee fee value for validator
 	 * @returns true = is not valid; false = is valid
 	 */
-	checkData(from: Data[], to: string, txValue: number, fee: number): boolean {
+	checkData(from: Data[]): boolean {
 		if(!from) { return true}
-		if(to.length < 10) { return true }
-		if( txValue == undefined ) { return true }
-		if( txValue == null ) { return true }
-		if( txValue < 0) { return true }
-		if( fee < 0) { return true}
-		if( fee == undefined ) { return true }
-		if( fee == null ) { return true }
+		if( this.to.value.length < 130) { return true }
+		if( this.txValue.value == undefined ) { return true }
+		if( this.txValue.value == null ) { return true }
+		if( this.txValue.value < 0) { return true }
+		if( this.fee.value < 0) { return true}
+		if( this.fee.value == undefined ) { return true }
+		if( this.fee.value == null ) { return true }
 		return false
 	}
 
@@ -121,4 +123,43 @@ export class CreateTxComponent implements OnInit {
 			this.balance = balance
 		}
 	}
-}
+
+	/**
+	 * Check if in input is any error by validating it
+	 * @returns string of error into html
+	 */
+	getErrorMessageTo(){
+		if(this.to.hasError('required')){
+			return 'You must enter a value';
+		}
+		if(this.to.hasError('start') != null){
+			return "It's not correct wallet address!"
+		}
+		return this.to.hasError('minlength') ? 'Wallet need to have 130 letters length' : ''
+	}
+
+	/**
+	 * Check if in input is any error by validating it
+	 * @returns string of error into html
+	 */
+	getErrorMessagetxValue(){
+		return this.txValue.hasError('isMinValue') != null ? 'Place value higher than 0.0000001' : ''
+	}
+
+	/**
+	 * Check if in input is any error by validating it
+	 * @returns string of error into html
+	 */
+	getErrorMessageFee(){
+		return this.fee.hasError('isMinValue') != null ? 'Place value higher than 0.0000001' : ''
+	}
+
+	test(){
+		console.log(`To: ${this.to.value}; TxValue: ${this.txValue.value}; Fee: ${this.fee.value}`)
+	}
+
+	sendTxToDialog(){
+		this.sendTransaction(this.from, this.to.value, this.txValue.value, this.fee.value)
+	}
+}//TODO sprawdzić czy wallet z którego jest wysyłana transakcja jest inny od tego do którego wysyłamy
+//TODO dokumentacja kodu

@@ -25,7 +25,7 @@ export class TransactionsComponent implements OnInit {
 
 	ngOnInit(): void {
 		//just for testing
-		this.searchForTx("bffda9fdb9115d08aae26571ca56d546c4a063751a3837252011150dcc41b59b");
+		this.searchForTx("04493ca61fcd504a051563f2a41f095c1040d2d33694b58ab853b14caf855cae5c713e6ca7c1a2a10584e0f9c6a3720d641103baad200187b4d30fe67e65c55225");
 	}
 
 
@@ -33,7 +33,11 @@ export class TransactionsComponent implements OnInit {
 		this.spinner= true
 		let test: string = search.slice(0 , 2);
 		if(test == '04'){
-			console.log("Wallet")
+			this.http.connectToRandomNode().then((value)=>{
+				this.http.getWalletTransactions(search, `${value.host}:${value.port}/get-wallet-transactions`).then((tx)=>{
+					console.log(tx)
+				})
+			})
 		} else {
 			this.http.connectToRandomNode().then((val)=>{
 				let transaction = this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`);
