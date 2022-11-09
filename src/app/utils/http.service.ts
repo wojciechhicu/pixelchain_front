@@ -56,8 +56,6 @@ export class HttpService {
 	 * @returns transaction object
 	 */
 	public searchForTransactionInfo(transaction: string, url: string): Promise<TX>{
-
-		// return this.http.post<TX>(url, hash, {observe: 'response'})
 		return new Promise(resolve=>{
 			const hash: TXHash = {
 				TxHash: transaction
@@ -106,9 +104,13 @@ export class HttpService {
 	 * @returns transactions
 	 */
 	public async getWalletTransactions(wallet: string, url: string): Promise<TX[]>{
+		const walletObj = {
+			wallet: wallet
+		}
 		return new Promise(resolve=>{
-			this.http.post(url, wallet, {observe: 'response'}).pipe(take(1)).subscribe((data: any)=>{
-				resolve(data)
+			this.http.post(url, walletObj, {observe: 'response'}).pipe(take(10)).subscribe((data: any)=>{
+				const transactions: TX[] = data.body;
+				resolve(transactions)
 			})
 		})
 	}

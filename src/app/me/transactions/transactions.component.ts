@@ -39,7 +39,7 @@ export class TransactionsComponent implements OnInit {
 
 	/**
 	 * Send transaction hash or wallet to random node
-	 * @param search searching transaction hash
+	 * @param search searching transaction hash or wallet public key
 	 */
 	searchForTx(search: string): void {
 		this.spinner= true
@@ -47,15 +47,14 @@ export class TransactionsComponent implements OnInit {
 		if(test == '04'){
 			this.http.connectToRandomNode().then((value)=>{
 				this.http.getWalletTransactions(search, `${value.host}:${value.port}/get-wallet-transactions`).then((tx)=>{
-					// here smt new
+					console.log(tx)
 				})
 			})
 		} else {
 			this.http.connectToRandomNode().then((val)=>{
-				let transaction = this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`);
-				transaction.then((value)=>{
+				this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`).then((val)=>{
 					this.visibleTX = true;
-					this.txObj = value;
+					this.txObj = val;
 				}).then(()=>{
 				this.spinner = false
 			})
