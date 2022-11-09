@@ -1,3 +1,8 @@
+/**
+ * Sending transaction interface.
+ * 
+ * Correct version
+ */
 export interface SendTransaction {
         from: string;
         to: string;

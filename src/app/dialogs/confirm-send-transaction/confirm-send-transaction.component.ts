@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ErrorSendingTransactionComponent } from '../error-sending-transaction/error-sending-transaction.component';
 import { HttpService } from 'src/app/utils/http.service';
 import { SendTransaction } from 'src/app/_helpers/ready-to-send-transaction.interface';
 import { WalletService } from 'src/app/utils/wallet.service';
@@ -21,6 +20,10 @@ export class ConfirmSendTransactionComponent implements OnInit {
 
 	ngOnInit(): void {}
 
+	/**
+	 * Send transaction from dialog
+	 * @param tx transaction
+	 */
 	sendTransaction(tx: SendTransaction) {
 		if(this.wallet.isUserHaveEnoughFunds(tx.from, tx.txValue, tx.fee)){
 			this.http.connectToRandomNode().then((val)=>{

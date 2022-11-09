@@ -10,16 +10,23 @@ import { UploadWalletsDialogErrorComponent } from 'src/app/dialogs/upload-wallet
 	styleUrls: ['./load-wallet.component.scss'],
 })
 export class LoadWalletComponent implements OnInit {
-	//selectedFile: File;
+	/** selected file */
 	file!: File;
-	helperCount: number = 0;
+
+	/** helper value */
 	noErrors: boolean = true;
+
+	/** file data init */
 	fileData!: Data[];
 
 	constructor(public wallet: WalletService, public dialog: MatDialog) { }
 
 	ngOnInit(): void { }
 
+	/**
+	 * Check if conditions in file are correct
+	 * @param event event to check file
+	 */
 	handleFileInputErrors(event: any) {
 		try {
 			/**

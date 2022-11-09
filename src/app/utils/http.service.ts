@@ -99,6 +99,12 @@ export class HttpService {
 		})
 	}
 
+	/**
+	 * Get wallet transactions with specyfied wallet hash
+	 * @param wallet wallet hash
+	 * @param url url where to send wallet
+	 * @returns transactions
+	 */
 	public async getWalletTransactions(wallet: string, url: string): Promise<TX[]>{
 		return new Promise(resolve=>{
 			this.http.post(url, wallet, {observe: 'response'}).pipe(take(1)).subscribe((data: any)=>{

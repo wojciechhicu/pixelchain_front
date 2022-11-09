@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Tx } from '../_helpers/trasaction.interface';
 import { ConnectedPeers  as Peers} from '../_helpers/http-response/connected-peers.interface';
 import * as elliptic from 'elliptic'
 import { SHA256 } from 'crypto-js'
