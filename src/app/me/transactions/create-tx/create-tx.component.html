@@ -7,7 +7,7 @@
 					<mat-option
 						*ngFor="let wallet of wallets"
 						[value]="wallet"
-						(click)="setBalance(wallet.funds)"
+						(click)="setBalance(wallet.funds); setPubKey(wallet.pubKey)"
 						>{{ wallet.name }}</mat-option
 					>
 				</mat-select>

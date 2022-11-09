@@ -212,6 +212,15 @@ export class WalletService {
 		localStorage.setItem('walletsList', JSON.stringify(walletsInMemory))
 	}
 
+	/**
+	 * Check if user have enough funds to spend.
+	 * 
+	 * It's just inmemory check. To fully check it user need to refresh funds in memory
+	 * @param wallet wallet object
+	 * @param txValue transaction value
+	 * @param fee fee value
+	 * @returns true if user have enough funds; else not enough
+	 */
 	public isUserHaveEnoughFunds(wallet: string, txValue: number, fee: number): boolean {
 		const wallets = this.loadConnectedWallets();
 		let singleWallet!: Data

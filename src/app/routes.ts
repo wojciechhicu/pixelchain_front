@@ -1,4 +1,7 @@
+/** Router interface import */
 import { Routes } from "@angular/router";
+
+/**Components for routing import */
 import { StatsComponent } from './pixelscan/stats/stats.component';
 import { BlocksComponent } from './pixelscan/blocks/blocks.component';
 import { ValidatorsComponent } from './pixelscan/validators/validators.component';
@@ -13,6 +16,7 @@ import { VisualisationComponent } from "./other/visualisation/visualisation.comp
 import { MemPoolComponent } from './pixelscan/mem-pool/mem-pool.component';
 import { FaucetComponent } from './me/faucet/faucet.component';
 
+/** Routes object */
 export const routes: Routes = [
         {
                 path: '',

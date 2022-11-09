@@ -32,15 +32,32 @@ import {
 	],
 })
 export class MemPoolComponent implements OnInit, AfterViewInit {
+
+	/** which columns are displayed */
 	displayedColumns: string[] = ['from'];
+
+	/** every transaction value combined */
 	volume: number = 0;
+
+	/** data source of table */
 	dataSource = new MatTableDataSource<SendTransaction>();
+
+	/** expanded columns */
 	columnsToDisplayWithExpand = [...this.displayedColumns, 'expand'];
+
+	/** expanded element type declaration */
 	expandedElement!: SendTransaction | null;
+
+	/** init paginator */
 	@ViewChild(MatPaginator) paginator!: MatPaginator;
 
+	/** connected nodes to network */
 	connectedNodes = this.http.connectToRandomNode();
+
+	/** delcaration of transactions in memory */
 	txObjs: SendTransaction[] = [];
+
+	/** helper value to show/hide loading spinner */
 	spinner: boolean = false;
 
 	constructor(public http: HttpService, private snack: MatSnackBar, private clip: Clipboard) {
@@ -55,6 +72,7 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 
 	}
 
+	/** search for object */
 	applyFilter(event: Event) {
 		const filterValue = (event.target as HTMLInputElement).value;
 		this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -64,15 +82,23 @@ export class MemPoolComponent implements OnInit, AfterViewInit {
 		}
 	}
 
+	/** refresh values in mempool */
 	refresh(): void  {
 		this.getMempool()
 	}
 
+	/**
+	 * Copy text
+	 * @param text text to copy
+	 */
 	copy(text: string){
 		this.clip.copy(text);
 		this.snack.open('Coppied to clipboard.', 'Close',{duration: 3000})
 	}
 
+	/**
+	 * Get mempool info
+	 */
 	getMempool(): void{
 		this.spinner = true;
 		this.connectedNodes.then((value)=>{

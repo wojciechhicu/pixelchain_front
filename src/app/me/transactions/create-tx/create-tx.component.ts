@@ -9,7 +9,6 @@ import { ErrorInTransactionComponent } from '../../../dialogs/error-in-transacti
 import * as elliptic from 'elliptic';
 import { FormControl, Validators } from '@angular/forms';
 import { minValue, check04 } from 'src/app/utils/custom-validators';
-
 const ec = new elliptic.ec('secp256k1');
 
 @Component({
@@ -19,12 +18,26 @@ const ec = new elliptic.ec('secp256k1');
 })
 export class CreateTxComponent implements OnInit {
 	
+	/** values in select to send from which wallet */
 	from!: Data[];
+
+	/** Wallet list from memory */
 	wallets!: Data[];
+
+	/** destination value control */
 	to = new FormControl('', [Validators.required, check04()]);
+
+	/** Transaction value control */
 	txValue = new FormControl(null, [Validators.required, minValue(0.0000001)]);
+
+	/** fee control */
 	fee = new FormControl(null, [Validators.required, minValue(0.0000001)]);
+
+	/** balance of wallet clicked by user */
 	balance!: number;
+
+	/** public key set by clicked wallet */
+	pubKey: string = '';
 
 	constructor(public walletService: WalletService, public txService: TransactionsService, public dialog: MatDialog) {}
 
@@ -107,10 +120,12 @@ export class CreateTxComponent implements OnInit {
 		if( this.to.value.length < 130) { return true }
 		if( this.txValue.value == undefined ) { return true }
 		if( this.txValue.value == null ) { return true }
-		if( this.txValue.value < 0) { return true }
-		if( this.fee.value < 0) { return true}
+		if( this.txValue.value < 0.0000001) { return true }
+		if( this.fee.value < 0.0000001) { return true}
 		if( this.fee.value == undefined ) { return true }
 		if( this.fee.value == null ) { return true }
+		if( this.to.value == this.pubKey) { return true }
+		if( (this.txValue.value * 10000000 ) + (this.fee.value * 10000000) > this.balance) { return true}
 		return false
 	}
 
@@ -122,6 +137,14 @@ export class CreateTxComponent implements OnInit {
 		if(balance != undefined){
 			this.balance = balance
 		}
+	}
+
+	/**
+	 * Set pubkey of clicked wallet and save it in angular
+	 * @param pubkey public key of clicked wallet
+	 */
+	setPubKey(pubkey: string | undefined){
+		pubkey != undefined ? this.pubKey = pubkey : this.pubKey = ''
 	}
 
 	/**
@@ -154,12 +177,10 @@ export class CreateTxComponent implements OnInit {
 		return this.fee.hasError('isMinValue') != null ? 'Place value higher than 0.0000001' : ''
 	}
 
-	test(){
-		console.log(`To: ${this.to.value}; TxValue: ${this.txValue.value}; Fee: ${this.fee.value}`)
-	}
-
+	/**
+	 * Send created transaction to dialog
+	 */
 	sendTxToDialog(){
 		this.sendTransaction(this.from, this.to.value, this.txValue.value, this.fee.value)
 	}
-}//TODO sprawdzić czy wallet z którego jest wysyłana transakcja jest inny od tego do którego wysyłamy
-//TODO dokumentacja kodu
+}
