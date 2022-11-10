@@ -61,6 +61,7 @@ import { FaucetComponent } from './me/faucet/faucet.component';
 import { WwwComponent } from './other/documentation/www/www.component';
 import { RouterComponent } from './other/documentation/router/router.component';
 import { ValidatorComponent } from './other/documentation/validator/validator.component';
+import { WalletTransactionsComponent } from './me/transactions/wallet-transactions/wallet-transactions.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { ValidatorComponent } from './other/documentation/validator/validator.co
     FaucetComponent,
     WwwComponent,
     RouterComponent,
-    ValidatorComponent
+    ValidatorComponent,
+    WalletTransactionsComponent
   ],
   imports: [
     BrowserModule,

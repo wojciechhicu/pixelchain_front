@@ -1,0 +1,47 @@
+<mat-tab-group mat-align-tabs="center">
+        <mat-tab>
+                <ng-template mat-tab-label>
+                        <mat-icon class="material-icons-outlined tab-icon">swap_horiz</mat-icon>
+                        Transactions
+                </ng-template>
+                Transactions
+                <!-- here goes table with transactions -->
+        </mat-tab>
+        <mat-tab>
+                <ng-template mat-tab-label>
+                        <mat-icon class="material-icons-outlined tab-icon">bar_chart</mat-icon>Analytics
+                </ng-template> 
+                <mat-tab-group mat-align-tabs="center" @fadeIn>
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        <mat-icon class="material-icons-outlined tab-icon">account_balance</mat-icon>
+                                        Pixel Balance
+                                </ng-template>
+                                Chart with pixel Balance
+                                <!-- here goes chart with Pixels balance over time -->
+                        </mat-tab>
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        <mat-icon class="material-icons-outlined tab-icon">dialpad</mat-icon> Transactions
+                                </ng-template> 
+                                Chart with transactions
+                                <!-- Here goes chart with Transactions for wallet over the time -->
+                        </mat-tab>
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        <mat-icon class="material-icons-outlined tab-icon">paid</mat-icon> TX Fees
+                                </ng-template> 
+                                Chart with transactions fees over the time
+                                <!-- Here goes chart with Transactions fees for wallet over the time -->
+                        </mat-tab>
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        <mat-icon class="material-icons-outlined tab-icon">transfer_within_a_station</mat-icon> Pixel Transfers
+                                </ng-template> 
+                                Chart with transfers in this wallet, receive and send
+                                <!-- Here goes chart with receiver and sender values over time -->
+                        </mat-tab>
+                </mat-tab-group>
+        </mat-tab>
+</mat-tab-group>
+<!-- TODO kiedy istnieje w linku publivKey parametr wtedy automatycznie wyszukaj tego portfela -->

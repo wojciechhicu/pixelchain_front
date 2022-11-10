@@ -24,8 +24,14 @@ export class TransactionsComponent implements OnInit {
 	/** Transaction object */
 	txObj!: TX;
 
-	/** Helper value to show/hide loading spinner */
+	/** Helper value to show/hide loading spinner in transaction*/
 	spinner: boolean = false;
+
+	/** Helper value to show/hide loading spinner in wallet */
+	spinnerWallet: boolean = false;
+
+	/** helper value to display wallet transactions */
+	visibleWalletTXs: boolean = false;
 
 	constructor(
 		public tx: Transaction,
@@ -35,6 +41,8 @@ export class TransactionsComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		//just for testing
+		this.searchForTx("04493ca61fcd504a051563f2a41f095c1040d2d33694b58ab853b14caf855cae5c713e6ca7c1a2a10584e0f9c6a3720d641103baad200187b4d30fe67e65c55225");
 	}
 
 	/**
@@ -45,12 +53,17 @@ export class TransactionsComponent implements OnInit {
 		this.spinner= true
 		let test: string = search.slice(0 , 2);
 		if(test == '04'){
-			this.http.connectToRandomNode().then((value)=>{
-				this.http.getWalletTransactions(search, `${value.host}:${value.port}/get-wallet-transactions`).then((tx)=>{
-					console.log(tx)
-				})
-			})
+			this.visibleWalletTXs = true;
+			// this.http.connectToRandomNode().then((value)=>{
+			// 	this.http.getWalletTransactions(search, `${value.host}:${value.port}/get-wallet-transactions`).then((tx)=>{
+			// 		this.visibleWalletTXs = true;
+			// 		this.spinnerWallet = true
+			// 	}).then(()=>{
+			// 		this.spinnerWallet = false
+			// 	})
+			// })
 		} else {
+			this.visibleWalletTXs = false;
 			this.http.connectToRandomNode().then((val)=>{
 				this.http.searchForTransactionInfo(search, `${val.host}:${val.port}/get-transaction-data`).then((val)=>{
 					this.visibleTX = true;
