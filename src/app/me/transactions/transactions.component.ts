@@ -82,10 +82,12 @@ export class TransactionsComponent implements OnInit {
 	 */
 	searchForParameter(): void {
 		this.aRoute.queryParams.subscribe((params: any)=>{
-			if(params.publicKey.length >= 130 && params.publicKey.slice(0, 2) == '04'){
-				this.searchForTx(params.publicKey)
-			} else {
-				this.snack.open('Public key as address incorrect', 'Close', {duration: 3000})
+			if(params.publicKey){
+				if(params.publicKey.length >= 130 && params.publicKey.slice(0, 2) == '04'){
+					this.searchForTx(params.publicKey)
+				} else {
+					this.snack.open('Public key as address incorrect', 'Close', {duration: 3000})
+				}
 			}
 		})
 	}
