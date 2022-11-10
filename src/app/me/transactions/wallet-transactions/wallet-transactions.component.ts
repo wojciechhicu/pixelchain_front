@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import * as EventEmitter from 'events';
+import { HttpService } from 'src/app/utils/http.service';
 
 
 @Component({
@@ -25,17 +26,19 @@ import * as EventEmitter from 'events';
 export class WalletTransactionsComponent implements OnInit {
 	@Input() walletHash: string = '';
 	@Output() walletHashChange = new EventEmitter();
-	constructor() {}
+	constructor(public http: HttpService) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		this.getTransactions()
+	}
 
-				// this.http.connectToRandomNode().then((value)=>{
-			// 	this.http.getWalletTransactions(search, `${value.host}:${value.port}/get-wallet-transactions`).then((tx)=>{
-			// 		this.visibleWalletTXs = true;
-			// 		this.spinnerWallet = true;
-			// 		console.log(tx)
-			// 	}).then(()=>{
-			// 		this.spinnerWallet = false
-			// 	})
-			// })
+	getTransactions(){
+		if( this.walletHash.length >= 130 && this.walletHash.slice(0,2) == '04'){
+			this.http.connectToRandomNode().then((value)=>{
+				this.http.getWalletTransactions(this.walletHash, `${value.host}:${value.port}/get-wallet-transactions`).then((val)=>{
+					console.log(val)
+				})
+			})
+		}
+	}
 }

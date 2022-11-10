@@ -1,10 +1,10 @@
 <mat-tab-group mat-align-tabs="center">
-        <mat-tab>
+        <mat-tab @fadeIn>
                 <ng-template mat-tab-label>
                         <mat-icon class="material-icons-outlined tab-icon">swap_horiz</mat-icon>
                         Transactions
                 </ng-template>
-                Transactions {{ walletHash }}
+                Transactions
                 <!-- here goes table with transactions -->
         </mat-tab>
         <mat-tab>
