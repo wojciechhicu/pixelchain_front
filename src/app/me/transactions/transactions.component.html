@@ -121,5 +121,8 @@
                         </mat-list>
 
                 </div>
+                <div class="wallet-transactions" *ngIf="visibleWalletTXs">
+                        <app-wallet-transactions></app-wallet-transactions>
+                </div>
         </mat-card-content>
 </mat-card>
