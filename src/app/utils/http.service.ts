@@ -7,6 +7,7 @@ import { TX } from '../_helpers/http-response/block.interface';
 import { TXHash } from '../_helpers/http-response/txhash.interface';
 import { take } from 'rxjs';
 import { WalletBalances as WB} from '../_helpers/received-wallet-balances.interface';
+import { responseWalletTxs as RW } from '../_helpers/wallet-transactions';
 
 @Injectable({
 	providedIn: 'root'
@@ -103,13 +104,13 @@ export class HttpService {
 	 * @param url url where to send wallet
 	 * @returns transactions
 	 */
-	public async getWalletTransactions(wallet: string, url: string): Promise<TX[]>{
+	public async getWalletTransactions(wallet: string, url: string): Promise<RW[]>{
 		const walletObj = {
 			wallet: wallet
 		}
 		return new Promise(resolve=>{
 			this.http.post(url, walletObj, {observe: 'response'}).pipe(take(10)).subscribe((data: any)=>{
-				const transactions: TX[] = data.body;
+				const transactions: RW[] = data.body;
 				resolve(transactions)
 			})
 		})

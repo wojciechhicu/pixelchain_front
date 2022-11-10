@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import * as EventEmitter from 'events';
 import { HttpService } from 'src/app/utils/http.service';
+import { tableData, picelBalance, txsOverTime, feeSpent, pixelsTransfer } from 'src/app/_helpers/wallet-transactions';
 
 
 @Component({
@@ -26,6 +27,8 @@ import { HttpService } from 'src/app/utils/http.service';
 export class WalletTransactionsComponent implements OnInit {
 	@Input() walletHash: string = '';
 	@Output() walletHashChange = new EventEmitter();
+
+	tableData: tableData[] = [];
 	constructor(public http: HttpService) {}
 
 	ngOnInit(): void {
