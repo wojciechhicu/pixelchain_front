@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output } from '@angular/core';
 import { TransactionsService as Transaction } from 'src/app/utils/transactions.service';
 import { HttpService } from 'src/app/utils/http.service';
 import { Data } from 'src/app/_helpers/wallet-list.interface';
 import { TX } from 'src/app/_helpers/http-response/block.interface';
 import { TransactionsService } from 'src/app/utils/transactions.service';
+import * as EventEmitter from 'events';
+
 
 @Component({
 	selector: 'app-transactions',
@@ -33,6 +35,11 @@ export class TransactionsComponent implements OnInit {
 	/** helper value to display wallet transactions */
 	visibleWalletTXs: boolean = false;
 
+	@Input() walletHash: string = '';
+	@Output() walletHashChange = new EventEmitter();
+
+
+
 	constructor(
 		public tx: Transaction,
 		public http: HttpService,
@@ -54,14 +61,7 @@ export class TransactionsComponent implements OnInit {
 		let test: string = search.slice(0 , 2);
 		if(test == '04'){
 			this.visibleWalletTXs = true;
-			// this.http.connectToRandomNode().then((value)=>{
-			// 	this.http.getWalletTransactions(search, `${value.host}:${value.port}/get-wallet-transactions`).then((tx)=>{
-			// 		this.visibleWalletTXs = true;
-			// 		this.spinnerWallet = true
-			// 	}).then(()=>{
-			// 		this.spinnerWallet = false
-			// 	})
-			// })
+			this.walletHash = search
 		} else {
 			this.visibleWalletTXs = false;
 			this.http.connectToRandomNode().then((val)=>{

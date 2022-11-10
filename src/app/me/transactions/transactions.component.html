@@ -122,7 +122,7 @@
 
                 </div>
                 <div class="wallet-transactions" *ngIf="visibleWalletTXs">
-                        <app-wallet-transactions></app-wallet-transactions>
+                        <app-wallet-transactions [walletHash]="walletHash"></app-wallet-transactions>
                 </div>
         </mat-card-content>
 </mat-card>
