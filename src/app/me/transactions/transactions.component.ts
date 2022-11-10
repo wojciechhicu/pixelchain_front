@@ -5,7 +5,8 @@ import { Data } from 'src/app/_helpers/wallet-list.interface';
 import { TX } from 'src/app/_helpers/http-response/block.interface';
 import { TransactionsService } from 'src/app/utils/transactions.service';
 import * as EventEmitter from 'events';
-
+import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'app-transactions',
@@ -43,13 +44,14 @@ export class TransactionsComponent implements OnInit {
 	constructor(
 		public tx: Transaction,
 		public http: HttpService,
-		public transaction: TransactionsService
+		public transaction: TransactionsService,
+		private aRoute: ActivatedRoute,
+		private snack: MatSnackBar
 	) {
 	}
 
 	ngOnInit(): void {
-		//just for testing
-		this.searchForTx("04493ca61fcd504a051563f2a41f095c1040d2d33694b58ab853b14caf855cae5c713e6ca7c1a2a10584e0f9c6a3720d641103baad200187b4d30fe67e65c55225");
+		this.searchForParameter()
 	}
 
 	/**
@@ -73,5 +75,18 @@ export class TransactionsComponent implements OnInit {
 			})
 			})
 		}
+	}
+
+	/**
+	 * Search for param name in url as publicKey and if it exist and have correct data search it in blockchain and show component
+	 */
+	searchForParameter(): void {
+		this.aRoute.queryParams.subscribe((params: any)=>{
+			if(params.publicKey.length >= 130 && params.publicKey.slice(0, 2) == '04'){
+				this.searchForTx(params.publicKey)
+			} else {
+				this.snack.open('Public key as address incorrect', 'Close', {duration: 3000})
+			}
+		})
 	}
 }
