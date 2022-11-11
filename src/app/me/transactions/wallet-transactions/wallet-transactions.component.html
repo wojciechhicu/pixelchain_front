@@ -1,16 +1,68 @@
 <mat-tab-group mat-align-tabs="center">
-        <mat-tab @fadeIn>
+        <mat-tab>
                 <ng-template mat-tab-label>
                         <mat-icon class="material-icons-outlined tab-icon">swap_horiz</mat-icon>
                         Transactions
                 </ng-template>
-                Transactions
-                <!-- here goes table with transactions -->
+                <div class="mat-elevation-z8 table">
+                        <mat-form-field appearance="standard" class="full">
+                                <mat-label>Filter transactions</mat-label>
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 32000" #input>
+                              </mat-form-field>
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+                                <!-- Txhash Column -->
+                                <ng-container matColumnDef="txHash">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tx Hash </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.txHash}} </td>
+                                </ng-container>
+        
+                                <!-- Block height Column -->
+                                <ng-container matColumnDef="blockHeight">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Block </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.blockHeight}} </td>
+                                </ng-container>
+        
+                                <!-- Create date Column -->
+                                <ng-container matColumnDef="timestamp">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Age </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
+                                </ng-container>
+        
+                                <!-- From Column -->
+                                <ng-container matColumnDef="from">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> From </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.from}} </td>
+                                </ng-container>
+        
+                                <!-- To Column -->
+                                <ng-container matColumnDef="to">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> To </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.to}} </td>
+                                </ng-container>
+        
+                                <!-- Value Column -->
+                                <ng-container matColumnDef="value">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.value / 10000000}} </td>
+                                </ng-container>
+        
+                                <!-- Fee Column -->
+                                <ng-container matColumnDef="fee">
+                                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tx Fee </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.fee / 10000000}} </td>
+                                </ng-container>
+        
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons aria-label="Select page of transactions"></mat-paginator>
+                </div>
         </mat-tab>
         <mat-tab>
                 <ng-template mat-tab-label>
                         <mat-icon class="material-icons-outlined tab-icon">bar_chart</mat-icon>Analytics
-                </ng-template> 
+                </ng-template>
                 <mat-tab-group mat-align-tabs="center" @fadeIn>
                         <mat-tab>
                                 <ng-template mat-tab-label>
@@ -22,22 +74,24 @@
                         </mat-tab>
                         <mat-tab>
                                 <ng-template mat-tab-label>
-                                        <mat-icon class="material-icons-outlined tab-icon">dialpad</mat-icon> Transactions
-                                </ng-template> 
+                                        <mat-icon class="material-icons-outlined tab-icon">dialpad</mat-icon>
+                                        Transactions
+                                </ng-template>
                                 Chart with transactions
                                 <!-- Here goes chart with Transactions for wallet over the time -->
                         </mat-tab>
                         <mat-tab>
                                 <ng-template mat-tab-label>
                                         <mat-icon class="material-icons-outlined tab-icon">paid</mat-icon> TX Fees
-                                </ng-template> 
+                                </ng-template>
                                 Chart with transactions fees over the time
                                 <!-- Here goes chart with Transactions fees for wallet over the time -->
                         </mat-tab>
                         <mat-tab>
                                 <ng-template mat-tab-label>
-                                        <mat-icon class="material-icons-outlined tab-icon">transfer_within_a_station</mat-icon> Pixel Transfers
-                                </ng-template> 
+                                        <mat-icon class="material-icons-outlined tab-icon">transfer_within_a_station
+                                        </mat-icon> Pixel Transfers
+                                </ng-template>
                                 Chart with transfers in this wallet, receive and send
                                 <!-- Here goes chart with receiver and sender values over time -->
                         </mat-tab>

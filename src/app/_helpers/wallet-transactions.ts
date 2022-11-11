@@ -53,3 +53,27 @@ export interface responseWalletTxs {
 	blockHeight: number;
 	transactions: TX[];
 }
+
+export function creatDataTable(res: responseWalletTxs[]): tableData[]{
+        let finalData: tableData[] = []
+        if(res.length <= 0){
+                return finalData
+        } else {
+                res.forEach((val)=>{
+                        let singleData: tableData = { fee: 0, from: '', timestamp: 0, to: '', txHash: '', value: 0, blockHeight: 0}
+                        singleData.blockHeight = val.blockHeight;
+                        val.transactions.forEach((v)=>{
+                                if(v.TxHash != undefined){
+                                        singleData.fee = v.fee;
+                                        singleData.from = v.from;
+                                        singleData.timestamp = v.timestamp;
+                                        singleData.to = v.to;
+                                        singleData.txHash = v.TxHash;
+                                        singleData.value = v.txValue;
+                                        finalData.push(singleData)
+                                }
+                        })
+                })
+                return finalData
+        }
+}
