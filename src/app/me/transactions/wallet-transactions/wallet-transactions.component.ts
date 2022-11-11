@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, AfterViewInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import * as EventEmitter from 'events';
 import { HttpService } from 'src/app/utils/http.service';
@@ -26,7 +26,7 @@ import { MatSort } from '@angular/material/sort';
 		])
 	]
 })
-export class WalletTransactionsComponent implements OnInit {
+export class WalletTransactionsComponent implements OnInit, AfterViewInit {
 	@Input() walletHash: string = '';
 	@Output() walletHashChange = new EventEmitter();
 
@@ -43,13 +43,15 @@ export class WalletTransactionsComponent implements OnInit {
 		this.getTransactions()
 	}
 
+	ngAfterViewInit(): void {
+		this.dataSource.sort = this.sort
+	}
 	getTransactions() {
 		if (this.walletHash.length >= 130 && this.walletHash.slice(0, 2) == '04') {
 			this.http.connectToRandomNode().then((value) => {
 				this.http.getWalletTransactions(this.walletHash, `${value.host}:${value.port}/get-wallet-transactions`).then((val) => {
 					this.dataSource.data = creatDataTable(val);
 					this.dataSource.paginator = this.paginator;
-					this.dataSource.sort = this.sort
 				})
 			})
 		}

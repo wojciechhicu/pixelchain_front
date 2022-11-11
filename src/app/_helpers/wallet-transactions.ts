@@ -54,16 +54,18 @@ export interface responseWalletTxs {
 	transactions: TX[];
 }
 
+//FIXME naprawić zwracanie obiektu
 export function creatDataTable(res: responseWalletTxs[]): tableData[]{
         let finalData: tableData[] = []
         if(res.length <= 0){
                 return finalData
         } else {
                 res.forEach((val)=>{
-                        let singleData: tableData = { fee: 0, from: '', timestamp: 0, to: '', txHash: '', value: 0, blockHeight: 0}
-                        singleData.blockHeight = val.blockHeight;
+
                         val.transactions.forEach((v)=>{
                                 if(v.TxHash != undefined){
+                                        let singleData: tableData = { fee: 0, from: '', timestamp: 0, to: '', txHash: '', value: 0, blockHeight: 0}
+                                        singleData.blockHeight = val.blockHeight;
                                         singleData.fee = v.fee;
                                         singleData.from = v.from;
                                         singleData.timestamp = v.timestamp;
