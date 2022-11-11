@@ -1,3 +1,26 @@
 .tab-icon{
         margin-right: 8px;
 }
+table{
+        width: 100%;
+}
+// .table{
+        
+// }
+.full{
+        width: 100%;
+}
+.table-wrapper{
+        position: relative;
+        max-width: 100%;
+        overflow: auto;
+}
+.smallTD{
+        text-align: center;
+}
+.bigTD{
+        max-width: 100px !important;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
