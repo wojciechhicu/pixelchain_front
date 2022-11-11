@@ -53,8 +53,11 @@ export interface responseWalletTxs {
 	blockHeight: number;
 	transactions: TX[];
 }
-
-//FIXME naprawić zwracanie obiektu
+/**
+ * FN to create datatable from server response. It restruck object.
+ * @param res response from server
+ * @returns correct object
+ */
 export function creatDataTable(res: responseWalletTxs[]): tableData[]{
         let finalData: tableData[] = []
         if(res.length <= 0){

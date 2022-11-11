@@ -4,23 +4,54 @@
 table{
         width: 100%;
 }
-// .table{
-        
-// }
+
 .full{
         width: 100%;
+}
+.link{
+        color: blue;
+        cursor: pointer;
+}
+.link:hover {
+        opacity: 0.5;
 }
 .table-wrapper{
         position: relative;
         max-width: 100%;
         overflow: auto;
 }
-.smallTD{
-        text-align: center;
-}
 .bigTD{
         max-width: 100px !important;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.spinner-wrapper{
+	width: 100%;
+	height: calc(100% - 30px);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 30px;
+	left: 0;
+	background-color: rgba(0,0,0,0.10);
+}
+
+.in{
+        background-color: lightblue;
+        color: darkgreen;
+        font-weight: 300;
+        width: 100%;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+}
+.out{
+        background-color: rgba(219,154,4,.2);
+        color: #b47d00;
+        width: 100%;
+        font-weight: 300;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
 }

@@ -29,6 +29,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 
+/** Angular custom pipes */
+import { DateAgoPipe } from './utils/date-ago.pipe';
+
 /** Components import */
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -96,7 +99,8 @@ import { WalletTransactionsComponent } from './me/transactions/wallet-transactio
     WwwComponent,
     RouterComponent,
     ValidatorComponent,
-    WalletTransactionsComponent
+    WalletTransactionsComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
