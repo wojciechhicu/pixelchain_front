@@ -67,3 +67,10 @@ export class WalletTransactionsComponent implements OnInit, AfterViewInit {
 		}
 	}
 }
+//TODO w age dać np 25 minut temu zamiast timestamp
+//TODO po najechaniu na age td pokazac mattoolbar z dokładną datą
+//FIXME naprawić stylowanie responsive na każde RWD
+//TODO dokumentacja kodu
+//TODO dodać animację lub całkowicie usunąć przy zmianie tabsów
+//TODO dodać spinner ładowania
+//TODO dodać pustą kolumnę lub po prostu po from dać ikonkę out lub in zależnie od sposobu transakcji na portfelu
