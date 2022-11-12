@@ -53,7 +53,7 @@
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="Number of the block in which the transaction is recorded."
                                                         matTooltipPosition="left">help_outline</mat-icon>Block:
-                                                {{ txObj.blockHeight}}
+                                                 <span matTooltip="Go to block: {{ txObj.blockHeight }}" matTooltipPosition="right" class="link" (click)="goToBlock(txObj.blockHeight)">{{ txObj.blockHeight }}</span>
                                         </div>
                                         <ng-template #otherH>
                                                 <div mat-line>
@@ -88,13 +88,14 @@
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The sending party of the transaction."
                                                         matTooltipPosition="left">help_outline</mat-icon>From:
-                                                {{ txObj.from}}
+                                                        <span class="link" matTooltip="Go to this wallet transactions" matTooltipPosition="right" (click)="goToWallet(txObj.from)" *ngIf="txObj.from != 'null'; else fromElse">{{ txObj.from }}</span>
+                                                        <ng-template #fromElse>Root transaction</ng-template>
                                         </div>
                                         <div mat-line>
                                                 <mat-icon class="material-icons-outlined icon-lower"
                                                         matTooltip="The receiving party of the transaction."
-                                                        matTooltipPosition="left">help_outline</mat-icon>To: {{
-                                                txObj.to}}
+                                                        matTooltipPosition="left">help_outline</mat-icon>To: <span class="link" matTooltip="Go to this wallet transactions" matTooltipPosition="below" (click)="goToWallet(txObj.to)">{{
+                                                        txObj.to}}</span>
                                         </div>
                                 </mat-list-item>
                                 <mat-divider [inset]="true"></mat-divider>

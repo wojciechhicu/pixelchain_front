@@ -103,7 +103,9 @@ export class ConnectedWalletsComponent implements OnInit, AfterViewInit {
 	goToTransactions(pubKey: string): void {
 		this.router.navigate(['transactions'], {
 			queryParams: { publicKey: pubKey },
-		});
+		}).then(()=>{
+			window.location.reload()
+		})
 	}
 
 	/**

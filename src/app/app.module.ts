@@ -27,6 +27,10 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSortModule } from '@angular/material/sort';
+
+/** Angular custom pipes */
+import { DateAgoPipe } from './utils/date-ago.pipe';
 
 /** Components import */
 import { AppRoutingModule } from './app-routing.module';
@@ -95,7 +99,8 @@ import { WalletTransactionsComponent } from './me/transactions/wallet-transactio
     WwwComponent,
     RouterComponent,
     ValidatorComponent,
-    WalletTransactionsComponent
+    WalletTransactionsComponent,
+    DateAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -125,7 +130,8 @@ import { WalletTransactionsComponent } from './me/transactions/wallet-transactio
     ClipboardModule,
     MatTabsModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

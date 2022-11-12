@@ -7,6 +7,7 @@ import { TransactionsService } from 'src/app/utils/transactions.service';
 import * as EventEmitter from 'events';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-transactions',
@@ -36,17 +37,19 @@ export class TransactionsComponent implements OnInit {
 	/** helper value to display wallet transactions */
 	visibleWalletTXs: boolean = false;
 
+	/** wallet bind from other component */
 	@Input() walletHash: string = '';
+
+	/** output */
 	@Output() walletHashChange = new EventEmitter();
-
-
 
 	constructor(
 		public tx: Transaction,
 		public http: HttpService,
 		public transaction: TransactionsService,
 		private aRoute: ActivatedRoute,
-		private snack: MatSnackBar
+		private snack: MatSnackBar,
+		private router: Router
 	) {
 	}
 
@@ -89,6 +92,27 @@ export class TransactionsComponent implements OnInit {
 					this.snack.open('Public key as address incorrect', 'Close', {duration: 3000})
 				}
 			}
+			if(params.txHash){
+				this.searchForTx(params.txHash)
+			}
 		})
+	}
+
+	/**
+	 * Click function to go to block component with url param with block number
+	 * @param block block number
+	 */
+	goToBlock(block: number | undefined): void {
+		if(block != undefined){
+			this.router.navigate(['blockchain'], {queryParams: { block: block}})
+		}
+	}
+
+	/**
+	 * Go to wallet component in this case reload page with new param key of wallet
+	 * @param wallet wallet hash
+	 */
+	goToWallet(wallet: string): void {
+		this.router.navigate(['transactions'], {queryParams: {publicKey: wallet}}).then(()=>{ window.location.reload()})
 	}
 }
