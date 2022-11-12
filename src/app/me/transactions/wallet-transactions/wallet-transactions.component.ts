@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, AfterViewInit } from '@angular/core';
 import * as EventEmitter from 'events';
 import { HttpService } from 'src/app/utils/http.service';
-import { tableData, picelBalance, txsOverTime, feeSpent, pixelsTransfer, creatDataTable } from 'src/app/_helpers/wallet-transactions';
+import { tableData, pixelBalance, txsOverTime, feeSpent, pixelsTransfer,responseWalletTxs, creatDataTable, pixelBalanceChartData } from 'src/app/_helpers/wallet-transactions';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -41,6 +41,7 @@ export class WalletTransactionsComponent implements OnInit, AfterViewInit {
 	/** helper fn to display spinner while loading */
 	spinner: boolean = true
 
+	balance: pixelBalance[] = [];
 	constructor(public http: HttpService, private router: Router, private aRoute: ActivatedRoute) { }
 
 	ngOnInit(): void {
@@ -58,9 +59,10 @@ export class WalletTransactionsComponent implements OnInit, AfterViewInit {
 			this.http.connectToRandomNode().then((value) => {
 				this.http.getWalletTransactions(this.walletHash, `${value.host}:${value.port}/get-wallet-transactions`).then((val) => {
 					this.dataSource.data = creatDataTable(val);
+					this.balance = pixelBalanceChartData(val, this.from);
 					this.dataSource.paginator = this.paginator;
 				}).then(()=>{
-					this.spinner = false
+					this.spinner = false;
 				})
 			})
 		}
@@ -106,7 +108,7 @@ export class WalletTransactionsComponent implements OnInit, AfterViewInit {
 	fromWallet(): void{
 		this.aRoute.queryParams.subscribe((params: any)=>{
 			if(params.publicKey){
-				this.from = params.pubKey;
+				this.from = params.publicKey;
 			}
 		})
 	}

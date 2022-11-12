@@ -16,9 +16,9 @@ export interface tableData{
 /**
  * balance in pixels over time chart
  */
-export interface picelBalance {
+export interface pixelBalance {
 	balance: number;
-	time: number;
+	day: string;
 }
 
 /**
@@ -53,6 +53,12 @@ export interface responseWalletTxs {
 	blockHeight: number;
 	transactions: TX[];
 }
+
+/** before grouping balance  */
+interface middleTransform {
+        balance: number;
+        date: string;
+}
 /**
  * FN to create datatable from server response. It restruck object.
  * @param res response from server
@@ -60,6 +66,7 @@ export interface responseWalletTxs {
  */
 export function creatDataTable(res: responseWalletTxs[]): tableData[]{
         let finalData: tableData[] = []
+
         if(res.length <= 0){
                 return finalData
         } else {
@@ -81,4 +88,82 @@ export function creatDataTable(res: responseWalletTxs[]): tableData[]{
                 })
                 return finalData
         }
+}
+
+/**
+ * Get transaction object and return value for 'from' wallet as balance after transaction
+ * @param tx transaction object
+ * @param from wallet to search as balance
+ * @returns balance after this transaction
+ */
+ function transform(tx: TX, from: string): number {
+        if( tx.from == from){
+                return 0 - tx.txValue - tx.fee
+        } else{
+                return 0 + tx.txValue
+        }
+}
+
+/**
+ * Function for filter function on array to get only unique values
+ * @param value value
+ * @param index index
+ * @param self self
+ * @returns true or false
+ */
+function onlyUnique(value: any, index: any, self: any): boolean{
+        return self.indexOf(value) === index
+}
+
+/**
+ * Group and modify data to expecting form
+ * @param trans transactions
+ * @returns grouped and modifyied per day object
+ */
+function group(trans: middleTransform[]):pixelBalance[]{
+        let days: string[] = [];
+        let finalData: pixelBalance[] = [];
+        
+        trans.forEach((val)=>{
+                days.push(val.date);
+        })
+        let filteredDays = days.filter(onlyUnique);
+        filteredDays.forEach((val)=>{
+                let singleData: pixelBalance = {balance: 0, day: ''};
+                singleData.day = val;
+                singleData.balance = 0;
+                trans.forEach((value)=>{
+                        singleData.balance += value.balance
+                })
+                singleData.balance = singleData.balance / 10000000
+                finalData.push(singleData)
+        })
+        return finalData
+}
+
+/**
+ * Create new structure from server response
+ * @param res response from server
+ * @param from searched wallet
+ * @returns restructured object
+ */
+export function pixelBalanceChartData(res: responseWalletTxs[], from: string): pixelBalance[] {
+        let transactions: TX[] = [];
+        let middleData: middleTransform[] = [];
+        res.forEach((value)=>{
+                value.transactions.forEach((val)=>{
+                        transactions.push(val)
+                })
+        })
+
+        transactions.forEach((value)=>{
+                let middleDataTmp: middleTransform = { balance: 0, date: ''};
+                
+                middleDataTmp.balance = transform(value, from);
+                middleDataTmp.date = `${new Date(value.timestamp * 1000).getDate()}/${new Date(value.timestamp * 1000).getMonth() + 1}/${new Date(value.timestamp * 1000).getFullYear()}`
+                middleData.push(middleDataTmp)
+        })
+
+        const final = group(middleData);
+        return final;
 }
