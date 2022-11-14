@@ -58,9 +58,14 @@ export class WalletTransactionsComponent implements OnInit, AfterViewInit {
 		if (this.walletHash.length >= 130 && this.walletHash.slice(0, 2) == '04') {
 			this.http.connectToRandomNode().then((value) => {
 				this.http.getWalletTransactions(this.walletHash, `${value.host}:${value.port}/get-wallet-transactions`).then((val) => {
-					this.dataSource.data = creatDataTable(val);
-					this.balance = pixelBalanceChartData(val, this.from);
-					this.dataSource.paginator = this.paginator;
+					if(val === null || val.length <=0){
+						this.spinner = false;
+					} else{
+						this.dataSource.data = creatDataTable(val);
+						this.balance = pixelBalanceChartData(val, this.from);
+						this.dataSource.paginator = this.paginator;
+					}
+
 				}).then(()=>{
 					this.spinner = false;
 				})

@@ -24,6 +24,7 @@ export interface TX {
         TxHash?: string;
         status?: number;
         blockHeight?: number;
+        in?: boolean;
 }
 
 /**

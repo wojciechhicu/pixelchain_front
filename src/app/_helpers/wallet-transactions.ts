@@ -8,6 +8,7 @@ export interface tableData{
 	blockHeight: number;
 	timestamp: number;
 	from: string;
+        in: boolean;
 	to: string;
 	value: number;
 	fee: number;
@@ -74,12 +75,15 @@ export function creatDataTable(res: responseWalletTxs[]): tableData[]{
 
                         val.transactions.forEach((v)=>{
                                 if(v.TxHash != undefined){
-                                        let singleData: tableData = { fee: 0, from: '', timestamp: 0, to: '', txHash: '', value: 0, blockHeight: 0}
+                                        let singleData: tableData = { fee: 0, from: '', timestamp: 0, to: '', txHash: '', value: 0, blockHeight: 0, in: true}
                                         singleData.blockHeight = val.blockHeight;
                                         singleData.fee = v.fee;
                                         singleData.from = v.from;
                                         singleData.timestamp = v.timestamp;
                                         singleData.to = v.to;
+                                        if(v.in != undefined){
+                                                singleData.in = v.in
+                                        }
                                         singleData.txHash = v.TxHash;
                                         singleData.value = v.txValue;
                                         finalData.push(singleData)
@@ -155,7 +159,8 @@ export function pixelBalanceChartData(res: responseWalletTxs[], from: string): p
                         transactions.push(val)
                 })
         })
-
+        transactions.unshift({from: '', to: '', fee: 0, signature: '', timestamp: transactions[0].timestamp - 604800, txValue: 0, TxHash: ''});
+        console.log(transactions)
         transactions.forEach((value)=>{
                 let middleDataTmp: middleTransform = { balance: 0, date: ''};
                 
@@ -165,5 +170,6 @@ export function pixelBalanceChartData(res: responseWalletTxs[], from: string): p
         })
 
         const final = group(middleData);
-        return final;
+        console.log(final)
+        return final; //FIXME naprawić zliczanie balance
 }
