@@ -36,8 +36,7 @@
                                 <!-- Create date Column -->
                                 <ng-container matColumnDef="timestamp">
                                         <th mat-header-cell *matHeaderCellDef mat-sort-header class="smallTD"> Age </th>
-                                        <td mat-cell *matCellDef="let element" class="smallTD" matTooltip="{{element.timestamp * 1000 | date: 'd/M/Y, h:mm a': 'GMT+2'}}" matTooltipPosition="above"> {{element.timestamp *
-                                                1000 | dateAgo}}
+                                        <td mat-cell *matCellDef="let element" class="smallTD" matTooltip="{{element.timestamp | date: 'd/M/Y, h:mm a': 'GMT+2'}}" matTooltipPosition="above"> {{element.timestamp  | dateAgo}}
                                         </td>
                                 </ng-container>
 
